@@ -2,5 +2,5 @@
  * 只允許使用 Publishable key，絕不可填入 secret / service_role。 */
 window.JIULI_CLOUD_CONFIG = {
   url: "https://cdvkdpwhkwinswpedmmb.supabase.co",
-  publishableKey: "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE"
+  publishableKey: "sb_publishable_"
 };

@@ -1,0 +1,59 @@
+name: 九黎靈貓 WEB 安全帳本一次性升級
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '請輸入 YES 代表已備份舊進度並同意凍結舊版網頁存檔'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jiuli-secure-migration
+  cancel-in-progress: false
+
+jobs:
+  secure-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 確認使用者已備份
+        shell: bash
+        env:
+          USER_CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$USER_CONFIRM" != 'YES' ]; then
+            echo '請先備份舊版遊戲進度，然後在 Run workflow 的 confirm 欄輸入 YES。'
+            exit 1
+          fi
+      - name: 取得程式檔
+        uses: actions/checkout@v4
+      - name: 檢查必要檔案
+        run: |
+          test -s Jiuli_Secure_Setup.sql
+          test -s Jiuli_Secure_Check.sql
+          test -s index.html
+      - name: 安裝 PostgreSQL 客戶端
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+      - name: 資料庫升級（交易全有或全無）
+        shell: bash
+        env:
+          JIULI_DB_URL: ${{ secrets.JIULI_DB_URL }}
+        run: |
+          if [ -z "$JIULI_DB_URL" ]; then
+            echo '缺少 JIULI_DB_URL：請到 Repo Settings → Secrets and variables → Actions 建立。'
+            exit 1
+          fi
+          export PGCONNECT_TIMEOUT=20
+          psql "$JIULI_DB_URL" --no-psqlrc -v ON_ERROR_STOP=1 --single-transaction --file=Jiuli_Secure_Setup.sql
+      - name: 驗證原版資料目錄與舊寫入權限
+        shell: bash
+        env:
+          JIULI_DB_URL: ${{ secrets.JIULI_DB_URL }}
+        run: |
+          psql "$JIULI_DB_URL" --no-psqlrc -v ON_ERROR_STOP=1 --file=Jiuli_Secure_Check.sql

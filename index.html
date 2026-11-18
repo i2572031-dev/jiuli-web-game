@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.5.1-friends-release-notice"/><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -77,6 +77,42 @@ body.jiuli-entry-locked > .app,body.jiuli-entry-locked > .mobile-nav {display:no
  .jiuli-entry-auth-card{padding:25px 19px;}
 }
 
+
+/* 九黎靈貓 WEB 1.3：網頁手機版交易與分類強化 */
+.web13-fish-sales{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:12px 0}
+.web13-fish-sale{border:1px solid #555176;border-radius:14px;background:#1b2140a6;padding:9px;display:flex;flex-direction:column;gap:8px}
+.web13-fish-sale small{color:#b7bfd8}.web13-fish-sale .btn{width:100%}
+.web13-box-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;min-width:115px}
+.web13-box-actions .btn{margin:0}.web13-tip{padding:14px;margin:13px 0;border:1px solid #d4b36c;border-radius:14px;background:#5e4e2e44}
+.web13-warn{margin-top:14px;padding:12px;border-left:3px solid #e7b766;background:#66522d29;border-radius:8px;color:#f4d49b;font-size:13px;line-height:1.7}
+.web13-pagebar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:10px 0;color:#c4cfe1;font-size:13px}
+.web13-pagebar>div{display:flex;gap:7px;flex-wrap:wrap}
+@media(max-width:520px){.web13-fish-sales{grid-template-columns:repeat(2,minmax(0,1fr))}.web13-box-actions{width:100%;justify-content:flex-start}.web13-box-actions .btn{flex:1}}
+
+/* WEB 1.5：手機優先好友頁面與輕量特效；純 CSS、不讀取外部圖檔 */
+.jiuli-friend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:12px}
+.jiuli-friend-card{border-radius:18px;border:1px solid #554c82;background:linear-gradient(145deg,#29294b,#1b2340);padding:14px}
+.jiuli-friend-card h3{margin:0 0 5px;font-size:17px}.jiuli-friend-card .muted{font-size:12px}
+.jiuli-friend-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.jiuli-friend-actions>.btn{flex:1 1 105px;font-size:12px;padding:9px 7px}
+.jiuli-friend-form{border:1px solid #8472bc;border-radius:17px;background:linear-gradient(125deg,#322854,#203455);padding:14px;margin:16px 0}
+.jiuli-friend-form select,.jiuli-friend-form input{max-width:100%;min-width:0}.jiuli-friend-form .row{align-items:flex-end}
+.jiuli-social-pill{display:inline-flex;gap:5px;padding:5px 10px;border-radius:50px;background:#4e477f6b;border:1px solid #8479b9;color:#ecdefd;font-size:12px}
+.jiuli-stage-fx{position:relative;isolation:isolate;overflow:hidden;height:94px;border:1px solid #6b579877;border-radius:20px;background:radial-gradient(ellipse at 45% 90%,var(--scene-glow,#7c68ee44),transparent 68%),linear-gradient(128deg,#17172b,#272043);margin-bottom:18px;display:flex;align-items:center;justify-content:space-around}
+.jiuli-stage-fx b{font-size:31px;filter:drop-shadow(0 5px 9px #0006);animation:jiuliFloat 3s ease-in-out infinite alternate}.jiuli-stage-fx b:nth-child(2){animation-delay:-1.15s;font-size:40px}.jiuli-stage-fx b:nth-child(3){animation-delay:-1.9s}
+.jiuli-stage-fx::before{content:'✦  ✧  ·  ✦  ·  ✧  ✦';position:absolute;inset:8px;color:#ffefbe66;letter-spacing:12px;animation:jiuliShine 5s linear infinite;white-space:nowrap}
+.jiuli-stage-fx[data-game="fishing"]{--scene-glow:#34abff77}.jiuli-stage-fx[data-game="farm"],.jiuli-stage-fx[data-game="market"]{--scene-glow:#47db8177}
+.jiuli-stage-fx[data-game="restaurant"]{--scene-glow:#ffaf6977}.jiuli-stage-fx[data-game="court"]{--scene-glow:#d6aedb66}.jiuli-stage-fx[data-game="dungeon"]{--scene-glow:#eb4f7977}
+.jiuli-stage-fx[data-game="delivery"]{--scene-glow:#52c9d777}.jiuli-stage-fx[data-game="chests"]{--scene-glow:#ffce5977}
+.jiuli-stage-fx[data-game="friends"]{--scene-glow:#ec92c777}
+.jiuli-fx-layer{position:fixed;inset:0;z-index:10050;pointer-events:none;overflow:hidden}
+.jiuli-fx-particle{position:absolute;left:var(--px);top:var(--py);font-size:var(--ps);filter:drop-shadow(0 4px 9px #0009);animation:jiuliReward 1.35s cubic-bezier(.16,.7,.35,1) both;animation-delay:var(--pd)}
+.jiuli-fx-caption{position:absolute;left:50%;top:27%;transform:translateX(-50%);border:1px solid #ffda9a;background:#251a36f2;color:#fff6c9;padding:13px 19px;border-radius:25px;font-weight:800;box-shadow:0 8px 35px #0009;max-width:88vw;text-align:center;animation:jiuliCaption 1.65s ease-out both}
+@keyframes jiuliFloat{from{transform:translateY(8px) rotate(-5deg)}to{transform:translateY(-8px) rotate(5deg)}}
+@keyframes jiuliShine{0%{transform:translateX(-25%);opacity:.2}50%{opacity:.9}100%{transform:translateX(25%);opacity:.2}}
+@keyframes jiuliReward{0%{transform:translate(0,35px) scale(.4);opacity:0}25%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(30deg) scale(1.25);opacity:0}}
+@keyframes jiuliCaption{0%{opacity:0;transform:translate(-50%,24px) scale(.85)}20%{opacity:1;transform:translate(-50%,0) scale(1)}83%{opacity:1}100%{opacity:0}}
+@media(max-width:520px){.jiuli-stage-fx{height:73px;margin-bottom:14px}.jiuli-stage-fx b{font-size:27px}.jiuli-stage-fx b:nth-child(2){font-size:33px}.jiuli-friend-card{padding:12px}}
+@media(prefers-reduced-motion:reduce){.jiuli-stage-fx b,.jiuli-stage-fx::before,.jiuli-fx-particle,.jiuli-fx-caption{animation:none!important}.jiuli-fx-layer{display:none!important}}
 </style>
   <script>
 /* Jiuli original game catalog data. No secret credentials. */
@@ -85,6 +121,26 @@ window.JIULI_FISH_IMAGES={'common':'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAA
 
 </script>
 
+<style id="jiuliNoticeStyle">
+/* WEB 1.5.1: 登入成功後的新版本公告，保留原有頁面與存檔結構。 */
+#jiuliReleaseNotice[hidden]{display:none!important}
+#jiuliReleaseNotice{position:fixed;inset:0;z-index:10080;display:grid;place-items:center;padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom));background:rgba(5,7,19,.83);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,'PingFang TC',sans-serif;color:#f9f5ff}
+.jiuli-release-card{position:relative;width:min(100%,480px);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:linear-gradient(160deg,#30254f,#191d35 58%,#1d2039);border:1px solid #8370b7;border-radius:22px;box-shadow:0 28px 95px #000b,0 0 40px #9b66ff24;padding:21px 19px 20px}
+.jiuli-release-kicker{font-size:11px;font-weight:900;letter-spacing:.16em;color:#e6c4ff;margin-bottom:10px}
+.jiuli-release-card h2{font-size:23px;line-height:1.3;color:#fff;margin:0 42px 9px 0}
+.jiuli-release-card p{font-size:13px;line-height:1.7;color:#ded8ee;margin:7px 0 12px}
+.jiuli-release-chips{display:grid;gap:9px;margin:13px 0}
+.jiuli-release-chip{background:#100f269e;border:1px solid #6e638b;border-radius:12px;padding:10px 12px}
+.jiuli-release-chip strong{display:block;font-size:14px;line-height:1.5;color:#fff}
+.jiuli-release-chip span{display:block;font-size:12px;line-height:1.6;margin-top:2px;color:#d2cce6}
+.jiuli-release-note{border-left:3px solid #ffd77a;background:#51402a63;color:#ffefc7;border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.65;margin:12px 0}
+.jiuli-release-close{position:absolute;right:13px;top:13px;border:1px solid #8f80b0;background:#353056;color:white;width:36px;height:36px;border-radius:12px;font-size:22px;cursor:pointer}
+.jiuli-release-go{width:100%;padding:13px;border:0;border-radius:13px;background:linear-gradient(110deg,#ffd89c,#ffe9c5);font-size:16px;font-weight:900;color:#402441;cursor:pointer}
+.jiuli-release-go:focus-visible,.jiuli-release-close:focus-visible,.jiuli-release-reopen:focus-visible{outline:3px solid #efd5ff;outline-offset:2px}
+.jiuli-release-reopen{border:1px solid #706387;border-radius:11px;background:#30294c;color:#fff;font-size:12px;font-weight:800;min-height:34px;padding:5px 8px;white-space:nowrap;cursor:pointer}
+@media(max-width:440px){.jiuli-release-card{border-radius:18px;padding:17px 15px}.jiuli-release-card h2{font-size:21px}.jiuli-release-reopen{font-size:11px;padding:4px 6px}.top-actions .save-label{display:none}}
+@media(prefers-reduced-motion:reduce){#jiuliReleaseNotice{backdrop-filter:none;-webkit-backdrop-filter:none}}
+</style>
 </head>
 <body class="jiuli-entry-locked">
   <!-- 進站第一頁：原版九黎靈貓宣傳圖片，內嵌避免手機漏上傳素材 -->
@@ -135,20 +191,37 @@ window.JIULI_FISH_IMAGES={'common':'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAA
     </div>
   </section>
 
+  <!-- WEB 1.5.1: 正式進入遊戲後顯示的小型更新公告；可隨時由頁首重開。 -->
+  <div id="jiuliReleaseNotice" role="presentation" hidden>
+    <section class="jiuli-release-card" role="dialog" aria-modal="true" aria-labelledby="jiuliReleaseHeading" aria-describedby="jiuliReleaseDescription" tabindex="-1">
+      <button class="jiuli-release-close" type="button" data-release-action="close" aria-label="關閉更新公告">×</button>
+      <div class="jiuli-release-kicker">✦ NOV 18, 2026 · WEB 1.5.1</div>
+      <h2 id="jiuliReleaseHeading">🐈‍⬛ 九黎靈貓更新公告</h2>
+      <p id="jiuliReleaseDescription">歡迎回來！這次整合好友社交、更多遊戲內容與手機動畫特效，一起看看新變化吧。</p>
+      <div class="jiuli-release-chips">
+        <div class="jiuli-release-chip"><strong>🤝 好友社交正式加入</strong><span>搜尋玩家 ID 加好友，接受後直接在好友卡片贈送道具、魚、寶箱、金幣／元寶，還能互動、求婚與邀請組隊；不必輸入邀請碼。</span></div>
+        <div class="jiuli-release-chip"><strong>🎣 賣魚更安全・寶箱更多</strong><span>七階魚種分開賣，避免誤賣珍貴魚；擴充寶箱種類與獎勵。</span></div>
+        <div class="jiuli-release-chip"><strong>🏦 共同金庫・外送驚喜</strong><span>銀行共享金庫與相關玩法；外送每單隨機報酬，幸運時可選金幣或元寶小費。</span></div>
+        <div class="jiuli-release-chip"><strong>🍳 500 道料理・更多冒險</strong><span>餐廳搜尋及五鍋烹飪、寵物養成、組隊副本，並新增釣魚、收成、開箱、外送等動畫。</span></div>
+      </div>
+      <div class="jiuli-release-note">🔒 共享銀行、好友贈禮與組隊等跨玩家功能，需站長先完成新版 Supabase 資料庫升級與驗證才可使用。正式上線前請先在測試帳號確認。</div>
+      <button class="jiuli-release-go" type="button" data-release-action="close">🎮 我知道了，開始冒險</button>
+    </section>
+  </div>
   <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="app">
     <aside class="sidebar" aria-label="遊戲導覽">
       <a class="brand" href="#home" data-nav="home"><span class="brand-icon">🐈‍⬛</span><span><strong>九黎靈貓</strong><small>JIULI SPIRIT CAT</small></span></a>
       <div class="sidebar-kicker">靈貓冒險世界</div>
       <nav id="sideNav"></nav>
-      <div class="sidebar-note"><b>🎮 公開試玩版</b><p>一般玩法預設本機存檔；完成雲端設定與登入後可以跨裝置同步。正式多人經濟仍未啟用。</p></div>
+      <div class="sidebar-note"><b>🔒 伺服器版測試中</b><p>登入後以 Supabase 管理角色資產；好友及組隊需先安裝正式資料庫更新。</p></div>
     </aside>
     <main class="main">
       <header class="topbar">
         <div class="mobile-logo"><span>🐈‍⬛</span><strong>九黎靈貓</strong></div>
         <div class="breadcrumb"><span>遊戲世界</span><span class="chevron">›</span><strong id="pageCrumb">冒險首頁</strong></div>
         <div class="top-actions">
-          <span class="online-dot" title="裝置本機存檔"></span><span class="save-label">本機／雲端存檔</span>
+          <span class="online-dot" title="裝置本機存檔"></span><span class="save-label">本機／雲端存檔</span><button class="jiuli-release-reopen" type="button" data-release-action="open" aria-label="重新查看版本更新公告">📣 更新</button>
           <button class="icon-button" data-action="share" title="分享網站" aria-label="分享網站">↗</button>
         </div>
       </header>
@@ -190,7 +263,7 @@ const petMap=new Map(D.pets.map(p=>[p[0],p]));
 const rarities=Object.keys(D.fish);
 const rarityEmoji={'普通魚':'🐟','進階魚':'🐠','稀有魚':'🐡','傳說魚':'🐉','絕世魚':'🌟','神話魚':'🔱','永恆魚':'👑'};
 const rarityImage={'普通魚':'common','進階魚':'advanced','稀有魚':'rare','傳說魚':'legendary','絕世魚':'supreme','神話魚':'mythic','永恆魚':'eternal'};
-const navs=[['home','🏠','冒險首頁','探索九黎世界'],['fishing','🎣','靈貓釣魚','3,500種魚類'],['farm','🌱','我的農場','5,000種種子'],['market','🥬','九黎菜市場','每小時收購5種'],['shop','🛒','靈貓百貨','道具補給商城'],['restaurant','🍳','靈貓餐廳','500道料理'],['property','🏘️','瘋狂收租婆','房產經營'],['pets','🐾','寵物王國','36種寵物'],['dungeon','⚔️','百層副本','戰力闖關'],['court','⚖️','法庭大亂鬥','5分鐘狡辯'],['delivery','🚀','瘋狂外送','限時送餐'],['finance','🏦','銀行與創業','個人金庫'],['chests','🎁','寶箱樂園','道具與驚喜'],['minigame','💣','數字炸彈','休閒挑戰'],['marriage','💍','婚姻與寶寶','雙人求婚養成'],['cloud','☁️','雲端帳號','跨裝置存檔'],['profile','📜','我的名片','冒險紀錄'],['guide','📖','玩法與說明','重要限制']];
+const navs=[['home','🏠','冒險首頁','探索九黎世界'],['fishing','🎣','靈貓釣魚','3,500種魚類'],['farm','🌱','我的農場','5,000種種子'],['market','🥬','九黎菜市場','每小時收購5種'],['shop','🛒','靈貓百貨','道具補給商城'],['restaurant','🍳','靈貓餐廳','500道料理'],['property','🏘️','瘋狂收租婆','房產經營'],['pets','🐾','寵物王國','36種寵物'],['dungeon','⚔️','百層副本','戰力闖關'],['court','⚖️','法庭大亂鬥','5分鐘狡辯'],['delivery','🚀','瘋狂外送','限時送餐'],['finance','🏦','銀行與創業','共享金庫'],['chests','🎁','寶箱樂園','道具與驚喜'],['minigame','💣','數字炸彈','休閒挑戰'],['marriage','💍','婚姻與寶寶','雙人求婚養成'],['friends','🤝','我的好友','贈禮・互動・組隊'],['cloud','☁️','雲端帳號','跨裝置存檔'],['profile','📜','我的名片','冒險紀錄'],['guide','📖','玩法與說明','重要限制']];
 const navInfo=Object.fromEntries(navs.map(n=>[n[0],n]));
 const starter=()=>({version:1,createdAt:N(),name:'靈貓旅人',gold:30000,yuanbao:50000,level:1,xp:0,signIn:'',newbieBonus:false,
  fish:[],discovered:[],fishing:null,speedCharges:0,autoCharges:0,baitCharges:0,
@@ -233,7 +306,7 @@ const empty=(icon,title,text)=>`<div class="empty"><div style="font-size:31px">$
 const pageTitle=(icon,name,desc)=>`<div class="page-title"><span class="big-icon">${icon}</span><div><h1>${name}</h1><p>${desc}</p></div></div>`;
 const actRow=(n)=>`<div class="activity"><i></i><div><div>${esc(n.text)}</div><span class="time">${minuteString(n.at)}</span></div></div>`;
 /* 九黎靈貓 WEB 1.2：Supabase Auth、衝突保護雲端存檔、雙方同意的婚姻／寶寶養成。
-   所有涉及兩名玩家的寫入都必須走 Supabase SQL RPC；本機遊戲經濟仍為公開試玩模式。 */
+   所有涉及兩名玩家的寫入都必須走 Supabase SQL RPC；正式金額由伺服器權威帳本結算。 */
 const cloud={client:null,user:null,profile:null,partner:null,marriage:null,proposals:[],baby:null,
  remote:null,revision:0,enabled:false,saving:false,dirty:0,timer:0,configured:false,proposerInfo:{},
  status:'尚未設定雲端',error:'',busy:false,lastSaved:''};
@@ -352,7 +425,7 @@ async function cloudInit(){
  entry.authReady=true;entryRefresh();render();
 }
 function cloudPage(){
- const status=esc(cloud.status),help=`<p class="footnote">💾 雲端存檔會按帳號保存：第一台裝置登入時，必須先選本機或雲端版本。雲端資料只允許帳號本人讀取；玩家遊戲獎勵仍由本機模擬，暫不具防作弊功能。</p>`;
+ const status=esc(cloud.status),help=`<p class="footnote">💾 雲端存檔會按帳號保存：第一台裝置登入時，必須先選本機或雲端版本。雲端資料只允許帳號本人讀取；WEB 1.5 由伺服器結算金錢和道具，請保護帳號密碼。</p>`;
  let html=`${pageTitle('☁️','雲端帳號與存檔','同一帳號跨 iPhone／iPad 載入進度，防止兩台裝置互相覆蓋')}
  <div class="panel"><div class="panel-head"><h3>☁️ 同步狀態</h3>${badge(cloud.user?'已登入':'本機模式',cloud.user?'mint':'')}</div>
  ${info('目前狀態',status)}${info('目前遊戲角色',esc(s.name))}${cloud.lastSaved?info('上次雲端儲存',esc(minuteString(new Date(cloud.lastSaved).getTime()))):''}
@@ -578,7 +651,7 @@ function renderShell(){
  $('mobileNav').innerHTML=[['home','🏠','首頁'],['fishing','🎣','釣魚'],['farm','🌱','農場'],['restaurant','🍳','餐廳'],['shop','🛒','商城']].map(n=>`<button data-nav="${n[0]}" class="mobile-link ${ui.page===n[0]?'active':''}"><span class="micon">${n[1]}</span>${n[2]}</button>`).join('');
  $('announcement').innerHTML=!storageOkay?'<span>⚠️</span><span>存檔寫入失敗；請關閉無痕模式，避免進度遺失！</span>':cloud.enabled?'<span>☁️</span><span>雲端備份已啟用；操作後自動同步。同一帳號不同裝置請先選擇存檔版本。</span>':'<span>✦</span><span>目前仍以瀏覽器本機進度遊玩；可到「雲端帳號」登入並啟用備份。</span>';
 }
-function render(){settlePassive();renderShell();const pages={home, fishing, farm, market,shop,restaurant,property,pets,dungeon,court,delivery,finance,chests,minigame,marriage:marriagePage,cloud:cloudPage,profile,guide};let el=$('screen');try{el.innerHTML=pages[ui.page]()}catch(e){console.error('九黎靈貓頁面錯誤',e);el.innerHTML=empty('⚠️','頁面暫時無法顯示','請重新整理，或到名片頁匯出存檔備份。')}updateTimers()}
+function render(){settlePassive();renderShell();const pages={home, fishing, farm, market,shop,restaurant,property,pets,dungeon,court,delivery,finance,chests,minigame,marriage:marriagePage,friends:friendsPage,cloud:cloudPage,profile,guide};let el=$('screen');try{el.innerHTML=pages[ui.page]()}catch(e){console.error('九黎靈貓頁面錯誤',e);el.innerHTML=empty('⚠️','頁面暫時無法顯示','請重新整理，或到名片頁匯出存檔備份。')}updateTimers()}
 function navigate(page){if(!navInfo[page])page='home';ui.page=page;history.replaceState(null,'','#'+page);render();window.scrollTo({top:0,behavior:'instant'})}
 function updateTimers(){
  if(document.hidden)return;
@@ -590,7 +663,7 @@ function updateTimers(){
 function commit(msg){save();queueCloudSave();render();if(msg)toast(msg)}
 function home(){let daily=s.signIn===dayKey();return `<div class="hero"><div class="hero-content"><div class="eyebrow">✦ WELCOME TO JIULI WORLD</div><h1>和靈貓一起，<br>開啟奇幻冒險。</h1><p>湖畔釣魚、採收農田、料理美食，還能經營房產與挑戰荒謬法庭。每一天都有新發現！</p><div class="hero-actions">${btn('🎣 立即釣魚','go','fishing','gold')}${btn('🛒 靈貓百貨','go','shop')}${btn('💍 婚姻寶寶','go','marriage')}${btn('☁️ 雲端存檔','go','cloud')}${btn('📖 遊戲玩法','go','guide')}</div></div></div>
  <div class="stacks"><div class="stat"><span class="icon">🐟</span><b>${fmt(s.discovered.length)} / 3,500</b><small>已發現魚種</small></div><div class="stat"><span class="icon">🌾</span><b>${fmt(s.stats.harvests)}</b><small>累計農場收成</small></div><div class="stat"><span class="icon">🏆</span><b>${s.dungeonMax} 層</b><small>副本最高紀錄</small></div></div>
- <div class="columns"><div><div class="section-head"><h2>✦ 探索遊戲世界</h2><span class="hint">12種以上可操作玩法</span></div><div class="game-grid">${navs.filter(n=>!['home','guide','profile'].includes(n[0])).map(n=>`<button class="game-card ${['fishing','farm','restaurant','court'].includes(n[0])?'highlight':''}" data-nav="${n[0]}"><span class="game-icon">${n[1]}</span><strong>${n[2]}</strong><span class="sub">${n[3]}</span><span class="arrow">›</span></button>`).join('')}</div></div>
+ <div class="columns"><div><div class="section-head"><h2>✦ 探索遊戲世界</h2><span class="hint">多種休閒與養成玩法</span></div><div class="game-grid">${navs.filter(n=>!['home','guide','profile'].includes(n[0])).map(n=>`<button class="game-card ${['fishing','farm','restaurant','court'].includes(n[0])?'highlight':''}" data-nav="${n[0]}"><span class="game-icon">${n[1]}</span><strong>${n[2]}</strong><span class="sub">${n[3]}</span><span class="arrow">›</span></button>`).join('')}</div></div>
  <div><div class="panel"><div class="panel-head"><h3>🎁 每日福利</h3>${badge(daily?'今日已簽到':'可以領取',daily?'mint':'gold')}</div><p class="muted tiny">每天可領取金幣、元寶與寶箱，按台灣日期重置。</p>${btn(daily?'✅ 今日已簽到':'🎉 領取每日簽到','signin','','gold',daily)}${!s.newbieBonus?`<div class="sep"></div><div class="inline-alert">🏘️ 首次網頁試玩可領一次「房產體驗補助」，讓你體驗原本 300 萬元寶的首間房。</div>${btn('💎 領取3,000,000元寶試玩補助','newbie','','gold')}`:''}</div>
  <div class="panel"><div class="panel-head"><h3>📜 最近冒險紀錄</h3>${btn('看名片','go','profile')}</div><div class="timeline">${s.activity.slice(0,6).map(actRow).join('')}</div></div><div class="panel"><div class="panel-head"><h3>💾 存檔保護</h3>${badge('目前為本機存檔')}</div><p class="tiny">進度只保留在這台裝置的瀏覽器。換手機前請到「我的名片」匯出備份。</p>${btn('匯出我的存檔','export','','soft')}</div></div></div>`}
 function fishing(){const waiting=s.fishing,now=N();const done=waiting&&now>=waiting.readyAt;const fishCount=s.fish.length;
@@ -767,7 +840,7 @@ function profile(){return `${pageTitle('📜','我的靈貓名片','個人資料
 <div><div class="panel"><div class="panel-head"><h3>🏅 靈貓成就</h3>${badge(`${achieves.filter(a=>a[2](s)).length}/${achieves.length}達成`,'mint')}</div>${achieves.map(a=>`<div class="achievement"><span class="medal">${a[0]}</span><div><strong>${a[1]}</strong><div class="desc">${a[2](s)?'已達成':'繼續冒險即可解鎖'}</div></div><span class="status">${a[2](s)?'✅':'🔒'}</span></div>`).join('')}</div><div class="panel"><h3>📜 最近發生的事</h3>${s.activity.slice(0,14).map(actRow).join('')}</div></div></div>`}
 function guide(){return `${pageTitle('📖','新手指南與版本說明','發佈後手機能直接遊玩；啟用 Supabase 後可使用雲端存檔與雙人婚姻')}
 <div class="columns"><div><div class="panel"><h3>🐈‍⬛ 開始玩九黎靈貓</h3><div class="help-list"><p><b>🎣 釣魚：</b>按拋竿，約16秒後收竿，可累積魚類圖鑑、販賣魚獲換金幣。</p><p><b>🌱 農場：</b>買種子 → 一鍵種滿 → 成熟自動顯示收成 → 一鍵收成。菜市場每小時收購5種作物，收價2～3倍。</p><p><b>🛒 靈貓百貨：</b>購買釣魚道具、農場補給、料理加速券、寵物碎片和寶箱，可在背包直接使用。</p><p><b>🍳 餐廳：</b>搜尋500道原版食譜，準備作物，支付批發材料金幣，煮好後收取並賣給 NPC。</p><p><b>🏘️ 房產：</b>首次可領試玩金，買第1間300萬元寶的房子。每滿1小時會在下一次進站自動結算租金。</p><p><b>🐾 寵物與副本：</b>先買寵物、出戰、累積碎片提升等級，再挑戰100層。</p><p><b>⚖️ 荒謬法庭：</b>5分鐘狡辯，暫用本機評分，勝訴拿補償，敗訴得稱號。</p><p><b>🎁 寶箱：</b>獲得時光道具、碎片、戰力果實等，玩法與釣魚、寵物互通。</p></div></div><div class="panel"><h3>📦 網頁版本內容</h3>${info('魚種目錄','3,500 種（7類各500）')}${info('種子目錄','5,000 種')}${info('餐廳食譜','500 道')}${info('房產','5間、10級，高價元寶制')}${info('法庭時限','300秒')}${info('寵物清單','36種')}${info('副本','100層單人')}${info('正式玩家資料','不連動 LINE／Roblox')}</div></div>
-<div><div class="panel"><h3>⚠️ 公開試玩版的限制</h3><div class="inline-alert warn">這是可直接部署在 GitHub Pages 的網頁試玩版，不是具伺服器驗證的正式多人網路遊戲。</div><p class="tiny"><b>已完成：</b>可點擊操作、角色進度本機保存、匯出備份、釣魚、農場及一鍵種收、每小時五種作物菜市場、靈貓百貨、料理、房產、法庭個人辯護、寵物、副本、外送、銀行、寶箱、數字炸彈。</p><p class="tiny"><b>新增（需站長設定 Supabase）：</b>登入／雲端存檔、玩家ID、雙方同意的婚姻、30分鐘孕育與寶寶養成。<br><b>尚未完成：</b>完整夫妻任務、即時多人聊天／共享銀行、組隊副本、GPT 雲端判官、5000種種子的完整原版耕作週期、所有 LINE 會員功能。</p><p class="tiny"><b>遊戲內經濟：</b>雲端存檔保護帳號隱私與同步版本，不代表伺服器已驗證金幣／元寶。玩家仍可自行修改瀏覽器資料；正式排行榜、玩家交易、付費道具前需要全面後端結算。</p></div><div class="panel"><h3>🌐 部署說明</h3><p class="tiny">使用 GitHub Pages 的免費靜態網站發布。GitHub Free 的 Pages 須使用公開倉庫；請不要把 LINE 金鑰、Supabase 密碼或私人資料放在此倉庫。</p><p class="tiny">GitHub 倉庫設 Settings → Pages → Deploy from a branch → main / (root)，儲存後從 Visit site 開啟網址。請參考 ZIP 內的 README_iPad_發布教學.md。</p>${btn('📤 分享遊戲網址','share','','soft')}</div></div></div>`}
+<div><div class="panel"><h3>⚠️ 公開試玩版的限制</h3><div class="inline-alert warn">這是 WEB 1.5 伺服器測試版；必須先完成資料庫升級及兩人測試，才能正式開放玩家經濟交易。</div><p class="tiny"><b>已完成：</b>可點擊操作、角色進度本機保存、匯出備份、釣魚、農場及一鍵種收、每小時五種作物菜市場、靈貓百貨、料理、房產、法庭個人辯護、寵物、副本、外送、銀行、寶箱、數字炸彈。</p><p class="tiny"><b>新增（需站長設定 Supabase）：</b>登入／雲端存檔、玩家ID、雙方同意的婚姻、30分鐘孕育與寶寶養成。<br><b>尚未完成：</b>完整夫妻任務、即時多人聊天、GPT 雲端判官、5000種種子的完整原版耕作週期、所有 LINE 會員功能。</p><p class="tiny"><b>遊戲內經濟：</b>新版由 PostgreSQL 結算金幣與元寶，並提供好友直接贈禮／互動；上線前需完成資料庫遷移及多人測試。舊版資產無法回溯確認沒有作弊。</p></div><div class="panel"><h3>🌐 部署說明</h3><p class="tiny">使用 GitHub Pages 的免費靜態網站發布。GitHub Free 的 Pages 須使用公開倉庫；請不要把 LINE 金鑰、Supabase 密碼或私人資料放在此倉庫。</p><p class="tiny">GitHub 倉庫設 Settings → Pages → Deploy from a branch → main / (root)，儲存後從 Visit site 開啟網址。請參考 ZIP 內的 README_iPad_發布教學.md。</p>${btn('📤 分享遊戲網址','share','','soft')}</div></div></div>`}
 function fishCast(){if(s.fishing)return fail('你已經拋竿，先等待魚兒上鉤。');let use=s.speedCharges>0;if(use)s.speedCharges--;let now=N();s.fishing={startedAt:now,readyAt:now+(use?8000:16000)};log(`🎣 拋竿成功，${use?'已消耗1次加速':'等待魚兒上鉤'}`);commit('🎣 拋竿成功！')}
 function fishCollect(){if(!s.fishing)return fail('請先拋竿');if(N()<s.fishing.readyAt)return fail('魚兒還沒上鉤，請再等一下');const f=recordFish();s.fishing=null;commit(`🎉 ${f.rarity}：釣到 ${f.name}！`)}
 function sellFish(which){let keeps=[],sold=[],total=0;for(const f of s.fish){if(which==='全部'||f.rarity===which){sold.push(f);total+=f.price}else keeps.push(f)}if(!sold.length)return fail('目前沒有可賣出的魚');s.fish=keeps;s.gold+=total;s.stats.fishSold+=sold.length;log(`🪙 賣出${sold.length}條魚，獲得${fmt(total)}金幣`);commit(`✅ 已賣${sold.length}條魚，金幣 +${fmt(total)}`)}
@@ -828,10 +901,701 @@ function action(type,value){if(type.startsWith('cloud')||type.startsWith('baby')
  case 'noop':return;
  default:return fail('這項操作尚未開放');
 }}
+/*
+ * 九黎靈貓 WEB 1.3 遊戲玩法擴充（此段位於遊戲主 IIFE 內）
+ * 不修改既有 localStorage key、存檔 version、Supabase Auth 與婚姻 SQL。
+ */
+const WEB13_CHEST_ORDER=['普通寶箱','精良寶箱','精緻寶箱','稀有寶箱','傳說寶箱','絕世寶箱','神秘寶箱','永恆寶箱','究極寶箱','天域寶箱','鴻蒙寶箱','木製寶箱','星光寶箱'];
+const WEB13_CHEST_INFO={
+ '普通寶箱':['🪵','基本金幣及高級魚餌','gold',150],
+ '精良寶箱':['🥈','進階金幣與高級魚餌','gold',800],
+ '精緻寶箱':['🎁','舊版精緻箱，等同精良獎池',null,0],
+ '稀有寶箱':['💎','稀有金幣與幸運符','yuanbao',30],
+ '傳說寶箱':['🐉','高額金幣，有機會得元寶',null,0],
+ '絕世寶箱':['🌟','極高金幣，有機會得元寶',null,0],
+ '神秘寶箱':['❓','隨機基礎金幣','yuanbao',50],
+ '永恆寶箱':['♾️','10,000～99,999元寶、道具及碎片（貴族限定）',null,0],
+ '究極寶箱':['🌈','99,999～500,000元寶、5～10高級碎片','yuanbao',99000],
+ '天域寶箱':['☁️','199,998～1,000,000元寶與10～20碎片',null,0],
+ '鴻蒙寶箱':['🌌','500,000～1,500,000元寶、碎片與三階果實',null,0],
+ '木製寶箱':['📦','網頁試玩舊款木箱','gold',2000],
+ '星光寶箱':['✨','網頁試玩舊款星光箱','yuanbao',3000]
+};
+Object.assign(boxPrices,Object.fromEntries(Object.entries(WEB13_CHEST_INFO).filter(([n,v])=>v[2]).map(([n,v])=>[n,[v[2],v[3]]])));
+for(const name of WEB13_CHEST_ORDER){
+ const [icon,desc,currency,price]=WEB13_CHEST_INFO[name];
+ if(currency&&!shopProducts.some(p=>p.name===name))shopProducts.push({name,icon,category:'寶箱',currency,price,desc,type:'chest'});
+}
+const WEB13_SAFE_FISH=['普通魚','進階魚','稀有魚'];
+let web13Bank=null,web13BankBusy=false;
+const web13FmtGold=n=>`${fmt(Math.max(0,Number(n)||0))}金幣`;
+const web13Rand=(lo,hi)=>rand(lo,hi);
+// 釣魚：默認安全賣魚僅普通～稀有，七階均可單獨賣，高階二次確認。
+fishing=(()=>{
+ const old=fishing;
+ return function(){
+  let html=old();const fishCount=s.fish.length;
+  const tierButtons=rarities.map(r=>{
+   const own=s.fish.filter(f=>f.rarity===r),value=own.reduce((v,f)=>v+Number(f.price||0),0);
+   return `<div class="web13-fish-sale"><span class="rarity-${esc(r)}">${rarityEmoji[r]} ${esc(r)}</span><small>${fmt(own.length)}條 · 約${fmt(value)}金幣</small>${btn('只賣這階','sellFish',r,'soft',own.length===0)}</div>`;
+  }).join('');
+  // 換掉危險的「全部賣魚」，只在最下方保留需要二次確認的高風險選項。
+  const oldButtons=html.match(/<div class="row wrap mb">[\s\S]*?<\/div>/);
+  if(oldButtons)html=html.replace(oldButtons[0],`<div class="row wrap mb">${btn('🪙 安全賣魚（普通／進階／稀有）','sellFish','安全出售','gold',!s.fish.some(f=>WEB13_SAFE_FISH.includes(f.rarity)))}</div><div class="web13-fish-sales">${tierButtons}</div><p class="footnote">🔒 安全出售不會賣掉傳說、絕世、神話或永恆魚。各階可單獨出售；需要賣光所有魚才使用下方危險操作。</p><div class="row wrap mb">${btn('⚠️ 真的要出售全部魚（雙重確認）','sellFish','全部','soft',fishCount===0)}</div>`);
+  return html;
+ };
+})();
+sellFish=function(which){
+ const matches=s.fish.filter(f=>which==='全部'||which==='安全出售'&&WEB13_SAFE_FISH.includes(f.rarity)||f.rarity===which);
+ if(!matches.length)return fail('魚塘沒有符合條件的魚');
+ const total=matches.reduce((n,f)=>n+Number(f.price||0),0);
+ if(which==='全部'){
+  const rares=matches.filter(f=>!WEB13_SAFE_FISH.includes(f.rarity));
+  if(!confirm(`⚠️ 危險：將售出全部${matches.length}條魚，其中包含${rares.length}條傳說／絕世／神話／永恆珍貴魚！確定繼續？`))return;
+  if(!confirm(`最後確認：真的要永久出售全部魚，換取${fmt(total)}金幣？無法還原！`))return;
+ }else if(['傳說魚','絕世魚','神話魚','永恆魚'].includes(which)){
+  if(!confirm(`確定賣出${matches.length}條${which}，換取${fmt(total)}金幣？`))return;
+ }
+ const matched=new Set(matches);s.fish=s.fish.filter(f=>!matched.has(f));
+ s.gold+=total;s.stats.fishSold+=matches.length;
+ log(`🐟 ${which}：賣出${matches.length}條魚，獲${fmt(total)}金幣`);
+ commit(`✅ 已售出${matches.length}條${which==='安全出售'?'低階魚':which==='全部'?'魚':which}，獲${fmt(total)}金幣`);
+};
+// 全部寶箱清單：原版十一種與網頁歷史舊箱並存，副本有機率掉落高階箱。
+function web13RollChest(name){
+ let result=[];const addGold=(n)=>{s.gold+=n;result.push(`金幣+${fmt(n)}`)};
+ const addY=(n)=>{s.yuanbao+=n;result.push(`元寶+${fmt(n)}`)};
+ const addItem=(n,q)=>{s.items[n]=(s.items[n]||0)+q;result.push(`${n}×${q}`)};
+ const addFrag=(q)=>{s.fragments+=q;result.push(`寵物碎片×${q}`)};
+ const addFruit=(q)=>{s.fruit+=q;result.push(`戰力果實×${q}`)};
+ const common={'普通寶箱':[100,1000,'高級魚餌',.1],'精良寶箱':[500,3000,'高級魚餌',.15],
+   '精緻寶箱':[500,3000,'高級魚餌',.15],'稀有寶箱':[2000,8000,'幸運符',.2],
+   '傳說寶箱':[5000,20000,'元寶',.25],'絕世寶箱':[20000,100000,'元寶',.4]};
+ if(common[name]){
+  const [lo,hi,extra,p]=common[name];addGold(web13Rand(lo,hi));
+  if(Math.random()<p){if(extra==='元寶')addY(web13Rand(name==='絕世寶箱'?50:10,name==='絕世寶箱'?200:50));else addItem(extra,1)}
+ }else if(name==='神秘寶箱')addGold(web13Rand(100,1000));
+ else if(name==='永恆寶箱'){
+  addY(web13Rand(10000,99999));addItem(choose(['時光加速','自動提竿','稀有魚餌','種子補給箱','全田施肥券','料理加速券']),web13Rand(1,3));
+  if(Math.random()<.25)addFrag(web13Rand(1,3));
+ }else if(name==='究極寶箱'){addY(web13Rand(99999,500000));addFrag(web13Rand(5,10))}
+ else if(name==='天域寶箱'){addY(web13Rand(199998,1000000));addFrag(web13Rand(10,20))}
+ else if(name==='鴻蒙寶箱'){addY(web13Rand(500000,1500000));addFrag(web13Rand(10,20));addFruit(web13Rand(1,3))}
+ else if(name==='木製寶箱'||name==='星光寶箱'){
+  const bonus=name==='星光寶箱'?4:1,roll=rand(1,6);
+  if(roll===1)addGold(web13Rand(500,1400)*bonus);
+  else if(roll===2)addY(web13Rand(200,600)*bonus);
+  else if(roll===3)addItem('時光加速',bonus);
+  else if(roll===4)addItem('自動提竿',bonus);
+  else if(roll===5)addFrag(bonus*2);
+  else addFruit(bonus);
+ }else throw new Error('未知寶箱品項');
+ return result.join('、');
+}
+chests=function(){
+ const owned=WEB13_CHEST_ORDER.filter(n=>(s.chests[n]||0)>0);
+ const listed=WEB13_CHEST_ORDER.map(name=>{
+  const [icon,desc,currency,price]=WEB13_CHEST_INFO[name];
+  const stock=s.chests[name]||0;
+  return `<div class="list-card"><div class="avatar">${icon}</div><div class="details"><strong>${name}</strong><small>${esc(desc)}</small><small>持有 ${fmt(stock)}箱 · ${currency?`售價 ${fmt(price)}${currency==='gold'?'金幣':'元寶'}`:'活動／副本／會員限定'}</small></div><div class="web13-box-actions">${btn('開啟1箱','openChest',name,'soft',stock<1)}${currency?btn('購買','buyChest',name,'gold',s[currency]<price):''}</div></div>`;
+ }).join('');
+ return `${pageTitle('🎁','寶箱樂園','對照 LINE 原版完整寶箱種類；不同寶箱有各自獎池')}
+ <div class="stacks"><div class="stat"><span class="icon">🎁</span><b>${fmt(owned.reduce((v,n)=>v+(s.chests[n]||0),0))}</b><small>持有寶箱</small></div><div class="stat"><span class="icon">🧩</span><b>${fmt(s.fragments)}</b><small>寵物碎片</small></div><div class="stat"><span class="icon">🍎</span><b>${fmt(s.fruit)}</b><small>戰力果實</small></div></div>
+ <div class="panel"><h3>🎒 寶箱快捷操作</h3><div class="row wrap mt">${btn('🎁 全部開箱（每次最多100箱）','openAllChests','','gold',owned.length===0)}${btn('🛒 前往商城','go','shop','soft')}</div><p class="footnote">全開依現有持有量結算，不會把本次開出的新寶箱連續打開。永恆寶箱貴族資格尚待移植；天域與鴻蒙可從高層副本獲得。</p></div>
+ <div class="columns"><div class="panel"><h3>📦 寶箱清單（含歷史舊款）</h3><div class="card-list">${listed}</div></div><div class="panel"><h3>🎒 背包道具</h3>${Object.entries(s.items).filter(([,q])=>q>0).map(([n,q])=>info(n,fmt(q))+(['高級魚餌','幸運符'].includes(n)?btn('使用'+esc(n),'useShopItem',n,'soft'):'')).join('')||empty('🧺','沒有道具','前往商城購買或開箱獲得')}${info('寵物碎片',fmt(s.fragments))}${info('戰力果實',fmt(s.fruit))}</div></div>`;
+};
+openChest=function(name){
+ if(!WEB13_CHEST_INFO[name])return fail('未知寶箱種類');
+ if(!(s.chests[name]>0))return fail('沒有這種寶箱');
+ s.chests[name]--;
+ const result=web13RollChest(name);log(`🎁 開啟${name}：${result}`);
+ commit(`🎁 ${name}獲得：${result}`);
+};
+function web13OpenAllChests(){
+ const snap=WEB13_CHEST_ORDER.map(name=>[name,Math.max(0,s.chests[name]||0)]);
+ const sum=snap.reduce((v,[,q])=>v+q,0);if(!sum)return fail('沒有可開啟的寶箱');
+ let left=100,out=[],count=0;
+ for(const [name,q] of snap){
+  const n=Math.min(q,left);if(n<=0)continue;
+  for(let i=0;i<n;i++){s.chests[name]--;out.push(`${name}：${web13RollChest(name)}`);count++}
+  left-=n;if(left===0)break;
+ }
+ log(`🎁 一鍵開箱${count}箱：${out.slice(0,5).join('；')}`);
+ commit(`🎁 本次開啟${count}箱！查看背包與元寶餘額；剩餘寶箱可再開一次。`);
+}
+// 高層副本掉落更多原版寶箱，降低高戰力玩家獎勵倒掛。
+const web13OldDungeon=startDungeon;
+startDungeon=function(){
+ const old=s.stats.dungeonRuns,p=power();let floor=0;for(let f=1;f<=100;f++){if(p>=100+70*f+7*f*f)floor=f;else break}
+ web13OldDungeon();
+ if(s.stats.dungeonRuns===old)return;
+ const roll=Math.random();let box='';
+ if(floor>=95&&roll<.10)box='鴻蒙寶箱';
+ else if(floor>=75&&roll<.22)box='天域寶箱';
+ else if(floor>=55&&roll<.35)box='究極寶箱';
+ else if(floor>=35&&roll<.55)box='絕世寶箱';
+ else if(floor>=18&&roll<.60)box='傳說寶箱';
+ else if(roll<.55)box='稀有寶箱';
+ else box='精良寶箱';
+ // 前述原版副本操作已成功，這裡只追加寶箱獎勵。
+ s.chests[box]=(s.chests[box]||0)+1;
+ log(`⚔️ 通關${floor}層，額外獲得${box}`);
+ commit(`🏆 副本獎勵追加${box}×1！`);
+};
+// 外送：完整顧客/餐點/地點情境，獎金隨單隨機、10% 小費二選一。
+const WEB13_CUSTOMERS=["透明人總經理", "水豚教授", "脾氣不好的阿嬤", "週一星球王子", "社恐吸血鬼", "工作狂魔法師", "愛碎念的神秘外星人", "街角的跳舞殭屍", "有八隻手的珍奶店長", "失眠的機器貓", "會走路的包租婆", "草莓味忍者"];
+const WEB13_PLACES=["泡麵星球三樓", "永遠在裝修的夜市", "月球轉角便利商店", "阿嬤的雲端宮殿", "不能左轉的時空路口", "禁止打噴嚏的魔法學校", "水豚開會中心", "全宇宙最慢的電梯", "被珍奶淹沒的辦公室", "地獄廚房VIP包廂", "喵喵國際機場", "傳送門裡的早餐店", "一秒鐘換十次招牌的商場", "奇怪的三角飯糰實驗所"];
+const WEB13_ORDERS=["雙倍香菜冰淇淋", "不准變冷的泡麵", "會唱歌的珍珠奶茶", "長得像老闆的披薩", "99顆不加糖珍珠", "需要保護的炸雞腿", "柴犬專屬便當", "外星人必勝客皮鞋餅乾", "超級辣的睡前牛奶", "不能看的神祕漢堡", "魚形起司蛋糕", "比房東還兇的洋蔥圈"];
+const WEB13_OBSTACLES=["不能敲門，請用意念按電鈴", "顧客在另一個平行時空等外送", "電梯堅持要聽完冷笑話才上樓", "路口被鴿子交警接管", "導航叫你先學會倒立", "顧客說只能從窗戶遞進去", "運送途中禁止眨眼", "要用臺語說三次外送到了", "電動門說先回答它的星座", "顧客要求便當保持45度傾斜", "不准路過火鍋店，以免訂單忍不住下鍋"];
+delivery=function(){
+ const d=s.delivery,tip=s.tipOffer;
+ const recent=(s.deliveryRecords||[]).slice(-8).reverse();
+ return `${pageTitle('🚀','瘋狂外送魔','12種奇葩顧客 × 超多餐點和路線 · 每單不同報酬，小機率客人打賞')}
+ <div class="columns"><div class="panel main-panel"><div class="eyebrow">DELIVERY GUILD</div><h2>🛵 靈貓超速外送隊</h2>
+ ${d?`<div class="inline-alert ${d.readyAt<=N()?'success':''}"><strong>👤 ${esc(d.customer||'神秘顧客')}</strong><br>🥡 ${esc(d.order)}<br>📍 ${esc(d.destination||'未知目的地')}<br>⚠️ ${esc(d.obstacle||'小心配送')}<br>${d.readyAt>N()?`配送中，還有 ${countdown(d.readyAt)}`:'🎉 已送達，可以領取報酬！'}</div>${btn('📦 完成訂單領報酬','finishDelivery','','mint',d.readyAt>N(),d.readyAt>N()?`data-ready-refresh="${d.readyAt}"`:'')}`:`${btn('🚀 接取隨機外送訂單','startDelivery','','gold',!!tip)}`}
+ ${tip?`<div class="web13-tip"><strong>🎁 顧客送來小費！請選擇一項</strong><p class="tiny">小費僅能領一次。金幣 1,000～15,000，或元寶 500～5,000。</p><div class="row wrap">${btn('🪙 領取金幣小費','claimTip','gold','gold')}${btn('💎 領取元寶小費','claimTip','yuanbao','soft')}</div></div>`:''}
+ <div class="sep"></div>${info('累積完成訂單',`${fmt(s.deliveries)}筆`)}${info('每單金幣報酬','1～5,000金幣（隨機）')}${info('每單元寶報酬','1～1,000元寶（隨機）')}${info('小費機率','10%｜由玩家選擇金幣或元寶')}
+ <p class="footnote">外送進度記錄在存檔，完成後請按領取。報酬在派單時確定，避免重整網頁反覆抽獎。</p></div>
+ <div class="panel"><h3>📋 最近外送紀錄</h3>${recent.length?recent.map(j=>`<div class="slim-card">${esc(j.title)}<br><span class="tiny">+${fmt(j.gold)}金幣、+${fmt(j.yuanbao)}元寶${j.tip?'｜🎁 有小費':''}</span></div>`).join(''):empty('🥡','尚無配送紀錄','接取第一張訂單吧！')}</div></div>`;
+};
+startDelivery=function(){
+ if(s.delivery)return fail('請先完成目前訂單');
+ if(s.tipOffer)return fail('先領取上一單的小費，再接下一單');
+ const item=choose(WEB13_ORDERS),customer=choose(WEB13_CUSTOMERS),destination=choose(WEB13_PLACES),obstacle=choose(WEB13_OBSTACLES);
+ const readyAt=N()+rand(2,12)*60000;
+ // 每張訂單預先產生報酬，防止頁面刷新重新抽取。
+ s.delivery={order:item,customer,destination,obstacle,readyAt,baseGold:rand(1,5000),baseYuanbao:rand(1,1000),tipEligible:Math.random()<.10};
+ log(`📦 接到${customer}的外送單：${item}→${destination}`);
+ commit(`🚀 ${customer}的訂單接單成功！預計${Math.ceil((readyAt-N())/60000)}分鐘送達`);
+};
+finishDelivery=function(){
+ const d=s.delivery;if(!d)return fail('目前沒有外送訂單');
+ if(d.readyAt>N())return fail(`還需 ${fmtTime(d.readyAt-N())}`);
+ const gold=Number.isSafeInteger(d.baseGold)?d.baseGold:rand(1,5000),yuanbao=Number.isSafeInteger(d.baseYuanbao)?d.baseYuanbao:rand(1,1000);
+ s.delivery=null;s.gold+=gold;s.yuanbao+=yuanbao;s.deliveries++;gainXp(25);
+ const tip=typeof d.tipEligible==='boolean'?d.tipEligible:Math.random()<.10;
+ if(tip)s.tipOffer={title:d.order,createdAt:N()};
+ s.deliveryRecords=(Array.isArray(s.deliveryRecords)?s.deliveryRecords:[]);
+ s.deliveryRecords.push({title:d.order,customer:d.customer||'神秘顧客',gold,yuanbao,tip,finishedAt:N()});
+ s.deliveryRecords=s.deliveryRecords.slice(-50);
+ log(`🚀 ${d.order}完成：+${fmt(gold)}金幣、+${fmt(yuanbao)}元寶${tip?'，客人送小費':''}`);
+ commit(`📦 外送完成！獲得${fmt(gold)}金幣＋${fmt(yuanbao)}元寶${tip?'，🎁 還有小費可選擇！':''}`);
+};
+function web13ClaimTip(currency){
+ if(!s.tipOffer)return fail('目前沒有待領的小費');
+ if(currency!=='gold'&&currency!=='yuanbao')return fail('請選擇金幣或元寶');
+ const amount=currency==='gold'?rand(1000,15000):rand(500,5000);
+ s.tipOffer=null;s[currency]+=amount;
+ log(`🎁 客人小費：${fmt(amount)}${currency==='gold'?'金幣':'元寶'}`);
+ commit(`🎁 已領取${fmt(amount)}${currency==='gold'?'金幣':'元寶'}，小費已結清！`);
+}
+// 餐廳：500道不再只顯示前12道；新增分頁與「材料齊全」篩選。
+function web13FilteredRecipes(){
+ let q=ui.recipeQuery.trim();return D.recipes.filter(r=>
+  (ui.category==='全部'||r[6]===ui.category)&&
+  (!q||r[0].includes(q)||r[3].some(a=>a[0].includes(q)))&&
+  (!ui.recipeAvailableOnly||recipeNeeds(r).every(([n,num])=>(s.crops[n]||0)>=num))
+ );
+}
+ui.recipePage=1;ui.recipeAvailableOnly=false;
+renderRecipeResults=function(){
+ const all=web13FilteredRecipes(),per=20,pages=Math.max(1,Math.ceil(all.length/per));
+ ui.recipePage=Math.max(1,Math.min(Number(ui.recipePage)||1,pages));
+ const entries=all.slice((ui.recipePage-1)*per,ui.recipePage*per);
+ const toolbar=`<div class="web13-pagebar"><span>符合 ${fmt(all.length)} 道｜第 ${ui.recipePage}/${pages} 頁</span><div>${btn('上一頁','recipePrev','','soft',ui.recipePage<=1)}${btn('下一頁','recipeNext','','soft',ui.recipePage>=pages)}</div></div>`;
+ return entries.length?`${toolbar}<div class="card-list">${entries.map(r=>{
+  const req=cookCost(r),missing=req.crops.filter(([n,num])=>(s.crops[n]||0)<num).map(([n,num])=>n+'差'+(num-(s.crops[n]||0)));
+  const can=s.gold>=req.supplyGold;
+  return `<div class="list-card"><div class="avatar">${esc(r[1])}</div><div class="details"><strong>${esc(r[0])}</strong><small>${r[6]} · ${r[2]}分原版｜基礎${fmt(r[5])}元寶</small><small>🥬 ${req.crops.map(([n,q])=>`${esc(n)}×${q}`).join('、')}｜批發${fmt(req.supplyGold)}金幣</small>${missing.length?`<small class="rarity-傳說魚">缺少：${esc(missing.join('、'))}</small>`:''}</div>${btn('開始烹飪','cook',r[0],'gold',s.kitchen.length>=5||missing.length>0||!can)}</div>`;
+ }).join('')}</div>${toolbar}`:empty('🍽️','沒有符合的料理','可以切換分類、搜尋或關閉材料篩選');
+};
+restaurant=(()=>{
+ const old=restaurant;
+ return function(){
+  let html=old();
+  html=html.replace('500道固定食譜 • 農場作物製作料理 • NPC 購買與評價','500道完整食譜・分頁搜尋・材料篩選・最多5鍋同時烹飪');
+  html=html.replace(/(\d+)\/2鍋/g,'$1/5鍋');
+  html=html.replace("<div class=\"chip-row\">${['全部',...new Set(D.recipes.map(r=>r[6]))]", "<div class=\"chip-row\">${['全部',...new Set(D.recipes.map(r=>r[6]))]");
+  html=html.replace('<div id="recipeResults">',`<div class="row wrap mb">${btn(ui.recipeAvailableOnly?'✅ 只顯示材料齊全（關閉）':'🧺 只顯示材料齊全','recipeAvailable','','soft')}</div><div id="recipeResults">`);
+  html=html.replace('為方便網頁測試，烹飪時間為原版每分鐘3秒','網頁料理時間為原版每分鐘3秒；未領取料理6小時後腐壞。完整500道可依分類與搜尋分頁查看');
+  return html;
+ };
+})();
+// 正式取代舊的雙鍋 cook 處理，避免副作用或過早 commit。
+cook=function(name){
+ const r=recipeMap.get(name);if(!r)return fail('找不到這道料理');
+ if(s.kitchen.length>=5)return fail('廚房最多同時烹飪5鍋');
+ const req=cookCost(r);
+ for(const [n,q] of req.crops)if((s.crops[n]||0)<q)return fail(`缺少${n}×${q}，請先種植收成`);
+ if(!paid('gold',req.supplyGold))return;
+ for(const [n,q] of req.crops)s.crops[n]-=q;
+ s.kitchen.push({name,readyAt:N()+Math.max(15000,r[2]*3000),price:r[5]});s.stats.cooked++;
+ log(`🍳 製作${name}，耗費${fmt(req.supplyGold)}金幣`);commit(`🍳 ${name}已開始烹飪！`);
+};
+// 原版開箱取得的高級魚餌與幸運符，在網頁版也能實際啟用，而非無效果道具。
+const web13OldUseShopItem=useShopItem;
+useShopItem=function(name){
+ if(name==='高級魚餌'||name==='幸運符'){
+  if(!(s.items[name]>0))return fail('背包沒有'+name);
+  s.items[name]--;s.baitCharges+=(name==='幸運符'?10:5);
+  return commit(`🎣 已使用${name}，增加${name==='幸運符'?10:5}次稀有魚餌加成！`);
+ }
+ return web13OldUseShopItem(name);
+};
+// 共同金庫：所有存款、搶劫、監獄/保釋與轉帳由 Supabase SQL RPC 實際結算。
+finance=function(){
+ const b=web13Bank;
+ const bankPanel=`<div class="panel"><h3>🏦 九黎靈貓全站共同金庫</h3>
+ <p class="tiny">與 LINE 群組銀行同一玩法：所有登入玩家共用金庫＝個人存款總和＋公用獎池。網站目前只有一個全站公會，並非按 LINE 群組分庫。</p>
+ ${b?`${info('🏛️ 全站金庫',`${fmt(b.vault)}金幣`)}${info('成員總存款',`${fmt(b.deposits)}金幣`)}${info('創業／罰金公用獎池',`${fmt(b.pool)}金幣`)}${info('我的存款',`${fmt(b.own)}金幣`)}${b.jailed_until&&new Date(b.jailed_until).getTime()>N()?`<div class="web13-warn">🚔 監獄服刑中：${new Date(b.jailed_until).toLocaleString('zh-TW')}</div>`:''}`:'<p class="muted">點「查詢共同金庫」載入即時餘額。</p>'}
+ <div class="row wrap mt">${btn('🔄 查詢共同金庫','web13BankStatus','','soft',web13BankBusy)}</div>
+ <div class="field"><label for="bankAmount">存款／提款金額（金幣）</label><input class="input" id="bankAmount" inputmode="numeric" type="number" min="1" max="10000000" placeholder="輸入金幣金額"></div>
+ <div class="row wrap mt">${btn('存入金幣','web13BankDeposit','','gold',web13BankBusy)}${btn('提領金幣','web13BankWithdraw','','soft',web13BankBusy)}${btn('🎲 搶銀行','web13BankRob','','gold',web13BankBusy)}</div>
+ <div class="sep"></div><div class="field"><label for="bankTarget">好友玩家 ID（英文小寫）</label><input class="input" id="bankTarget" maxlength="16" placeholder="填對方的玩家ID，不要填Email"></div>
+ <div class="row wrap mt">${btn('🚔 逃獄（3,000金幣）','web13BankEscape','','soft',web13BankBusy)}${btn('🤝 保釋好友（20,000金幣）','web13BankBail','','soft',web13BankBusy)}${btn('💸 轉帳金幣','web13BankTransfer','','soft',web13BankBusy)}</div>
+ <p class="footnote">搶銀行成功率35%；失敗有35%機率監禁2小時，否則罰金20～200金幣投入獎池。搶銀行不限冷卻／次數。保釋或轉帳需輸入玩家 ID。共同金庫只對已登入、已啟用雲端存檔玩家開放。</p>
+ <p class="web13-warn">⚠️ 公開測試提示：雖然銀行 SQL 已防止同時交易重複扣款，但遊戲其他金幣收入還在網頁端計算，尚未達到正式多人經濟防作弊標準。</p>
+ </div>`;
+ return `${pageTitle('🏦','銀行與創業','全站共同金庫、銀行搶劫、監獄、逃獄及金幣轉帳')}
+ <div class="stacks"><div class="stat"><span class="icon">🪙</span><b>${fmt(s.gold)}</b><small>目前錢包金幣</small></div><div class="stat"><span class="icon">🏦</span><b>${fmt(b?.own||0)}</b><small>共同銀行個人存款</small></div><div class="stat"><span class="icon">🏛️</span><b>${fmt(b?.vault||0)}</b><small>全站共用金庫</small></div></div>
+ <div class="columns equal">${bankPanel}<div class="panel"><h3>📦 舊版私人銀行保留金額</h3>
+ ${info('WEB 1.2 版私人銀行',`${fmt(s.bank||0)}金幣`)}
+ <p class="tiny">之前存在本機個人銀行的金幣仍然保留，請先領回錢包，再視需要存入新的多人共享金庫。</p>
+ ${btn('取回舊版私人銀行全部金幣','web13LegacyWithdraw','','soft',!(s.bank>0))}
+ <div class="sep"></div><h3>💼 九項創業｜銀行公用獎池</h3><p class="tiny">和原版一樣：60%機率創業成功；金幣創業失敗的本金將投入全站金庫。沒有冷卻及次數限制。</p>
+ <div class="field"><label for="ventureProject">創業類型（回報率）</label><select class="input" id="ventureProject">${['🐶寵物商店 120%','🏬百貨商店 140%','✂️美容美髮 160%','🏓全民健身 160%','🥎私人教練 180%','🥪特色餐飲 200%','🛳️豪華遊艇 220%','✈️太空冒險 240%','🛸星際飛船 260%'].map((n,i)=>`<option value="${i+1}">${n}</option>`).join('')}</select></div>
+ <div class="field"><label for="ventureAmount">投入金額（100～50,000）</label><input class="input" id="ventureAmount" inputmode="numeric" type="number" min="100" max="50000" value="1000"></div>
+ <div class="row wrap">${btn('🪙 金幣創業','web13VentureGold','','gold',web13BankBusy)}${btn('💎 元寶創業（需資格）','web13VentureYuanbao','','soft',web13BankBusy||!b?.venture_permit)}</div>
+ ${info('元寶創業資格',b?.venture_permit?'✅ 可使用1次':'尚未取得（成功金幣創業有20%機率解鎖）')}
+ <p class="footnote">創業的勝負、金額與銀行金庫由 Supabase 交易結算；不會把舊版試玩本機獎勵直接加到銀行獎池。</p></div></div>`;
+};
+async function web13BankOp(op){
+ if(web13BankBusy)return fail('銀行交易正在處理，請勿連按');
+ if(!cloud.user||!cloud.client||!cloud.enabled)return fail('請先登入雲端帳號、啟用雲端備份，才能使用全站共同銀行');
+ let amount=0,target='';
+ if(['deposit','withdraw','transfer','venture','venture_yuanbao'].includes(op)){
+  const field=$(op.startsWith('venture')?'ventureAmount':'bankAmount');amount=Number(field?.value);
+  if(!Number.isSafeInteger(amount)||amount<1||amount>10000000)return fail('請輸入1～10,000,000之間的金幣整數');
+ }
+ if(['bail','transfer'].includes(op)){
+  target=String($('bankTarget')?.value||'').trim().replace(/^@/,'').toLowerCase();
+  if(!/^[a-z0-9_]{3,16}$/.test(target))return fail('請填寫好友正確的玩家 ID');
+ }
+ if(op.startsWith('venture')){target=String($('ventureProject')?.value||'');if(!/^[1-9]$/.test(target)||amount<100||amount>50000)return fail('選擇創業1～9號及投入100～50,000');if(!confirm(`確定投入${fmt(amount)}${op==='venture'?'金幣':'元寶'}進行創業？失敗會損失本金！`))return;}
+ if(op==='rob'&&!confirm('⚠️ 搶銀行有風險：有可能扣罰金或被關入監獄2小時，確定搶劫？'))return;
+ if(op==='transfer'&&!confirm(`確定轉帳${fmt(amount)}金幣給 ${target}？`))return;
+ web13BankBusy=true;
+ try{
+  // 提交既有遊戲進度，讓伺服器從最新存檔扣金幣；若發生版本衝突則停止。
+  for(let i=0;cloud.saving&&i<50;i++)await new Promise(r=>setTimeout(r,100));
+  if(cloud.saving)throw new Error('雲端同步仍在進行，請稍後重試');
+  if(op!=='status')await cloudWrite();
+  if(!cloud.enabled)throw new Error('雲端同步衝突，請重載雲端進度再操作銀行');
+  // 暫停此分頁的背景雲端覆寫，讓銀行結算完成後才使用新 revision。
+  if(op!=='status')cloud.saving=true;
+  let result;
+  try{result=await cloud.client.rpc('jiuli_web_bank_action',{p_action:op,p_amount:amount,p_target:target||null})}
+  finally{if(op!=='status')cloud.saving=false}
+  const {data,error}=result;
+  if(error)throw error;
+  web13Bank=data;
+  const gold=Number(data.gold),revision=Number(data.revision); if(Number.isFinite(Number(data.yuanbao)))s.yuanbao=Number(data.yuanbao);
+  if(!Number.isFinite(gold)||!Number.isSafeInteger(revision))throw new Error('銀行回傳格式不正確');
+  s.gold=gold;cloud.revision=revision;cloud.remote=null;
+  cloud.lastSaved=new Date().toISOString();cloud.status='✅ 雲端已儲存';
+  save(); // RPC 已修改雲端存檔，不可再用舊 revision 覆蓋。
+  if(op!=='status')log(`🏦 ${data.message||op}${data.loot?`｜獲${fmt(data.loot)}金幣`:''}`);
+  toast('🏦 '+(data.message||'銀行餘額已更新')+(data.loot?`，取得${fmt(data.loot)}金幣`:''));
+ }catch(e){
+  let msg=String(e?.message||e);
+  const tr={LOGIN_REQUIRED:'請先登入',SAVE_REQUIRED:'找不到雲端存檔，請到雲端帳號啟用備份',BAD_AMOUNT:'金額不正確',NOT_ENOUGH_GOLD:'金幣不足',NOT_ENOUGH_DEPOSIT:'個人銀行存款不足',JAILED:'你仍在監獄，請先逃獄或保釋',EMPTY_VAULT:'共同金庫不足10金幣',NOT_JAILED:'你目前沒有被關押',INVALID_TARGET:'找不到好友或不能選自己',TARGET_NOT_JAILED:'這位好友目前沒有在監獄',TARGET_SAVE_REQUIRED:'對方尚未啟用雲端進度',BANK_BALANCE_CONFLICT:'銀行餘額衝突，請刷新後再試',INVALID_PROJECT:'創業項目編號錯誤',VENTURE_PERMIT_REQUIRED:'尚未取得元寶創業資格',NOT_ENOUGH_YUANBAO:'元寶不足'};
+  for(const [k,v] of Object.entries(tr))if(msg.includes(k)){msg=v;break}
+  toast('⚠️ '+msg.slice(0,125));
+ }finally{web13BankBusy=false;render()}
+}
+// 攔截新增操作：不修改原本遊戲快捷選單和 Supabase 婚姻事件處理。
+const web13OriginalAction=action;
+action=function(type,value){
+ if(type==='openAllChests')return web13OpenAllChests();
+ if(type==='claimTip')return web13ClaimTip(value);
+ if(type==='recipePrev'){ui.recipePage=Math.max(1,ui.recipePage-1);return render()}
+ if(type==='recipeNext'){ui.recipePage++;return render()}
+ if(type==='recipeAvailable'){ui.recipeAvailableOnly=!ui.recipeAvailableOnly;ui.recipePage=1;return render()}
+ if(type==='recipeCategory'){ui.recipePage=1;return web13OriginalAction(type,value)}
+ if(type==='web13BankStatus')return web13BankOp('status');
+ if(type==='web13BankDeposit')return web13BankOp('deposit');
+ if(type==='web13BankWithdraw')return web13BankOp('withdraw');
+ if(type==='web13BankRob')return web13BankOp('rob');
+ if(type==='web13BankEscape')return web13BankOp('escape');
+ if(type==='web13BankBail')return web13BankOp('bail');
+ if(type==='web13BankTransfer')return web13BankOp('transfer');
+ if(type==='web13VentureGold')return web13BankOp('venture');
+ if(type==='web13VentureYuanbao')return web13BankOp('venture_yuanbao');
+ if(type==='web13LegacyWithdraw'){if(!(s.bank>0))return fail('沒有舊版私人存款');const old=s.bank;s.gold+=old;s.bank=0;return commit(`🏦 已領回舊版私人銀行${fmt(old)}金幣，現在可存入共同金庫`)}
+ return web13OriginalAction(type,value);
+};
+
+/* 九黎靈貓 WEB 1.4：所有金錢、道具、獎勵由 Supabase 單入口 RPC 結算。
+   前端只傳動作和選項，不傳任何獎勵金額，也不能以舊的 JSON 存檔覆寫正式帳本。 */
+const SECURE_MONEY_ACTIONS=new Set([
+ 'signin','newbie','memberSignin','saveName','fishCast','fishCollect','sellFish','useFishItem',
+ 'buySeed','plant','plantAll','harvest','harvestAll','water','fertilizeAll','marketSell','sellCrop',
+ 'cook','pickupCook','sellDish','npcSellAll','buyHouse','upgradeHouse','renameHouse','collectRent',
+ 'openCourt','defend','lawyer','bail','buyPet','equipPet','upgradePet','feedPet','startDungeon',
+ 'startDelivery','finishDelivery','claimTip','buyShop','useShopItem','buyChest','openChest','openAllChests',
+ 'bombStart','bombGuess','bombQuit','web13BankStatus','web13BankDeposit','web13BankWithdraw',
+ 'web13BankRob','web13BankEscape','web13BankBail','web13BankTransfer','web13VentureGold',
+ 'web13VentureYuanbao','web13LegacyWithdraw','buyMembership','teamCreate','teamJoin','teamStart'
+]);
+let secureInFlight=false,secureBooted=false,secureMarketOffers=null,secureServerNow=0,secureTeamInfo=null;
+window.JIULI_SECURE_MODE=true;
+// 舊版只可做 UI 閱讀；新的官方金幣/元寶不能再使用舊的任意本機存檔 API。
+queueCloudSave=function(){};
+cloudWrite=async function(){return;};
+settlePassive=function(){return false;};
+const secureOldCommit=commit;
+commit=function(){toast('正式資產只能透過伺服器結算，請重新載入最新頁面。');};
+const secureOriginalCloudAction=cloudAction;
+cloudAction=async function(type,value){
+ if(['cloudUseRemote','cloudUploadLocal','cloudSyncNow','cloudReload'].includes(type)){
+  if(type==='cloudUploadLocal')return fail('🔒 官方資產已改由伺服器管理，不能以本機存檔覆蓋。請先匯出本機 JSON 交管理員核對。');
+  await secureAction('status',{},true);
+  if(!secureBooted)return;
+  if(type==='cloudUseRemote'){cloud.enabled=true;save();toast('✅ 已載入權威雲端進度');}
+  else toast('☁️ 已讀取最新伺服器資料，無需手動上傳錢包');
+  return;
+ }
+ return secureOriginalCloudAction(type,value);
+};
+async function secureAction(type,args={},quiet=false){
+ if(secureInFlight)return fail('⏳ 上一個伺服器操作還沒完成，請不要連按');
+ if(!cloud.user||!cloud.client)return fail('請先登入 Supabase 帳號，才能進入正式伺服器模式');
+ secureInFlight=true;
+ try{
+  const req=(globalThis.crypto?.randomUUID?.()||'00000000-0000-4000-8000-'+Math.random().toString(16).slice(2).padEnd(12,'0').slice(0,12));
+  const {data,error}=await cloud.client.rpc('jiuli_secure_game',{
+   p_action:type,p_args:args,p_request_id:req
+  });
+  if(error)throw error;
+  if(!data||!data.state||typeof data.state.gold!=='number'||typeof data.state.yuanbao!=='number')throw new Error('伺服器回應格式錯誤，請停止操作並聯繫站長');
+  s=normalizeCloudSave(data.state);
+  secureBooted=true;
+  cloud.revision=Number(data.revision||0);cloud.lastSaved=new Date().toISOString();
+  cloud.status='✅ 正式伺服器帳本已更新';cloud.error='';
+  cloud.remote={game_state:data.state,revision:cloud.revision,updated_at:cloud.lastSaved};
+  web13Bank=data.bank||null;secureMarketOffers=data.market_offers||null;secureTeamInfo=data.team||null;secureServerNow=Number(data.server_time||0);
+  cloud.enabled=true;
+  save();render();
+  if(!quiet)toast('✅ '+String(data.message||'操作完成').slice(0,110));
+  return data;
+ }catch(e){
+  let msg=String(e?.message||e);
+  const translations={
+   LOGIN_REQUIRED:'請登入帳號',SERVER_ACTION_NOT_YET_IMPLEMENTED:'此功能暫不開放正式結算',
+   NOT_ENOUGH_GOLD:'金幣不足',NOT_ENOUGH_YUANBAO:'元寶不足',NOT_ENOUGH_DEPOSIT:'存款不足',
+   BONUS_ALREADY_CLAIMED:'已領過新手補助',ALREADY_SIGNED_IN:'今天已簽到',
+   NOT_READY:'還沒完成倒數，請稍候',DELIVERY_NOT_READY:'外送還未送達',
+   NO_FISH_TO_SELL:'沒有符合階級的魚',UNKNOWN_LEGACY_FISH_NEEDS_REVIEW:'此魚需要管理員核對舊存檔',
+   NO_DISH_TO_SELL:'沒有可販賣的料理',CROP_NOT_IN_MARKET:'這項作物不在本輪菜市場名單',
+   TEAM_NEEDS_2_TO_5:'組隊需要2～5位成員',TEAM_NOT_FOUND:'找不到隊伍，請確認邀請代碼',
+   ALREADY_IN_TEAM:'你已在一個開放隊伍內',TEAM_FULL:'隊伍已滿5人',
+   ONLY_LEADER_CAN_START:'只有隊長能開始副本',TEAM_MEMBER_LIMIT:'隊員已達每日副本上限',
+   MISSING_FISH_CATALOG:'尚未安裝完整魚類資料庫',MISSING_SEED_CATALOG:'尚未安裝種子資料庫',
+   MONEY_LIMIT:'經濟額度已達上限',INVALID_STATE:'角色資料需要管理員檢查',
+   MIGRATED_BALANCE_REQUIRES_ADMIN_REVIEW:'舊版餘額異常，需要管理員核對',
+   VIP_REQUIRED:'永恆寶箱僅限貴族會員',LEGACY_BANK_REVIEW_REQUIRED:'舊版銀行存款須人工核對',
+   NO_COOKING_TO_SPEED:'沒有可加速的料理',CLOUD_CONFLICT:'進度衝突，請重新登入'
+  };
+  for(const [code,tr] of Object.entries(translations))if(msg.includes(code)){msg=tr;break;}
+  toast('⚠️ '+msg.slice(0,145));
+  if(type==='status'){cloud.status='安全伺服器初始化失敗：'+msg;cloud.error=cloud.status;entry.notice=cloud.status;}
+  return null;
+ }finally{secureInFlight=false;entryRefresh();}
+}
+// 註冊登入不變；只把登入後的存檔讀取換成 SQL 權威資料。
+cloudFetchState=async function(){
+ if(!cloud.user)return;
+ entry.fetching=true;entryRefresh();
+ await secureAction('status',{},true);
+ if(secureBooted){
+  // 社交搜尋和好友名片也需要載入已註冊的玩家ID，不能只讀金錢帳本。
+  try{const {data,error}=await cloud.client.from('jiuli_web_profiles').select('user_id,handle,display_name').eq('user_id',cloud.user.id).maybeSingle();
+   if(error)throw error;cloud.profile=data||null;
+  }catch(e){console.warn('玩家ID載入失敗',e);}
+  await cloudRefreshFamily(false);
+ }
+ entry.fetching=false;entryRefresh();
+};
+const secureOldEntrySyncView=entrySyncView;
+entrySyncView=function(){
+ secureOldEntrySyncView();
+ if($('jiuliEntryUseLocal'))$('jiuliEntryUseLocal').hidden=true;
+ if($('jiuliEntrySyncNotice'))$('jiuliEntrySyncNotice').textContent='🔒 正式伺服器版只讀取權威雲端進度。舊本機資料會保留在此裝置，不能直接匯入正式資產。';
+};
+entryDoChoice=async function(choice){
+ if(!cloud.user||entry.fetching)return;
+ if(!secureBooted){await secureAction('status',{},true);if(!secureBooted)return;}
+ if(choice==='useLocal'){entry.notice='正式資產不可由本機覆寫；請選擇使用伺服器進度。';entrySyncView();return;}
+ if(choice==='continue'&&!cloud.remote){entrySyncView();return;}
+ cloud.enabled=true;entryUnlock();
+};
+// 使用伺服器保存的市場輪換五種作物，與伺服器核價結果一致。
+const secureOldMarketOffers=marketOffers;
+marketOffers=function(){
+ if(!secureMarketOffers)return secureOldMarketOffers();
+ const hour=Math.floor((secureServerNow||Date.now())/3600000);
+ return {hour,names:secureMarketOffers.map(x=>x.name),multipliers:secureMarketOffers.map(x=>100*x.rate)};
+};
+// 補齊組隊副本、會員簽到，未使用到舊版用戶自主鑄幣邏輯。
+const secureOriginalDungeon=dungeon;
+dungeon=function(){
+ const html=secureOriginalDungeon();
+ const panel=`<div class="panel"><h3>👥 好友組隊副本（2～5人）</h3><p class="tiny">不用邀請碼或外部連結。到「我的好友」按「⚔️ 邀請組隊」，對方直接在好友頁按接受。</p>${secureTeamInfo?`<div class="inline-alert success">目前隊伍：${secureTeamInfo.count}人｜${secureTeamInfo.leader?'你是隊長':'你是隊員'}</div>`:''}
+ <div class="row wrap">${btn('🤝 開啟好友名單','openFriends','','soft')}${btn('⚔️ 隊長開始副本','teamStart','','gold',!secureTeamInfo?.leader||secureTeamInfo?.count<2)}</div><p class="footnote">組隊獎勵由 Supabase 同一交易派發；隊長可同時邀請多位好友，最多五人。</p></div>`;
+ return html+panel;
+};
+const secureOriginalShop=shop;
+shop=function(){
+ const html=secureOriginalShop();
+ const expires=Number(s.vipUntil||0);
+ const member=expires>Date.now() ? `目前：${esc(s.membership||'會員')}，到期 ${new Date(expires).toLocaleString('zh-TW')}`:'目前沒有有效會員';
+ const members=[['普通會員','5,000元寶／7天'],['農場普通會員','8,000元寶／7天'],['農場豪華會員','100,000元寶／30天'],['貴族會員','2,000,000元寶／60天']];
+ return html+`<div class="panel"><h3>🎫 九黎會員專區</h3><p class="tiny">${member}</p><div class="card-list">${members.map(([n,p])=>`<div class="list-card"><div class="details"><strong>${n}</strong><small>${p}</small></div>${btn('購買會員','buyMembership',n,'gold')}</div>`).join('')}</div>${btn('💎 會員每日簽到（與普通簽到分開）','memberSignin','','mint',expires<=Date.now())}${btn('♾️ 貴族購買永恆寶箱（5,000元寶）','buyChest','永恆寶箱','gold',expires<=Date.now()||s.membership!=='貴族會員')}<p class="footnote">目前會員的伺服器效益包括每日會員簽到及貴族購買永恆寶箱。未移植的會員自動施肥、託管功能暫不另行收費。</p></div>`;
+};
+const secureOriginalRestaurant=restaurant;
+restaurant=function(){return secureOriginalRestaurant()+`<div class="panel"><h3>🤖 NPC 批量銷售</h3><p class="tiny">一次結算目前已完成且未腐壞的料理，金額由伺服器按上架時間計算。</p>${btn('🍽️ 一鍵賣出已完成料理','npcSellAll','','gold',!(s.dishes||[]).length)}</div>`;};
+const secureOriginalHome=home;
+home=function(){return secureOriginalHome()+`<div class="inline-alert success">🔒 WEB 1.4 伺服器經濟：金幣、元寶、寶箱、料理、副本、銀行由 PostgreSQL 核價與結算。切換裝置請使用同一雲端帳號。</div>`};
+const secureOriginalGuide=guide;
+guide=function(){return secureOriginalGuide()+`<div class="panel"><h3>🛡️ 伺服器權威結算說明</h3><p class="tiny">本版禁用舊版自訂存檔覆蓋與銀行舊 RPC；正式遊戲資產只能來自伺服器交易。升級前的舊雲端存檔會凍結為遷移快照，但既有資產不能追溯驗證沒有作弊。尚未完成的 GPT 即時判官、無審核玩家聊天與 LINE 全功能完全等價，並未宣稱已完成。</p></div>`};
+const secureOldAction=action;
+action=function(type,value){
+ if(type==='import'||type==='reset')return fail('🔒 正式版不允許透過本機匯入或重置金幣；請先匯出備份，再聯絡管理員審核。');
+ if(['import','reset'].includes(type))return fail('🔒 正式伺服器遊戲禁止從網頁匯入或清除官方資產；如需恢復請聯絡站長。');
+ if(type==='bankDeposit')type='web13BankDeposit';
+ if(type==='bankWithdraw')type='web13BankWithdraw';
+ if(type==='venture')return fail('請使用新版共享銀行的創業專區，由伺服器結算風險與獎勵。');
+ if(SECURE_MONEY_ACTIONS.has(type)){
+  if(!secureBooted)return fail('請先完成伺服器登入並載入正式進度。');
+  const args={name:value||'',value:value||'',quantity:ui.shopQty||1};
+  if(['plant','plantAll'].includes(type))args.seed=($('plantSeed')?.value||ui.plantSeed||'');
+  if(['plant','harvest','water','upgradeHouse','renameHouse','pickupCook','sellDish'].includes(type))args.index=Number(value);
+  if(type==='defend')args.text=($('defence')?.value||'').trim();
+  if(type==='bombGuess')args.guess=Number($('bombGuess')?.value);
+  if(['web13BankDeposit','web13BankWithdraw','web13BankTransfer','web13VentureGold','web13VentureYuanbao'].includes(type)){
+   args.amount=Number($(type.startsWith('web13Venture')?'ventureAmount':'bankAmount')?.value||0);
+  }
+  if(['web13BankTransfer','web13BankBail'].includes(type))args.text=($('bankTarget')?.value||'').trim().replace(/^@/,'');
+  if(type.startsWith('web13Venture'))args.project=Number($('ventureProject')?.value||0);
+  if(type==='teamJoin')args.text=($('secureTeamCode')?.value||'').trim().toUpperCase();
+  if(type==='saveName')args.name=($('playerName')?.value||'').trim();
+  if(type==='sellFish'&&value==='全部'&&!confirm('⚠️ 真的賣掉全部魚？包含所有絕世、神話、永恆魚！不可恢復。'))return;
+  if(['傳說魚','絕世魚','神話魚','永恆魚'].includes(value)&&type==='sellFish'&&!confirm('確定出售珍貴魚 '+value+'？'))return;
+  if(type==='web13BankTransfer'&&!confirm('確認轉帳給指定玩家？金額不能撤回。'))return;
+  if(type==='web13BankRob'&&!confirm('搶銀行有風險，可能被扣款或入獄，確定嗎？'))return;
+  if(type==='web13VentureGold'||type==='web13VentureYuanbao')if(!confirm('創業有本金損失風險，確定嗎？'))return;
+  return secureAction(type,args);
+ }
+ return secureOldAction(type,value);
+};
+// 當有人重新打開網頁時，拿到的永遠是伺服器狀態，而不是本機可自由修改的錢包。
+setInterval(()=>{
+ if(entry.stage!=='game'||!secureBooted||document.hidden||secureInFlight)return;
+ if(s.fishing?.readyAt<=Date.now()&&Number(s.autoCharges||0)>0){
+  secureAction('fishCollect',{},true).then(r=>{if(r&&Number(s.autoCharges||0)>0)secureAction('fishCast',{},true)});
+ }
+},17000);
+
+
+/* WEB 1.5：好友一鍵互動。好友關係、贈禮、稱號分數和組隊權限只信任 Supabase RPC。 */
+let socialData={friends:[],incoming:[],outgoing:[],team_invites:[],gifts_received:[],team:null,search:null};
+let socialBusy=false,socialSelection='',socialSearch='',socialGiftKind='item',socialOwnerId=null;
+const socialGiftNames=()=>{
+ const catalog=socialGiftKind==='item'?s.items:socialGiftKind==='chest'?s.chests:null;
+ if(catalog)return Object.keys(catalog||{}).filter(k=>Number(catalog[k])>0).sort();
+ if(socialGiftKind==='fish')return [...new Set((s.fish||[]).map(f=>f.name))].sort();
+ return [];
+};
+const socialLabel=n=>esc(n.display_name||n.handle||'靈貓好友');
+function friendsPage(){
+ if(socialOwnerId!==cloud.user?.id){socialData={friends:[],incoming:[],outgoing:[],team_invites:[],gifts_received:[],team:null,search:null};socialSelection='';}
+ const signed=!!cloud.user&&secureBooted;
+ const f=socialData.friends||[],incoming=socialData.incoming||[],outgoing=socialData.outgoing||[],inv=socialData.team_invites||[];
+ const chosen=f.find(v=>v.user_id===socialSelection);
+ const giftLabels={gold:'🪙 金幣',yuanbao:'💎 元寶',item:'🎒 背包道具',chest:'🎁 寶箱',fragments:'🐾 寵物碎片',fruit:'🍎 戰力果實',fish:'🐟 魚塘魚獲'};
+ const kindOptions=Object.entries(giftLabels).map(([value,label])=>`<option value="${value}" ${value===socialGiftKind?'selected':''}>${label}</option>`).join('');
+ const giftName=()=>['item','chest','fish'].includes(socialGiftKind)?`<div class="field"><label>選擇要贈送的東西</label><select id="socialGiftName" class="input">${socialGiftNames().map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>`:'';
+ const searchResult=socialData.search;
+ const pending=inv.map(i=>`<div class="list-card"><div class="details"><strong>⚔️ ${esc(i.from_name||i.from_handle)} 邀請你組隊</strong><small>點接受直接加入副本隊伍，不需代碼</small></div><div class="row wrap">${btn('✅ 接受','socialTeamAccept',i.id,'gold')}${btn('婉拒','socialTeamDecline',i.id)}</div></div>`).join('');
+ return `${pageTitle('🤝','我的靈貓好友','搜尋玩家ID、雙方同意後直接點擊好友卡片贈禮或組隊')}
+ <div class="panel"><div class="panel-head"><h3>💌 好友訊息中心</h3>${badge(`${f.length} 位好友`)}</div>
+ ${!signed?'<div class="inline-alert warn">請先登入並完成正式伺服器資料庫更新，才能使用好友互動。</div>':''}${signed&&!cloud.profile?'<div class="inline-alert warn">請先到婚姻與寶寶頁設定自己的玩家ID，好友才能搜尋到你。</div>':''}
+ <div class="row wrap">${btn('🔄 更新好友訊息','socialRefresh','','soft',!signed)}</div>
+ <div class="field"><label for="socialSearch">🔎 搜尋玩家 ID（非電子郵件）</label><input class="input" id="socialSearch" value="${esc(socialSearch)}" placeholder="例如：jiuli_cat" maxlength="16" autocapitalize="none" autocomplete="off"></div>
+ <div class="row wrap">${btn('🔎 搜尋玩家','socialSearch','','gold',!signed)}</div>
+ ${searchResult?`<div class="list-card"><div class="details"><strong>${socialLabel(searchResult)} <small>@${esc(searchResult.handle)}</small></strong></div>${searchResult.is_friend?badge('已是好友','mint'):btn('🤝 加好友','socialRequest',searchResult.handle,'gold')}</div>`:socialSearch?'<p class="tiny muted">未顯示搜尋結果？請按搜尋玩家，對方必須先設定玩家ID。</p>':''}</div>
+ ${incoming.length?`<div class="panel"><h3>📩 待接受的好友申請（${incoming.length}）</h3><div class="card-list">${incoming.map(x=>`<div class="list-card"><div class="details"><strong>${socialLabel(x)}</strong><small>@${esc(x.handle)} 想加你好友</small></div><div class="row wrap">${btn('✅ 接受','socialAccept',x.handle,'gold')}${btn('拒絕','socialDecline',x.handle)}</div></div>`).join('')}</div></div>`:''}
+ ${outgoing.length?`<div class="panel"><h3>📤 已送出申請</h3>${outgoing.map(x=>`<span class="jiuli-social-pill">⏳ @${esc(x.handle)}</span>`).join(' ')}</div>`:''}
+ ${inv.length?`<div class="panel"><h3>⚔️ 好友副本邀請（${inv.length}）</h3><div class="card-list">${pending}</div></div>`:''}
+ <div class="panel"><h3>🐈‍⬛ 好友名單</h3>${f.length?`<div class="jiuli-friend-grid">${f.map(friend=>`<div class="jiuli-friend-card"><h3>🌸 ${socialLabel(friend)}</h3><div class="muted">@${esc(friend.handle)} · Lv.${Math.max(1,Number(friend.level)||1)} · ${friend.pet?`寵物：${esc(friend.pet)} Lv.${friend.pet_level||1}`:'尚未出戰寵物'}</div><div class="muted">✨ 魅力 ${fmt(friend.charisma||0)} · 🎁 豪氣 ${fmt(friend.generosity||0)}</div><div class="jiuli-friend-actions">${btn('🎁 贈送','socialChooseGift',friend.user_id,'gold')}${btn('💌 打招呼','socialInteract',friend.handle)}${btn('💖 送抱抱','socialInteractHug',friend.handle)}${btn('👏 比讚','socialInteractPraise',friend.handle)}${btn('🚔 好友保釋','socialBail',friend.handle)}${btn('⚔️ 邀請組隊','socialTeamInvite',friend.handle)}${btn('💍 求婚','socialPropose',friend.handle,'soft',!!cloud.marriage)}${btn('解除好友','socialRemove',friend.handle,'soft')}</div></div>`).join('')}</div>`:empty('🤝','目前還沒有好友','搜尋對方的遊戲玩家ID，雙方確認後就可以直接贈禮與互動。')}</div>
+ ${chosen?`<div id="socialGiftForm" class="jiuli-friend-form"><h3>🎁 贈送給 ${socialLabel(chosen)}</h3><p class="tiny">對方不用複製邀請碼、也不用開外部連結。扣款與入帳由 Supabase 同時完成。</p><div class="field"><label>贈禮類型</label><select id="socialGiftKind" class="input">${kindOptions}</select></div><div id="socialGiftNameHolder">${giftName()}</div><div class="field"><label>數量（金幣／元寶可填金額）</label><input class="input" id="socialGiftQty" inputmode="numeric" type="number" min="1" max="1000000" value="1"></div><div class="row wrap">${btn('🎁 確認贈送','socialGift',chosen.handle,'gold')}${btn('取消','socialCancelGift','','soft')}</div><p class="footnote">每天最多30次贈禮；每次贈禮給送禮者豪氣值+1、收禮者魅力值+1。請確認對象及數量。</p></div>`:''}
+ <div class="panel"><h3>🌟 我的社交名片</h3>${info('豪氣值',fmt(s.generosity||0))}${info('魅力值',fmt(s.charisma||0))}${info('好友數量',f.length)}<p class="tiny">好友互動每天每人最多5次，間隔至少10分鐘。好友邀請會顯示在本頁，可重新整理或在遊戲中自動檢查。</p></div>
+ ${(socialData.gifts_received||[]).length?`<div class="panel"><h3>🎀 最近收到的禮物</h3>${socialData.gifts_received.map(x=>`<div class="activity"><span>🎁</span> <span>@${esc(x.from)} 贈送 ${esc(x.item)} ×${fmt(x.quantity)}</span></div>`).join('')}</div>`:''}`;
+}
+async function socialRefresh(search='',silent=false){
+ if(!cloud.user||!cloud.client||!secureBooted)return null;
+ if(socialBusy)return null;const owner=cloud.user.id;socialBusy=true;
+ try{
+  const {data,error}=await cloud.client.rpc('jiuli_social_snapshot',{p_search:search});
+  if(error)throw error;
+  if(data&&typeof data==='object'&&cloud.user?.id===owner){socialData=data;socialOwnerId=owner;}
+  if(ui.page==='friends')render();
+  if(!silent)toast('🤝 好友資料已更新');return data;
+ }catch(err){if(!silent)toast('⚠️ 好友資料讀取失敗：'+String(err?.message||err).slice(0,105));return null;}
+ finally{socialBusy=false;}
+}
+async function socialCall(type,target='',kind='',name='',quantity=1){
+ if(!secureBooted||!cloud.user)return fail('請先登入正式伺服器帳號');
+ if(socialBusy)return fail('好友操作進行中，請稍候');
+ if(['remove','gift'].includes(type)&&!confirm(type==='remove'?'要解除好友關係嗎？':'確定贈送這項物品？送出後無法取回。'))return;
+ socialBusy=true;
+ try{
+  const payload=JSON.stringify([type,target,kind,name,quantity]);
+  const old=(()=>{try{return JSON.parse(sessionStorage.getItem('jiuli_social_pending')||'null')}catch{return null}})();
+  const req=old?.payload===payload?old.id:globalThis.crypto?.randomUUID?.();
+  if(!req)throw new Error('裝置不支援安全交易編號');
+  try{sessionStorage.setItem('jiuli_social_pending',JSON.stringify({payload,id:req}))}catch{}
+  const {data,error}=await cloud.client.rpc('jiuli_social_action',{p_action:type,p_target:target,p_kind:kind,p_name:name,p_quantity:quantity,p_request_id:req});
+  if(error)throw error;
+  // 伺服器先提交，再重新讀取雙方資料；前端不可自行加減物品或幣值。
+  try{sessionStorage.removeItem('jiuli_social_pending')}catch{}
+  toast(String(data?.message||'已完成好友操作'));
+  socialSelection='';socialBusy=false;
+  await secureAction('status',{},true);
+  await socialRefresh('',true);
+  jiuliGameFx(type==='gift'?'gift':type==='inviteTeam'||type==='acceptTeam'?'team':'friends',null);
+ }catch(err){socialBusy=false;let msg=String(err?.message||err);const labels={NOT_FRIENDS:'你們還不是好友',REQUEST_PENDING:'好友申請已送出',REQUEST_COOLDOWN:'對方婉拒後需等待24小時',NO_INCOMING_REQUEST:'沒有可以接受的好友申請',FRIEND_LIMIT:'好友數已達150人',PLAYER_NOT_FOUND:'找不到玩家，請先確認對方的玩家 ID',PLAYER_SAVE_REQUIRED:'對方必須先登入並建立正式存檔',NOT_ENOUGH_CURRENCY:'金幣或元寶不足',ITEM_NOT_OWNED:'背包數量不足',FISH_NOT_OWNED:'魚塘裡沒有這麼多指定魚',GIFT_DAILY_LIMIT:'今日贈禮達30次上限',INTERACT_COOLDOWN:'請等待10分鐘後再互動',INTERACT_DAILY_LIMIT:'今天已與這位好友互動5次',ALREADY_IN_TEAM:'好友已在其他隊伍',NOT_TEAM_LEADER:'只有隊長可以邀請好友',TEAM_FULL:'隊伍已達5人',INVITE_EXPIRED:'這份組隊邀請已過期',INVALID_GIFT_KIND:'不支援這種贈禮'};for(const [k,v] of Object.entries(labels))if(msg.includes(k)){msg=v;break;}toast('⚠️ '+msg.slice(0,140));}
+}
+function socialAction(type,value){
+ if(type==='openFriends'){navigate('friends');socialRefresh('',true);return;}
+ if(type==='socialRefresh')return socialRefresh('');
+ if(type==='socialSearch'){socialSearch=($('socialSearch')?.value||'').trim().replace(/^@/,'').toLowerCase();return socialRefresh(socialSearch,true);}
+ if(type==='socialChooseGift'){socialSelection=value;socialGiftKind='item';render();requestAnimationFrame(()=>$('socialGiftForm')?.scrollIntoView({block:'center',behavior:'smooth'}));return;}
+ if(type==='socialCancelGift'){socialSelection='';render();return;}
+ if(type==='socialGift'){
+  const kind=$('socialGiftKind')?.value||socialGiftKind,amount=Number($('socialGiftQty')?.value||0),name=($('socialGiftName')?.value||'');
+  if(!Number.isSafeInteger(amount)||amount<1||amount>(['gold','yuanbao'].includes(kind)?1000000:100))return fail('贈送數量無效，金額每次最多100萬，其餘每次最多100份');
+  if(['item','chest','fish'].includes(kind)&&!name)return fail('請選擇道具、寶箱或魚獲');
+  return socialCall('gift',value,kind,name,amount);
+ }
+ if(type==='socialRequest')return socialCall('request',value);
+ if(type==='socialAccept')return socialCall('accept',value);
+ if(type==='socialDecline')return socialCall('decline',value);
+ if(type==='socialRemove')return socialCall('remove',value);
+ if(type==='socialTeamInvite')return socialCall('inviteTeam',value);
+ if(type==='socialBail'){if(!confirm('確定要花費金幣替好友 @'+value+' 保釋嗎？'))return;return secureAction('web13BankBail',{text:value});}
+ if(type==='socialTeamAccept')return socialCall('acceptTeam',value);
+ if(type==='socialTeamDecline')return socialCall('declineTeam',value);
+ if(type==='socialInteract')return socialCall('interact',value,'','打招呼',1);
+ if(type==='socialInteractHug')return socialCall('interact',value,'','送抱抱',1);
+ if(type==='socialInteractPraise')return socialCall('interact',value,'','幫好友比讚',1);
+ if(type==='socialPropose'){
+  if(!cloud.user||!cloud.client)return fail('請先登入帳號');
+  if(!confirm('確定向好友 @'+value+' 求婚嗎？對方仍須親自同意。'))return;
+  (async()=>{try{const {error}=await cloud.client.rpc('jiuli_web_send_proposal',{p_handle:value});if(error)throw error;await cloudRefreshFamily(false);toast('💍 已向好友發送求婚，對方可在婚姻頁接受！');jiuliGameFx('marriage');}catch(e){toast('⚠️ 求婚失敗：'+String(e?.message||e).slice(0,100))}})();return;
+ }
+}
+// 各個玩法的輕量主題動畫：水波、農田、蒸氣、寶箱、法槌等。
+const jiuliScenes={fishing:['💦','🎣','🐟'],farm:['💧','🌱','🌾'],market:['🧺','🥬','🪙'],shop:['🛒','✨','🎁'],restaurant:['♨️','🍲','🍳'],property:['🏘️','💎','🏠'],pets:['✨','🐾','🐈‍⬛'],dungeon:['⚔️','💥','🏆'],court:['⚖️','🔨','✨'],delivery:['📦','🚀','💨'],finance:['💰','🏦','💎'],chests:['✨','🎁','🌟'],minigame:['💣','🔢','💥'],marriage:['💖','💍','🌸'],friends:['🌸','🤝','💌']};
+const jiuliFxThemes={fishCast:['💦','🎣','✨'],fishCollect:['💦','🐟','🌟'],harvest:['🌱','🌾','✨'],harvestAll:['🌱','🌾','✨'],plant:['🌱','💧','🌸'],plantAll:['🌱','💧','🌸'],cook:['♨️','🍳','🥘'],pickupCook:['🍲','✨','💫'],openChest:['🎁','💎','🌟'],openAllChests:['🎁','💎','✨'],startDungeon:['⚔️','🏆','💥'],teamStart:['⚔️','✨','🏆'],finishDelivery:['📦','🚀','✨'],claimTip:['🎀','🪙','💎'],buyHouse:['🏠','💎','🏘️'],collectRent:['💎','🪙','✨'],defend:['⚖️','🔨','🌟'],upgradePet:['🐈‍⬛','🐾','✨'],sellFish:['🐟','🪙','✨'],gift:['🎁','💝','✨'],friends:['🌸','💌','🤝'],team:['⚔️','🤝','🏆'],marriage:['🌸','💍','💖'],bombGuess:['💣','💥','✨']};
+function jiuliGameFx(action,msg){
+ if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||document.hidden)return;
+ const icons=jiuliFxThemes[action]||jiuliScenes[ui.page]||['✨','🌟','🎉'];
+ const layer=document.createElement('div');layer.className='jiuli-fx-layer';layer.setAttribute('aria-hidden','true');
+ for(let i=0;i<9;i++){const span=document.createElement('span');span.className='jiuli-fx-particle';span.textContent=icons[i%icons.length];
+ span.style.setProperty('--px',(22+(i*19)%57)+'%');span.style.setProperty('--py',(45+(i*7)%16)+'%');span.style.setProperty('--ps',(20+i%3*6)+'px');span.style.setProperty('--pd',i*0.048+'s');span.style.setProperty('--dx',((i%2?-1:1)*(60+i*6))+'px');span.style.setProperty('--dy',(-70-i*10)+'px');layer.appendChild(span);}
+ if(msg){const caption=document.createElement('div');caption.className='jiuli-fx-caption';caption.textContent=msg;layer.appendChild(caption)}
+ document.body.appendChild(layer);setTimeout(()=>layer.remove(),1900);
+}
+const jiuliOriginalRender=render;
+render=function(){jiuliOriginalRender();if(entry.stage!=='game')return;
+ const icons=jiuliScenes[ui.page],root=$('screen');
+ if(icons&&root){const banner=document.createElement('div');banner.className='jiuli-stage-fx';banner.dataset.game=ui.page;banner.setAttribute('aria-label','遊戲動態裝飾');
+ icons.forEach(icon=>{const b=document.createElement('b');b.textContent=icon;banner.appendChild(b)});
+ root.insertAdjacentElement('afterbegin',banner);}
+};
+const jiuliOriginalSecureAction=secureAction;
+secureAction=async function(action,args={},quiet=false){
+ const data=await jiuliOriginalSecureAction(action,args,quiet);
+ if(data&&action!=='status'&&!quiet)jiuliGameFx(action,String(data.message||'挑戰成功').slice(0,24));
+ return data;
+};
+// 用好友列表代替所有組隊邀請碼；舊的 RPC 可以讀歷史隊伍，但 UI 不再要求輸碼。
+const jiuliOldAction=action;
+action=function(type,value){
+ if(type==='openFriends'||type.startsWith('social'))return socialAction(type,value||'');
+ return jiuliOldAction(type,value);
+};
+const jiuliOldNavigate=navigate;
+navigate=function(page){jiuliOldNavigate(page);if(page==='friends')socialRefresh('',true);};
+const jiuliOldProfile=profile;
+profile=function(){return jiuliOldProfile()+`<div class="panel"><h3>🤝 我的好友成就</h3>${info('好友數量',fmt((socialData.friends||[]).length))}${info('✨ 魅力值',fmt(s.charisma||0))}${info('🎁 豪氣值',fmt(s.generosity||0))}${btn('直接打開好友名單','openFriends','','gold')}</div>`;};
+// 新好友通知由本機定時查詢；不需要玩家刷新頁面或複製邀請碼。
+setInterval(()=>{if(entry.stage==='game'&&cloud.user&&secureBooted&&!document.hidden&&!socialBusy&&['friends','dungeon'].includes(ui.page))socialRefresh('',true)},24000);
+
+
+// WEB 1.5.1 登入完成後的公告：每個裝置、每個登入帳號、每個公告版本只自動顯示一次。
+const jiuliReleaseVersion='web-1.5.1-20261118';
+let jiuliReleaseReturnFocus=null;
+let jiuliReleaseOldOverflow='';
+function jiuliReleaseSeenKey(){
+ const id=cloud.user?.id;
+ return id?`jiuli.release.seen.${jiuliReleaseVersion}.${id}`:null;
+}
+function jiuliReleaseShow(force=false){
+ if(entry.stage!=='game'||!cloud.user)return;
+ const key=jiuliReleaseSeenKey();if(!key)return;
+ try{if(!force&&localStorage.getItem(key)==='1')return;}catch(_e){}
+ const popup=$('jiuliReleaseNotice');if(!popup||!popup.hidden)return;
+ jiuliReleaseReturnFocus=document.activeElement;
+ jiuliReleaseOldOverflow=document.body.style.overflow;
+ document.body.style.overflow='hidden';popup.hidden=false;
+ popup.querySelector('.jiuli-release-close')?.focus();
+}
+function jiuliReleaseHide(){
+ const popup=$('jiuliReleaseNotice');if(!popup||popup.hidden)return;
+ popup.hidden=true;document.body.style.overflow=jiuliReleaseOldOverflow;
+ const key=jiuliReleaseSeenKey();if(key)try{localStorage.setItem(key,'1')}catch(_e){}
+ if(jiuliReleaseReturnFocus?.isConnected)jiuliReleaseReturnFocus.focus();
+ jiuliReleaseReturnFocus=null;
+}
+const jiuliEntryUnlockBeforeNotice=entryUnlock;
+entryUnlock=function(){
+ const wasPlaying=entry.stage==='game';
+ jiuliEntryUnlockBeforeNotice();
+ if(!wasPlaying&&entry.stage==='game')setTimeout(()=>jiuliReleaseShow(false),180);
+};
+document.addEventListener('click',evt=>{
+ const button=evt.target.closest('[data-release-action]');if(!button)return;
+ evt.preventDefault();evt.stopPropagation();
+ if(button.dataset.releaseAction==='open')jiuliReleaseShow(true);
+ else jiuliReleaseHide();
+},true);
+document.addEventListener('keydown',evt=>{
+ const popup=$('jiuliReleaseNotice');if(!popup||popup.hidden)return;
+ if(evt.key==='Escape'){evt.preventDefault();jiuliReleaseHide();return;}
+ if(evt.key==='Tab'){
+  const stops=Array.from(popup.querySelectorAll('button:not([disabled])'));
+  if(!stops.length)return;
+  if(evt.shiftKey&&document.activeElement===stops[0]){evt.preventDefault();stops[stops.length-1].focus()}
+  else if(!evt.shiftKey&&document.activeElement===stops[stops.length-1]){evt.preventDefault();stops[0].focus()}
+ }
+},true);
+
 document.addEventListener('click',evt=>{const e=evt.target.closest('[data-entry-action]');if(e){evt.preventDefault();entryAct(e.dataset.entryAction);return;}const n=evt.target.closest('[data-action],[data-nav]');if(!n)return;if(entry.stage!=='game')return;if(n.disabled)return;evt.preventDefault();if(n.dataset.nav)return navigate(n.dataset.nav);try{action(n.dataset.action,n.dataset.value||'')}catch(e){console.error('九黎靈貓操作錯誤',e);toast('⚠️ 操作發生錯誤，請重新整理後再試')}});
 document.addEventListener('submit',evt=>{if(evt.target.id==='jiuliEntryForm')entrySubmit(evt)});
 document.addEventListener('keydown',evt=>{if(evt.target.matches?.('.jiuli-entry-poster[data-entry-action]')&&(evt.key==='Enter'||evt.key===' ')){evt.preventDefault();entryAct('begin')}});
-document.addEventListener('change',evt=>{if(evt.target.id==='plantSeed')ui.plantSeed=evt.target.value});
+document.addEventListener('change',evt=>{if(evt.target.id==='plantSeed')ui.plantSeed=evt.target.value;if(evt.target.id==='socialGiftKind'){socialGiftKind=evt.target.value;const names=socialGiftNames();const n=$('socialGiftNameHolder');if(n)n.innerHTML=['item','chest','fish'].includes(socialGiftKind)?`<div class="field"><label>選擇贈送品項</label><select class="input" id="socialGiftName">${names.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>`:'';}});
 document.addEventListener('input',evt=>{if(evt.target.id==='seedSearch'){ui.seedQuery=evt.target.value;let holder=$('seedResults');if(holder)holder.innerHTML=renderSeedResults()}if(evt.target.id==='recipeSearch'){ui.recipeQuery=evt.target.value;let holder=$('recipeResults');if(holder)holder.innerHTML=renderRecipeResults()}});
 $('importFile').addEventListener('change',async e=>{let file=e.target.files?.[0];e.target.value='';if(!file)return;if(file.size>3000000)return fail('存檔檔案超過3MB，請檢查檔案是否正確');try{let data=JSON.parse(await file.text());importSave(data)}catch(err){console.error(err);toast('存檔讀取失敗，請選擇九黎靈貓匯出的JSON檔')}});
 window.addEventListener('hashchange',()=>{if(entry.stage!=='game')return;const p=location.hash.replace('#','');if(navInfo[p]){ui.page=p;render()}});

@@ -688,7 +688,7 @@ $sql$;
 create or replace function public.jiuli_secure_game(p_action text,p_args jsonb default '{}'::jsonb,p_request_id uuid default null)
 returns jsonb language plpgsql security definer set search_path = '' as $game$
 declare
- v_uid uuid:=auth.uid();v_st jsonb;v_before jsonb;v_now bigint:=(pg_catalog.extract(epoch from pg_catalog.clock_timestamp())*1000)::bigint;
+ v_uid uuid:=auth.uid();v_st jsonb;v_before jsonb;v_now bigint:=(extract(epoch from pg_catalog.clock_timestamp())*1000)::bigint;
  v_day text:=pg_catalog.to_char(pg_catalog.now() at time zone 'Asia/Taipei','YYYY-MM-DD');
  v_gold bigint;v_y bigint;v_old_gold bigint;v_old_y bigint;v_n bigint;v_i integer;v_j integer;
  v_name text:=pg_catalog.left(coalesce(p_args->>'name',''),120);v_text text:=pg_catalog.left(coalesce(p_args->>'text',''),512);
@@ -1170,7 +1170,7 @@ begin
   insert into public.jiuli_secure_team_members(team_id,user_id) values(v_orig,v_uid);
   v_msg:='組隊成功，邀請代碼：'||v_text;
  elsif p_action='teamJoin' then
-  v_text:=pg_catalog.upper(pg_catalog.trim(v_text));
+  v_text:=pg_catalog.upper(pg_catalog.btrim(v_text));
   if v_text !~ '^[A-F0-9]{8}$' then raise exception 'INVALID_TEAM_CODE';end if;
   select id into v_orig from public.jiuli_secure_teams where code=v_text and status='open' for update;
   if v_orig is null then raise exception 'TEAM_NOT_FOUND';end if;
@@ -1277,7 +1277,7 @@ begin
    if pg_catalog.random()<0.45 then update public.jiuli_secure_jail set until_at=null where user_id=v_uid;v_msg:='逃獄成功';
    else update public.jiuli_secure_bank_pool set amount=amount+3000 where id=true;v_msg:='逃獄失敗';end if;
   elsif p_action='web13BankBail' or p_action='web13BankTransfer' then
-   select user_id into v_target from public.jiuli_web_profiles where lower(handle)=lower(pg_catalog.trim(v_text)) limit 1;
+   select user_id into v_target from public.jiuli_web_profiles where lower(handle)=lower(pg_catalog.btrim(v_text)) limit 1;
    if v_target is null or v_target=v_uid then raise exception 'INVALID_TARGET';end if;
    if p_action='web13BankBail' then
     select until_at into v_jailed from public.jiuli_secure_jail where user_id=v_target for update;
@@ -1472,7 +1472,7 @@ revoke all on public.jiuli_social_friends,public.jiuli_social_team_invites,
 create or replace function public.jiuli_social_snapshot(p_search text default '')
 returns jsonb language plpgsql security definer set search_path='' as $social_view$
 declare
- v_uid uuid:=auth.uid();v_name text:=pg_catalog.lower(pg_catalog.trim(coalesce(p_search,'')));
+ v_uid uuid:=auth.uid();v_name text:=pg_catalog.lower(pg_catalog.btrim(coalesce(p_search,'')));
  v_friends jsonb;v_in jsonb;v_out jsonb;v_invites jsonb;v_match jsonb;
  v_team jsonb;v_recent jsonb;
 begin

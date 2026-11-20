@@ -1,0 +1,41 @@
+name: 九黎靈貓 WEB 1.7 餐廳與圖鑑更新
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '確認已有資料庫備份，輸入 YES 才執行（不會清空玩家資料）'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: jiuli-game-upgrade
+  cancel-in-progress: false
+jobs:
+  streak-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 檢查確認與金鑰
+        shell: bash
+        env:
+          CONFIRM: ${{ inputs.confirm }}
+          JIULI_DB_URL: ${{ secrets.JIULI_DB_URL }}
+        run: |
+          [ "$CONFIRM" = 'YES' ] || { echo '請先備份資料，confirm 輸入 YES'; exit 1; }
+          [ -n "$JIULI_DB_URL" ] || { echo '缺少 GitHub Actions Secret: JIULI_DB_URL'; exit 1; }
+      - name: 取得增量更新檔
+        uses: actions/checkout@v4
+      - name: 檢查檔案
+        run: test -s Jiuli_17.sql
+      - name: 安裝 PostgreSQL 用戶端
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+      - name: 一次交易安全安裝餐廳與圖鑑更新
+        shell: bash
+        env:
+          JIULI_DB_URL: ${{ secrets.JIULI_DB_URL }}
+        run: |
+          export PGCONNECT_TIMEOUT=20
+          psql "$JIULI_DB_URL" --no-psqlrc -v ON_ERROR_STOP=1 --single-transaction --file=Jiuli_17.sql

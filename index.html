@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <meta name="jiuli-release" content="web-1.7.3-google-login"><title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.7.4-pet-dungeons"><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -1437,11 +1437,11 @@ const SECURE_MONEY_ACTIONS=new Set([
  'signin','newbie','memberSignin','saveName','fishCast','fishCollect','sellFish','useFishItem',
  'buySeed','plant','plantAll','harvest','harvestAll','water','fertilizeAll','marketSell','sellCrop',
  'cook','pickupCook','sellDish','npcSellAll','buyHouse','upgradeHouse','renameHouse','collectRent',
- 'openCourt','defend','lawyer','bail','buyPet','equipPet','upgradePet','feedPet','startDungeon',
+ 'openCourt','defend','lawyer','bail','buyPet','equipPet','upgradePet','feedPet','feedPetTier','feedPetAll','startDungeon',
  'startDelivery','finishDelivery','claimTip','buyShop','useShopItem','buyChest','openChest','openAllChests',
  'bombStart','bombGuess','bombQuit','web13BankStatus','web13BankDeposit','web13BankWithdraw',
  'web13BankRob','web13BankEscape','web13BankBail','web13BankTransfer','web13VentureGold',
- 'web13VentureYuanbao','web13LegacyWithdraw','buyMembership','teamCreate','teamJoin','teamStart'
+ 'web13VentureYuanbao','web13LegacyWithdraw','buyMembership','teamCreate','teamJoin','teamStart','teamLeave'
 ]);
 let secureInFlight=false,secureBooted=false,secureMarketOffers=null,secureServerNow=0,secureTeamInfo=null;
 window.JIULI_SECURE_MODE=true;
@@ -1499,6 +1499,7 @@ async function secureAction(type,args={},quiet=false){
    NOT_READY:'還沒完成倒數，請稍候',DELIVERY_NOT_READY:'外送還未送達',
    NO_FISH_TO_SELL:'沒有符合階級的魚',UNKNOWN_LEGACY_FISH_NEEDS_REVIEW:'此魚需要管理員核對舊存檔',
    NO_DISH_TO_SELL:'沒有可販賣的料理',CROP_NOT_IN_MARKET:'這項作物不在本輪菜市場名單',
+   NOT_ENOUGH_FRUIT:'背包內沒有這種戰力果實',PET_NOT_OWNED:'這不是你擁有的寵物',POWER_TOO_LOW:'戰力不足，無法通過第一層',SKY_POWER_TOO_LOW:'天域副本單人首層需要 12,000 戰力',TEAM_SKY_POWER_LOW:'天域組隊首層需要 26,000 總戰力',TEAM_MEMBER_NOT_READY:'有隊員尚未建立正式存檔',INVALID_DUNGEON_MODE:'副本選擇不正確',DUNGEON_DAILY_LIMIT:'今天已用完副本入場次數',
    TEAM_NEEDS_2_TO_5:'組隊需要2～5位成員',TEAM_NOT_FOUND:'找不到隊伍，請確認邀請代碼',
    ALREADY_IN_TEAM:'你已在一個開放隊伍內',TEAM_FULL:'隊伍已滿5人',
    ONLY_LEADER_CAN_START:'只有隊長能開始副本',TEAM_MEMBER_LIMIT:'隊員已達每日副本上限',
@@ -1594,6 +1595,21 @@ action=function(type,value){
   }
   if(['web13BankTransfer','web13BankBail'].includes(type))args.text=($('bankTarget')?.value||'').trim().replace(/^@/,'');
   if(type.startsWith('web13Venture'))args.project=Number($('ventureProject')?.value||0);
+  if(['startDungeon','teamCreate'].includes(type)&&['normal','sky'].includes(value))args.mode=value;
+  if(type==='feedPetTier'){
+   if(!j174HasPets())return fail('伺服器寵物更新尚未安裝。');
+   try{const pair=JSON.parse(value);args.name=pair[0];args.tier=pair[1];}catch(_){return fail('果實階級不正確');}
+   const tier=j174Fruits.find(t=>t.tier===args.tier);
+   if(typeof args.name!=='string'||!tier||!j174FruitQty(tier))return fail('這個階級的果實數量不足');
+  }
+  if(type==='feedPetAll'){
+   if(!j174HasPets()||!value||value!==s.activePet)return fail('請先選擇出戰寵物');
+   const n=j174Fruits.reduce((q,t)=>q+j174FruitQty(t),0);
+   const k=j174Fruits.reduce((q,t)=>q+j174FruitQty(t)*t.bonus,0);
+   if(!n)return fail('沒有可以使用的戰力果實');
+   if(!confirm(`確定把背包內全部戰力果實餵給「${value}」？目前顯示 ${fmt(n)} 顆，共 +${fmt(k)} 戰力。餵食後不可復原。`))return;
+  }
+  if(type==='teamLeave'&&!confirm(secureTeamInfo?.leader?'確定解散這支隊伍？':'確定離開目前隊伍？'))return;
   if(type==='teamJoin')args.text=($('secureTeamCode')?.value||'').trim().toUpperCase();
   if(type==='saveName')args.name=($('playerName')?.value||'').trim();
   if(type==='sellFish'&&value==='全部'&&!confirm('⚠️ 真的賣掉全部魚？包含所有絕世、神話、永恆魚！不可恢復。'))return;
@@ -1633,7 +1649,7 @@ function friendsPage(){
  const kindOptions=Object.entries(giftLabels).map(([value,label])=>`<option value="${value}" ${value===socialGiftKind?'selected':''}>${label}</option>`).join('');
  const giftName=()=>['item','chest','fish'].includes(socialGiftKind)?`<div class="field"><label>選擇要贈送的東西</label><select id="socialGiftName" class="input">${socialGiftNames().map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select></div>`:'';
  const searchResult=socialData.search;
- const pending=inv.map(i=>`<div class="list-card"><div class="details"><strong>⚔️ ${esc(i.from_name||i.from_handle)} 邀請你組隊</strong><small>點接受直接加入副本隊伍，不需代碼</small></div><div class="row wrap">${btn('✅ 接受','socialTeamAccept',i.id,'gold')}${btn('婉拒','socialTeamDecline',i.id)}</div></div>`).join('');
+ const pending=inv.map(i=>`<div class="list-card"><div class="details"><strong>⚔️ ${esc(i.from_name||i.from_handle)} 邀請你組隊</strong><small>${i.mode?j174ModeName(i.mode)+'｜':''}點接受直接加入副本隊伍，不需代碼</small></div><div class="row wrap">${btn('✅ 接受','socialTeamAccept',i.id,'gold')}${btn('婉拒','socialTeamDecline',i.id)}</div></div>`).join('');
  return `${pageTitle('🤝','我的靈貓好友','搜尋玩家ID、雙方同意後直接點擊好友卡片贈禮或組隊')}
  <div class="panel"><div class="panel-head"><h3>💌 好友訊息中心</h3>${badge(`${f.length} 位好友`)}</div>
  ${!signed?'<div class="inline-alert warn">請先登入並完成正式伺服器資料庫更新，才能使用好友互動。</div>':''}${signed&&!cloud.profile?'<div class="inline-alert warn">請先到婚姻與寶寶頁設定自己的玩家ID，好友才能搜尋到你。</div>':''}
@@ -1889,6 +1905,62 @@ setInterval(syncKitchen,15000);document.addEventListener('visibilitychange',()=>
 
 for(const [name,desc] of Object.entries({"普通寶箱":"每箱 100～1,000 金幣；10% 加碼高級魚餌 ×1","精良寶箱":"每箱 500～3,000 金幣；15% 加碼高級魚餌 ×1","精緻寶箱":"每箱 500～3,000 金幣；15% 加碼高級魚餌 ×1","稀有寶箱":"每箱 2,000～8,000 金幣；20% 加碼幸運符 ×1","傳說寶箱":"每箱 5,000～20,000 金幣；25% 加碼10～50 元寶","絕世寶箱":"每箱 20,000～100,000 金幣；40% 加碼50～200 元寶","神秘寶箱":"每箱 100～1,000 金幣","永恆寶箱":"每箱 10,000～99,999 元寶；隨機道具 ×1～3，另有 35% 加碼指定寵物碎片 ×1～3","究極寶箱":"每箱 99,999～500,000 元寶；隨機高級寵物專屬碎片 ×5～10","天域寶箱":"每箱 199,998～1,000,000 元寶；隨機高級寵物專屬碎片 ×10～20","鴻蒙寶箱":"每箱 500,000～1,500,000 元寶；究極寵物專屬碎片 ×10～20、三階戰力果實 ×1～3","木製寶箱":"六項各 1/6：金幣 500～1400、元寶 200～600、時光加速 ×1、自動提竿 ×1、碎片 ×2、戰力果實 ×1","星光寶箱":"六項各 1/6：金幣 2000～5600、元寶 800～2400、時光加速 ×4、自動提竿 ×4、碎片 ×8、戰力果實 ×4"})){WEB13_CHEST_INFO[name][1]=desc;const product=shopProducts.find(p=>p.name===name);if(product)product.desc=desc;}
 const previousNav17=navigate;navigate=function(p){previousNav17(p);if(p==='friends'&&cloud.user)loadBoard()};
+
+/* WEB 1.7.4: pet inventory and dungeon controls; all settlement stays on the server. */
+const j174Fruits=Object.freeze([
+ {tier:'1',name:'一階戰力果實',bonus:5},
+ {tier:'2',name:'二階戰力果實',bonus:25},
+ {tier:'3',name:'三階戰力果實',bonus:50},
+ {tier:'legacy',name:'舊版戰力果實',bonus:15}
+]);
+const j174HasPets=()=>Number(s.petDungeonVersion)>=1;
+const j174FruitQty=t=>Math.max(0,Math.floor(Number(t.tier==='legacy'?s.fruit:s.items?.[t.name])||0));
+const j174PetIcon=n=>n==='天域星凰'?'🦅':n==='天域玄武'?'🐢':n.includes('龍')?'🐉':n.includes('狐')?'🦊':n.includes('貓')?'🐱':n.includes('狗')?'🐶':'🐾';
+const j174ModeName=mode=>mode==='sky'?'天域高戰力副本':'普通寵物副本';
+const j174TierThreshold=(mode,f)=>mode==='sky'?12000+600*(f-1):100+70*f+7*f*f;
+const j174Floors=(mode,p)=>{let n=0;for(let f=1;f<=100&&p>=j174TierThreshold(mode,f);f++)n=f;return n};
+const j174OldPets=pets,j174OldDungeon=dungeon;
+pets=function(){
+ if(!j174HasPets())return j174OldPets();
+ const owned=s.pets||[];
+ const total=j174Fruits.reduce((n,t)=>n+j174FruitQty(t),0);
+ const active=owned.some(p=>p.name===s.activePet)?s.activePet:'';
+ const catalog=[...D.pets,['天域星凰','天域限定',0],['天域玄武','天域限定',0]].filter((p,i,a)=>a.findIndex(x=>x[0]===p[0])===i);
+ return `${pageTitle('🐾','靈貓寵物王國','出戰、升級與餵食，帶你的寵物一起闖副本。')}
+ <div class="stacks"><div class="stat"><span class="icon">⚔️</span><b>${fmt(power())}</b><small>目前戰力</small></div><div class="stat"><span class="icon">🐾</span><b>${owned.length}/${catalog.length}</b><small>已收集寵物</small></div><div class="stat"><span class="icon">🧩</span><b>${fmt(s.fragments)}</b><small>寵物碎片</small></div></div>
+ <div class="columns"><div>
+  <div class="panel"><div class="panel-head"><h3>🍎 戰力果實</h3>${badge(active?'出戰：'+active:'尚未出戰','mint')}</div>
+   ${j174Fruits.filter(t=>t.tier!=='legacy'||j174FruitQty(t)>0).map(t=>info(t.name,`${fmt(j174FruitQty(t))} 顆｜每顆 +${t.bonus} 戰力`)).join('')}
+   <div class="row wrap">${btn('🍎 一鍵餵給出戰寵物','feedPetAll',active,'gold',!active||!total||secureInFlight)}${btn('前往寵物副本','go','dungeon','soft')}</div>
+   <p class="footnote">一鍵會使用背包內所有階級的戰力果實；送出前會再次確認。不會更動已餵食的戰力。</p>
+  </div>
+  <div class="panel"><div class="panel-head"><h3>我的寵物</h3></div>
+   ${owned.length?`<div class="card-list">${owned.map(p=>`<div class="list-card"><div class="avatar">${j174PetIcon(p.name)}</div><div class="details"><strong>${esc(p.name)} ${active===p.name?badge('出戰中','gold'):''}</strong><small>Lv.${fmt(p.level)} · 果實與額外加成 +${fmt((Number(p.fruit)||0)*15+(Number(p.extraPower)||0))}</small><div class="row wrap">${btn(active===p.name?'已出戰':'出戰','equipPet',p.name,'soft',active===p.name)}${btn(`升級（${fmt(p.level*5)}碎片）`,'upgradePet',p.name,'mint',s.fragments<p.level*5)}</div><div class="row wrap">${j174Fruits.filter(t=>t.tier!=='legacy'||j174FruitQty(t)>0).map(t=>btn(`餵${{1:'一階',2:'二階',3:'三階',legacy:'舊果實'}[t.tier]}`,'feedPetTier',JSON.stringify([p.name,t.tier]),'soft',!j174FruitQty(t)||secureInFlight)).join('')}</div></div></div>`).join('')}</div>`:empty('🐾','還沒有寵物','先從寵物商店帶一隻回家。')}
+  </div></div>
+  <div class="panel"><div class="panel-head"><h3>🛍️ 寵物商店</h3>${badge(catalog.length+' 種寵物')}</div><div class="card-list">
+   ${catalog.map(([n,r,c])=>{const has=owned.some(p=>p.name===n);return `<div class="list-card"><div class="avatar">${j174PetIcon(n)}</div><div class="details"><strong>${esc(n)}</strong><small>${c?esc(r)+'級 · '+fmt(c)+' 金幣':'副本限定'}</small></div>${btn(has?'已擁有':c?'購買':'限定','buyPet',n,'gold',has||!c||s.gold<c)}</div>`}).join('')}
+  </div></div>
+ </div>`;
+};
+dungeon=function(){
+ if(!j174HasPets())return j174OldDungeon();
+ const p=power(), team=secureTeamInfo, active=Boolean(team);
+ const left=Math.max(0,5-(s.dungeonDate===dayKey()?Number(s.dungeonRuns)||0:0));
+ const cards=['normal','sky'].map(mode=>{
+  const sky=mode==='sky', floor=j174Floors(mode,p), best=sky?s.skyDungeonMax:s.dungeonMax;
+  return `<div class="panel main-panel"><h2>${sky?'🌌':'🏯'} ${j174ModeName(mode)}</h2>
+   <p>${sky?'通關有機會獲得天域星凰、天域玄武或天域寶箱，另有稀有鴻蒙寶箱。出戰寵物會永久增加戰力，通過幾層就加幾點。':'原有百層挑戰，通關可獲得金幣、元寶、碎片、果實等獎勵。'}</p>
+   ${info('單人首層門檻',fmt(j174TierThreshold(mode,1))+' 戰力')}${info('單人預計可過',floor?floor+' 層':'戰力不足')}${info('單人歷史最高',(Number(best)||0)+' / 100 層')}
+   ${sky?info('組隊首層門檻','26,000 總戰力')+info('組隊歷史最高',(Number(s.skyTeamDungeonMax)||0)+' / 100 層'):''}
+   <div class="row wrap">${btn('⚔️ 單人開始','startDungeon',mode,'gold',!left||!floor||secureInFlight)}${btn('👥 建立隊伍','teamCreate',mode,'soft',active||!left||secureInFlight)}</div></div>`;
+ }).join('');
+ return `${pageTitle('⚔️','寵物百層副本','普通與天域各 100 層。每次入場連打到戰力極限，單人和組隊共用每日 5 次。')}
+ <div class="stacks"><div class="stat"><span class="icon">🔥</span><b>${fmt(p)}</b><small>出戰戰力</small></div><div class="stat"><span class="icon">🎟️</span><b>${left} 次</b><small>今日剩餘入場</small></div></div>
+ <div class="columns">${cards}</div>
+ <div class="panel"><h3>👥 好友組隊（2～5 人）</h3><p class="tiny">先在上方建立想打的副本，再到好友頁送出邀請。好友可直接接受，不需邀請碼。</p>
+ ${team?`<div class="inline-alert success">${j174ModeName(team.mode)}｜${fmt(team.count)} 人｜${team.leader?'你是隊長':'你是隊員'}</div>`:''}
+ <div class="row wrap">${btn('🤝 開啟好友名單','openFriends','','soft')}${btn('⚔️ 隊長開始副本','teamStart','','gold',!team?.leader||team.count<2||!left||secureInFlight)}${team?btn(team.leader?'解散隊伍':'離開隊伍','teamLeave','','soft',secureInFlight):''}${btn('🐾 前往寵物養成','go','pets','soft')}</div></div>`;
+};
 
 if(!D||!D.seeds){$('screen').textContent='遊戲資料缺失，請確認 assets/data.js 已上傳。'}else render();
 entryStart();

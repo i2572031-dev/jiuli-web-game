@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <meta name="jiuli-release" content="web-1.7.2-mobile-adventure"><title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.7.3-google-login"><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -256,6 +256,8 @@ window.JIULI_DATA={"fish":{"普通魚":[["小魚",40],["鯽魚",41],["吳郭魚"
         <label class="jiuli-entry-field">電子郵件 <input id="jiuliEntryEmail" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120" placeholder="name@example.com"></label>
         <label class="jiuli-entry-field">密碼（至少 6 個字元） <input id="jiuliEntryPassword" name="password" type="password" autocomplete="current-password" required minlength="6" maxlength="100" placeholder="輸入自己的密碼"></label>
         <button type="submit" id="jiuliEntrySubmit" class="jiuli-entry-mainbtn">🔓 登入並繼續</button>
+        <button type="button" id="jiuliEntryGoogle" class="jiuli-entry-secondary" data-entry-action="googleLogin">使用 Google 登入</button>
+        <p style="font-size:12px;margin:12px 0 0">Google 登入不用等本站寄驗證信。已有雲端進度的玩家，請使用原帳號已驗證的同一個信箱。</p>
         <p style="font-size:12px;margin:15px 0 0">註冊可能需要 Email 驗證。請自行保管密碼；九黎靈貓不會要求你提供 Supabase 金鑰。</p>
       </form>
       <div id="jiuliEntrySigned" data-entry-view hidden>
@@ -387,6 +389,56 @@ const cloud={client:null,user:null,profile:null,partner:null,marriage:null,propo
  remote:null,revision:0,enabled:false,saving:false,dirty:0,timer:0,configured:false,proposerInfo:{},
  status:'尚未設定雲端',error:'',busy:false,lastSaved:''};
 const entry={stage:'cover',mode:'login',authReady:false,fetching:false,notice:''};
+const GOOGLE_RETURN_URL='https://i2572031-dev.github.io/jiuli-web-game/';
+const GOOGLE_PENDING_KEY='jiuli:google-auth-pending';
+let entryGoogleBusy=false;
+function entryGooglePending(enabled){
+ try{
+  if(enabled===true)sessionStorage.setItem(GOOGLE_PENDING_KEY,'1');
+  if(enabled===false)sessionStorage.removeItem(GOOGLE_PENDING_KEY);
+  return sessionStorage.getItem(GOOGLE_PENDING_KEY)==='1';
+ }catch(_){return false;}
+}
+async function entryGoogleLogin(){
+ if(entry.stage!=='auth'||!entry.authReady||!cloud.client||cloud.user||cloud.busy||entryGoogleBusy)return;
+ if(location.origin+location.pathname!==GOOGLE_RETURN_URL){
+  entry.notice='請從九黎靈貓正式網址開啟 Google 登入。';entryRefresh();return;
+ }
+ entryGoogleBusy=true;entryGooglePending(true);
+ entry.notice='正在開啟 Google 登入…';entryRefresh();
+ try{
+  const {error}=await cloud.client.auth.signInWithOAuth({provider:'google',options:{redirectTo:GOOGLE_RETURN_URL}});
+  if(error)throw error;
+ }catch(_){
+  entryGoogleBusy=false;entryGooglePending(false);
+  entry.notice='無法開啟 Google 登入，請再試一次，或使用原本的信箱登入。';entryRefresh();
+ }
+}
+async function entryStart(){
+ const url=new URL(location.href);
+ const oauthParams=new URLSearchParams(url.hash.slice(1));
+ const pending=entryGooglePending();
+ if(pending)entrySetStage('auth');
+ await cloudInit();
+ if(!pending)return;
+ entryGooglePending(false);
+ if(!cloud.user){
+  entry.notice='Google 登入未完成。你可以再試一次，或使用原本的信箱登入。';
+  entryRefresh();
+ }
+ const errors=['error','error_code','error_description'];
+ if(errors.some(k=>url.searchParams.has(k)||oauthParams.has(k))){
+  for(const k of errors){url.searchParams.delete(k);oauthParams.delete(k);}
+  url.hash=oauthParams.toString();
+  history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+ }
+}
+window.addEventListener('pageshow',e=>{
+ if(e.persisted&&entryGoogleBusy){
+  entryGoogleBusy=false;entryGooglePending(false);
+  entry.notice='Google 登入未完成。你可以再試一次。';entryRefresh();
+ }
+});
 function cloudMessage(e){
  let msg=String(e?.message||e||'未知錯誤');
  const known={LOGIN_REQUIRED:'請先登入',BAD_REVISION:'版本資料不正確',REVISION_CONFLICT:'其他裝置已更新雲端存檔，為避免覆蓋已停止同步。請重新查看雲端版本。',INVALID_SAVE:'存檔格式錯誤或超過2MB',PLAYER_NOT_FOUND:'找不到這位玩家，請確認對方已設定玩家ID',CANNOT_MARRY_SELF:'不能向自己求婚',ALREADY_MARRIED:'其中一人已結婚',DAILY_PROPOSAL_LIMIT:'24小時最多送出5次求婚',ALREADY_PROPOSED:'已經向這位玩家發過求婚',PROPOSAL_NOT_AVAILABLE:'求婚已失效、被回覆或不屬於你',NOT_MARRIED:'目前沒有配偶',MARRIAGE_REQUIRED:'必須先結婚才能養育寶寶',BABY_ALREADY_EXISTS:'你們已經有寶寶了',BAD_BABY_NAME:'寶寶名字必須為1～12字',PREGNANCY_REQUIRED:'先準備迎接寶寶',NOT_DUE_YET:'孕育時間尚未結束',ALREADY_BORN:'寶寶已出生',BABY_NOT_BORN:'寶寶尚未出生',FEED_COOLDOWN:'餵食冷卻中，5分鐘後再試',STUDY_COOLDOWN:'上學冷卻中，30分鐘後再試',PLAY_COOLDOWN:'玩耍冷卻中，10分鐘後再試',WORK_COOLDOWN:'打工冷卻中，60分鐘後再試',BABY_HUNGRY:'寶寶太餓，請先餵食'};
@@ -439,18 +491,19 @@ async function cloudFetchState(){
 }
 async function cloudRefreshFamily(repaint=true){
  if(!cloud.user||!cloud.client)return;
- const id=cloud.user.id;
+ const id=cloud.user.id,epoch=authEpoch;
  try{
   const [{data:mar,error:me},{data:proposals,error:pe}]=await Promise.all([
     cloud.client.from('jiuli_web_marriages').select('user_id,partner_id,married_at').eq('user_id',id).maybeSingle(),
     cloud.client.from('jiuli_web_proposals').select('id,sender_id,recipient_id,status,created_at,expires_at').eq('status','pending').or(`sender_id.eq.${id},recipient_id.eq.${id}`).order('created_at',{ascending:false}).limit(20)
   ]);
   if(me)throw me;if(pe)throw pe;
-  if(!cloud.user||cloud.user.id!==id)return;
+  if(epoch!==authEpoch)return;
   cloud.marriage=mar;cloud.proposals=(proposals||[]).filter(p=>new Date(p.expires_at).getTime()>N());cloud.baby=null;cloud.partner=null;cloud.proposerInfo={};
   const senderIds=[...new Set(cloud.proposals.filter(p=>p.recipient_id===id).map(p=>p.sender_id))];
   if(senderIds.length){
     const {data:senders,error:senderError}=await cloud.client.from('jiuli_web_profiles').select('user_id,handle,display_name').in('user_id',senderIds);
+    if(epoch!==authEpoch)return;
     if(senderError)throw senderError;
     for(const sender of (senders||[]))cloud.proposerInfo[sender.user_id]=sender;
   }
@@ -460,11 +513,34 @@ async function cloudRefreshFamily(repaint=true){
       cloud.client.from('jiuli_web_profiles').select('handle,display_name').eq('user_id',mar.partner_id).maybeSingle(),
       cloud.client.from('jiuli_web_babies').select('*').eq('parent_a',a).eq('parent_b',b).maybeSingle()
    ]);
+   if(epoch!==authEpoch)return;
    cloud.partner=partner;cloud.baby=baby;
   }
   cloud.error='';
- }catch(e){cloud.error='婚姻讀取失敗：'+cloudMessage(e)}
- if(repaint&&(ui.page==='marriage'||ui.page==='cloud'||ui.page==='profile'))render();
+ }catch(e){if(epoch===authEpoch)cloud.error='婚姻讀取失敗：'+cloudMessage(e)}
+ if(epoch===authEpoch&&repaint&&(ui.page==='marriage'||ui.page==='cloud'||ui.page==='profile'))render();
+}
+// Keep authoritative progress bound to the current auth transition, not browser storage.
+let authEpoch=0;
+let authorityEpoch=-1;
+const hasCurrentAuthority=()=>Boolean(cloud.user&&secureBooted&&authorityEpoch===authEpoch);
+function acceptAuthUser(user){
+ if((user?.id||null)===(cloud.user?.id||null)){cloud.user=user;return false;}
+ const epoch=++authEpoch;
+ if(entry.stage==='game'){jiuliReleaseHide();entrySetStage('auth');}
+ cloud.user=user;cloud.enabled=false;cloud.remote=null;cloud.revision=0;cloud.lastSaved='';
+ cloud.profile=null;cloud.marriage=null;cloud.partner=null;cloud.baby=null;cloud.proposals=[];cloud.proposerInfo={};cloud.error='';
+ secureBooted=false;authorityEpoch=-1;secureInFlight=false;secureMarketOffers=null;secureTeamInfo=null;secureServerNow=0;web13Bank=null;
+ socialData={friends:[],incoming:[],outgoing:[],team_invites:[],gifts_received:[],team:null,search:null};
+ socialOwnerId=null;socialSelection='';socialSearch='';board.data=null;board.owner='';board.error='';board.ticket++;
+ // Do not delete or use a previous player's local cache as the incoming account state.
+ s=starter();
+ entry.fetching=Boolean(user);entry.notice='';
+ cloud.status=user?'登入成功，正在讀取雲端存檔…':'尚未登入';
+ render();entryRefresh();
+ // Supabase's auth callback may hold its internal lock; perform API calls afterwards.
+ if(user)setTimeout(()=>{if(epoch===authEpoch)void cloudFetchState();},0);
+ return true;
 }
 async function cloudInit(){
  const conf=window.JIULI_CLOUD_CONFIG||{};
@@ -483,20 +559,10 @@ async function cloudInit(){
   }
   if(!window.supabase?.createClient)throw new Error('Supabase SDK 無法使用');
   cloud.client=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  cloud.client.auth.onAuthStateChange((_event,session)=>{
-    const user=session?.user||null;
-    if(user?.id!==(cloud.user?.id||null)){
-      entry.fetching=!!user;entry.notice='';
-      if(!user&&entry.stage==='game')entrySetStage('auth');
-      cloud.user=user;cloud.enabled=false;cloud.remote=null;cloud.revision=0;cloud.profile=null;cloud.marriage=null;cloud.partner=null;cloud.baby=null;cloud.proposals=[];
-      cloud.status=user?'登入成功，正在讀取雲端存檔…':'尚未登入';render();
-      if(user)setTimeout(()=>cloudFetchState(),0);
-      entryRefresh();
-    }
-  });
+  const initEpoch=authEpoch;
+  cloud.client.auth.onAuthStateChange((_event,session)=>{acceptAuthUser(session?.user||null);});
   const {data,error}=await cloud.client.auth.getSession();if(error)throw error;
-  if(data.session?.user&&!cloud.user){cloud.user=data.session.user;cloud.status='登入成功，正在讀取雲端存檔…';await cloudFetchState()}
-  else if(!data.session?.user)cloud.status='尚未登入';
+  if(initEpoch===authEpoch)acceptAuthUser(data.session?.user||null);
  }catch(e){cloud.status='雲端初始化失敗：'+cloudMessage(e)}
  entry.authReady=true;entryRefresh();render();
 }
@@ -663,7 +729,8 @@ function entryRefresh(){
  $('jiuliEntryLoginTab').setAttribute('aria-selected',String(entry.mode==='login'));
  $('jiuliEntrySignupTab').setAttribute('aria-selected',String(entry.mode==='signup'));
  $('jiuliEntrySubmit').textContent=entry.mode==='login'?'🔓 登入並繼續':'📝 建立帳號';
- $('jiuliEntrySubmit').disabled=cloud.busy;
+ $('jiuliEntrySubmit').disabled=cloud.busy||entryGoogleBusy;
+ $('jiuliEntryGoogle').disabled=cloud.busy||entryGoogleBusy;
  $('jiuliEntryPassword').setAttribute('autocomplete',entry.mode==='login'?'current-password':'new-password');
  entrySetMessage(entry.notice||cloud.error||'');
 }
@@ -680,7 +747,7 @@ function entrySyncView(){
  entrySetMessage('');
 }
 function entryUnlock(){
- if(!cloud.user||!cloud.enabled){entry.notice='請先登入並完成雲端存檔選擇';entryRefresh();return;}
+ if(!hasCurrentAuthority()||!cloud.enabled){entry.notice='請先登入並讀取此帳號的雲端進度';entryRefresh();return;}
  entry.notice='';entrySetStage('game');navigate('home');
 }
 async function entryDoChoice(choice){
@@ -694,6 +761,7 @@ async function entryDoChoice(choice){
  if(cloud.enabled)entryUnlock();else {entrySyncView();entrySetMessage(cloud.error||'未完成存檔設定，請確認後再試。')}
 }
 async function entryAct(type){
+ if(type==='googleLogin')return entryGoogleLogin();
  if(type==='begin'){entrySetStage('auth');return;}
  if(type==='backToCover'){entry.notice='';entrySetStage('cover');return;}
  if(type==='loginTab'||type==='signupTab'){entry.mode=type==='loginTab'?'login':'signup';entry.notice='';entryRefresh();return;}
@@ -705,7 +773,7 @@ async function entryAct(type){
 }
 async function entrySubmit(evt){
  evt.preventDefault();
- if(cloud.busy)return;
+ if(cloud.busy||entryGoogleBusy)return;
  if(!cloudConfigured()){entry.notice='目前無法連線到 Supabase，請聯絡管理員';entryRefresh();return;}
  const e=$('jiuliEntryEmail'),p=$('jiuliEntryPassword');
  const email=(e?.value||'').trim(),password=p?.value||'';
@@ -1398,6 +1466,8 @@ cloudAction=async function(type,value){
 async function secureAction(type,args={},quiet=false){
  if(secureInFlight)return fail('⏳ 上一個伺服器操作還沒完成，請不要連按');
  if(!cloud.user||!cloud.client)return fail('請先登入 Supabase 帳號，才能進入正式伺服器模式');
+ const epoch=authEpoch;
+ if(type!=='status'&&!hasCurrentAuthority())return fail('請先取得此帳號的雲端進度');
  secureInFlight=true;
  try{
   const req=(globalThis.crypto?.randomUUID?.()||'00000000-0000-4000-8000-'+Math.random().toString(16).slice(2).padEnd(12,'0').slice(0,12));
@@ -1406,10 +1476,11 @@ async function secureAction(type,args={},quiet=false){
     isStreakSignin?'jiuli_secure_streak_signin':'jiuli_secure_game',
     isStreakSignin?{p_request_id:req}:{p_action:type,p_args:args,p_request_id:req}
    );
+  if(epoch!==authEpoch)return null;
   if(error)throw error;
   if(!data||!data.state||typeof data.state.gold!=='number'||typeof data.state.yuanbao!=='number')throw new Error('伺服器回應格式錯誤，請停止操作並聯繫站長');
   s=normalizeCloudSave(data.state);
-  secureBooted=true;
+  secureBooted=true;authorityEpoch=epoch;
   cloud.revision=Number(data.revision||0);cloud.lastSaved=new Date().toISOString();
   cloud.status='✅ 正式伺服器帳本已更新';cloud.error='';
   cloud.remote={game_state:data.state,revision:cloud.revision,updated_at:cloud.lastSaved};
@@ -1419,6 +1490,7 @@ async function secureAction(type,args={},quiet=false){
   if(!quiet)toast('✅ '+String(data.message||'操作完成').slice(0,110));
   return data;
  }catch(e){
+  if(epoch!==authEpoch)return null;
   let msg=String(e?.message||e);
   const translations={
    LOGIN_REQUIRED:'請登入帳號',SERVER_ACTION_NOT_YET_IMPLEMENTED:'此功能暫不開放正式結算',
@@ -1440,23 +1512,25 @@ async function secureAction(type,args={},quiet=false){
   toast('⚠️ '+msg.slice(0,145));
   if(type==='status'){cloud.status='安全伺服器初始化失敗：'+msg;cloud.error=cloud.status;entry.notice=cloud.status;}
   return null;
- }finally{secureInFlight=false;entryRefresh();}
+ }finally{if(epoch===authEpoch){secureInFlight=false;entryRefresh();}}
 }
 // 註冊登入不變；只把登入後的存檔讀取換成 SQL 權威資料。
 cloudFetchState=async function(){
- if(!cloud.user)return;
+ const uid=cloud.user?.id,epoch=authEpoch;
+ if(!uid)return;
  entry.fetching=true;entryRefresh();
- await secureAction('status',{},true);
+ try{
+  await secureAction('status',{},true);
+  if(epoch!==authEpoch||!hasCurrentAuthority())return;
   // 老版今天已經簽到的玩家：只補記連續天數，不會再發第二份普通簽到。
-  if(secureBooted&&s.signIn===dayKey()&&s.streakLastDate!==dayKey())await secureAction('signin',{},true);
- if(secureBooted){
-  // 社交搜尋和好友名片也需要載入已註冊的玩家ID，不能只讀金錢帳本。
-  try{const {data,error}=await cloud.client.from('jiuli_web_profiles').select('user_id,handle,display_name').eq('user_id',cloud.user.id).maybeSingle();
+  if(s.signIn===dayKey()&&s.streakLastDate!==dayKey())await secureAction('signin',{},true);
+  if(epoch!==authEpoch)return;
+  try{const {data,error}=await cloud.client.from('jiuli_web_profiles').select('user_id,handle,display_name').eq('user_id',uid).maybeSingle();
+   if(epoch!==authEpoch)return;
    if(error)throw error;cloud.profile=data||null;
-  }catch(e){console.warn('玩家ID載入失敗',e);}
-  await cloudRefreshFamily(false);
- }
- entry.fetching=false;entryRefresh();
+  }catch(e){if(epoch===authEpoch)console.warn('玩家ID載入失敗',e);}
+  if(epoch===authEpoch)await cloudRefreshFamily(false);
+ }finally{if(epoch===authEpoch){entry.fetching=false;entryRefresh();}}
 };
 const secureOldEntrySyncView=entrySyncView;
 entrySyncView=function(){
@@ -1465,10 +1539,11 @@ entrySyncView=function(){
  if($('jiuliEntrySyncNotice'))$('jiuliEntrySyncNotice').textContent='🔒 正式伺服器版只讀取權威雲端進度。舊本機資料會保留在此裝置，不能直接匯入正式資產。';
 };
 entryDoChoice=async function(choice){
- if(!cloud.user||entry.fetching)return;
- if(!secureBooted){await secureAction('status',{},true);if(!secureBooted)return;}
+ const epoch=authEpoch;
+ if(entry.stage!=='auth'||!cloud.user||entry.fetching)return;
  if(choice==='useLocal'){entry.notice='正式資產不可由本機覆寫；請選擇使用伺服器進度。';entrySyncView();return;}
- if(choice==='continue'&&!cloud.remote){entrySyncView();return;}
+ if(!hasCurrentAuthority()){await cloudFetchState();}
+ if(epoch!==authEpoch||entry.stage!=='auth'||!hasCurrentAuthority()||!cloud.remote)return;
  cloud.enabled=true;entryUnlock();
 };
 // 使用伺服器保存的市場輪換五種作物，與伺服器核價結果一致。
@@ -1816,7 +1891,7 @@ for(const [name,desc] of Object.entries({"普通寶箱":"每箱 100～1,000 金�
 const previousNav17=navigate;navigate=function(p){previousNav17(p);if(p==='friends'&&cloud.user)loadBoard()};
 
 if(!D||!D.seeds){$('screen').textContent='遊戲資料缺失，請確認 assets/data.js 已上傳。'}else render();
-cloudInit();
+entryStart();
 window.JiuliDiagnostics=Object.freeze({catalogCounts:()=>({fish:Object.values(D.fish).reduce((a,v)=>a+v.length,0),seeds:D.seeds.length,recipes:D.recipes.length,pets:D.pets.length}),getSaveVersion:()=>s.version,getPage:()=>ui.page});
 })();
 </script>

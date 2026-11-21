@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <meta name="jiuli-release" content="web-1.7.8-noble-autofish"><title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.7.9-membership-admin"><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -280,9 +280,9 @@ window.JIULI_DATA={"fish":{"普通魚":[["小魚",40],["鯽魚",41],["吳郭魚"
   <div id="jiuliReleaseNotice" role="presentation" hidden>
     <section class="jiuli-release-card" role="dialog" aria-modal="true" aria-labelledby="jiuliReleaseHeading" aria-describedby="jiuliReleaseDescription" tabindex="-1">
       <button class="jiuli-release-close" type="button" data-release-action="close" aria-label="關閉更新公告">×</button>
-      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.8</div>
+      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.9</div>
       <h2 id="jiuliReleaseHeading">🐈‍⬛ 九黎靈貓更新公告</h2>
-      <p id="jiuliReleaseDescription">貴族會員可在釣魚頁開啟自動拋竿、收竿。</p>
+      <p id="jiuliReleaseDescription">各會員方案可同時生效，並各自顯示到期日。</p>
       <div class="jiuli-release-chips">
         <div class="jiuli-release-chip"><strong>🎁 每日簽到</strong><span>到首頁的每日福利領取獎勵，並查看連續打卡進度。</span></div>
         <div class="jiuli-release-chip"><strong>📜 角色名稱</strong><span>婚姻名片和排行榜會顯示角色名稱，原有的 @玩家 ID 不變。</span></div>
@@ -1053,22 +1053,31 @@ function membershipNow(){
  const elapsed=globalThis.performance?.now?.()-jiuliMemberClockAt;
  return secureServerNow+(Number.isFinite(elapsed)?Math.max(0,elapsed):0);
 }
+const jiuliClassicPlans=Object.freeze([['普通會員',888],['農場普通會員',2000],['農場豪華會員',6000],['貴族會員',888888]]);
+function jiuliMemberValidTime(x){
+ const t=(typeof x==='string'||typeof x==='number')?Number(x):0;
+ return Number.isSafeInteger(t)&&t>0&&t<=8.64e15?t:0;
+}
+function jiuliMemberPlansReady(state){return state?.membershipPlansVersion===1}
+function jiuliMemberPlanExpiry(state,name){
+ if(jiuliMemberPlansReady(state))return jiuliMemberValidTime(state.membershipPlans?.[name]);
+ return state.membership===name?jiuliMemberValidTime(state.vipUntil):0;
+}
 function membershipSnapshot(state,now){
  const tally=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'});
  const parts=Object.fromEntries(tally.formatToParts(now).map(p=>[p.type,p.value]));
- const names=['普通會員','農場普通會員','農場豪華會員','貴族會員'];
- const raw=typeof state.membership==='string'?state.membership.trim():'';
- const validTime=x=>{
-  const ts=Number(x);
-  return Number.isSafeInteger(ts)&&ts>0&&ts<=8.64e15?ts:0;
- };
- const vipUntil=validTime(state.vipUntil), cookUntil=validTime(state.cookUntil);
- const entries=[];
- if(vipUntil)entries.push({name:raw||'一般會員',expiry:vipUntil,active:vipUntil>now,kind:'vip'});
+ const plansReady=jiuliMemberPlansReady(state);
+ const entries=jiuliClassicPlans.map(([name,reward])=>{
+  const expiry=jiuliMemberPlanExpiry(state,name);
+  return {name,reward,expiry,active:expiry>now,kind:'vip'};
+ }).filter(p=>p.expiry>0);
+ const legacy=jiuliMemberValidTime(state.vipUntil);
+ if(!plansReady&&legacy&&entries.length===0)entries.push({name:(typeof state.membership==='string'?state.membership.trim():'')||'一般會員',expiry:legacy,active:legacy>now,kind:'legacy'});
+ const best=entries.filter(p=>p.active&&p.kind==='vip').reduce((a,b)=>!a||b.reward>a.reward?b:a,null);
+ const cookUntil=jiuliMemberValidTime(state.cookUntil);
  if(cookUntil)entries.push({name:'自動烹飪會員',expiry:cookUntil,active:cookUntil>now,kind:'cook'});
- const classic=entries.find(x=>x.kind==='vip');
- return {entries,classic,active:entries.filter(x=>x.active).length,
-   canClaim:!!classic?.active&&names.includes(raw),claimed:state.memberSignIn===parts.year+'-'+parts.month+'-'+parts.day};
+ return {entries,best,plansReady,active:entries.filter(x=>x.active).length,
+   canClaim:!!best,claimed:state.memberSignIn===parts.year+'-'+parts.month+'-'+parts.day};
 }
 function membershipSummary(source,now=membershipNow()){
  const m=membershipSnapshot(s,now),clock=new Intl.DateTimeFormat('zh-TW',{
@@ -1082,8 +1091,10 @@ function membershipSummary(source,now=membershipNow()){
  const control=shop
    ?btn(m.canClaim&&m.claimed?'今日會員獎勵已領取':'領取會員每日簽到','claimMembership','','gold',!ready||!m.canClaim||m.claimed)
    :btn('前往會員商店','go','membership','soft');
- const status=shop&&m.entries.some(x=>x.kind==='cook')
-   ?'<p class="footnote">自動烹飪會員不發每日簽到獎勵，可與一般方案並用。</p>':'';
+ const status=(shop?'<p class="footnote">一般會員可並存、各自到期；每日會員簽到只領一次，按生效方案中最高的獎勵發放。不與一般每日簽到共用。</p>':'')+
+   (shop&&m.best&&!m.claimed?`<p class="footnote">目前可領：${esc(m.best.name)} · 元寶 +${fmt(m.best.reward)}</p>`:'')+
+   (shop&&m.entries.some(x=>x.kind==='cook')?'<p class="footnote">自動烹飪會員另計效期，不發會員簽到獎勵。</p>':'')+
+   (shop&&ready&&!m.plansReady?'<p class="inline-alert warn">會員獨立續期功能尚未完成伺服器更新，暫停購買。已生效方案仍可查看。</p>':'');
  const todayReceipt=s.lastMemberSignin;
  const receipt=shop&&m.claimed&&todayReceipt?.date===s.memberSignIn&&Number(todayReceipt.yuanbao)>0
    ?`<p class="footnote">今日會員簽到已入帳：${esc(todayReceipt.plan||'一般會員')} · 元寶 +${fmt(Number(todayReceipt.yuanbao))}</p>`:'';
@@ -1097,6 +1108,7 @@ function membershipSummary(source,now=membershipNow()){
 function profile(){return `${pageTitle('📜','我的靈貓名片','個人資料、遊戲里程碑與本機存檔備份')}
 <div class="columns"><div><div class="panel main-panel"><div class="row start"><div class="avatar" style="font-size:48px;background:#322b54;padding:10px;border-radius:17px">🐈‍⬛</div><div><div class="eyebrow">JIULI ADVENTURER</div><h2 style="margin-bottom:4px">${esc(s.name)}</h2><span class="pill">Lv.${s.level}</span> ${s.courtTitle?badge(s.courtTitle,'gold'):badge('初出茅廬')}</div></div><div class="sep"></div><div class="field"><label for="playerName">修改角色名稱（最多12字）</label><input class="input" maxlength="12" id="playerName" value="${esc(s.name)}" placeholder="輸入遊戲暱稱"></div><div class="mt">${btn('✏️ 儲存名稱','saveName','','gold')}</div><div class="sep"></div>${info('冒險等級',`Lv.${s.level}`)}${info('距離下次升級',`${fmt(s.xp)} / ${fmt(s.level*130)} 經驗`)}<div class="meter"><span style="width:${Math.min(100,s.xp/(s.level*130)*100)}%"></span></div>${info('加入九黎靈貓',minuteString(s.createdAt))}${cloud.user&&cloud.profile?info('雲端ID',esc('@'+cloud.profile.handle)):''}${cloud.marriage?info('💍 婚姻狀態',`與 ${esc(cloud.partner?.display_name||cloud.partner?.handle||'伴侶')} 結婚`):''}${cloud.baby?.born_at?info('👶 寶寶',esc(cloud.baby.baby_name)):''}${info('已發現魚種',`${s.discovered.length} / 3500`)}${info('農場收成次數',fmt(s.stats.harvests))}${info('餐廳銷售份數',fmt(s.restaurantSales))}${info('最高副本層數',`${s.dungeonMax}層`)}</div>
 ${membershipSummary('profile')}
+${jiuliAdminPanel()}
 <div class="panel"><h3>💾 備份與轉移進度</h3><div class="inline-alert warn">⚠️ 這是如果還沒啟用雲端，Safari 清除網站資料或換裝置可能遺失進度。雲端同步前請先匯出備份。</div><div class="row wrap">${btn('⬇️ 匯出存檔 JSON','export','','gold')}${btn('⬆️ 匯入舊存檔','import','','soft')}${btn('🔄 重置進度','reset','','danger')}</div><p class="footnote">請妥善保管 JSON 備份；匯入會取代此裝置目前的進度。這份存檔與 LINE 正式玩家資料、Roblox 資料互不連動。</p></div></div>
 <div><div class="panel"><div class="panel-head"><h3>🏅 靈貓成就</h3>${badge(`${achieves.filter(a=>a[2](s)).length}/${achieves.length}達成`,'mint')}</div>${achieves.map(a=>`<div class="achievement"><span class="medal">${a[0]}</span><div><strong>${a[1]}</strong><div class="desc">${a[2](s)?'已達成':'繼續冒險即可解鎖'}</div></div><span class="status">${a[2](s)?'✅':'🔒'}</span></div>`).join('')}</div><div class="panel"><h3>📜 最近發生的事</h3>${s.activity.slice(0,14).map(actRow).join('')}</div></div></div>`}
 function guide(){return `${pageTitle('📖','新手指南與版本說明','發佈後手機能直接遊玩；啟用 Supabase 後可使用雲端存檔與雙人婚姻')}
@@ -1554,6 +1566,7 @@ async function secureAction(type,args={},quiet=false){
    board.data=null;board.owner='';board.ticket++;
   }
   secureBooted=true;authorityEpoch=epoch;
+  jiuliAdminOnSync();
   cloud.revision=Number(data.revision||0);cloud.lastSaved=new Date().toISOString();
   cloud.status='✅ 正式伺服器帳本已更新';cloud.error='';
   cloud.remote={game_state:data.state,revision:cloud.revision,updated_at:cloud.lastSaved};
@@ -1645,11 +1658,8 @@ dungeon=function(){
 };
 const secureOriginalShop=shop;
 shop=function(){
- const html=secureOriginalShop();
- const expires=Number(s.vipUntil||0);
- const member=expires>Date.now() ? `目前：${esc(s.membership||'會員')}，到期 ${new Date(expires).toLocaleString('zh-TW')}`:'目前沒有有效會員';
- const members=[['普通會員','5,000元寶／7天'],['農場普通會員','8,000元寶／7天'],['農場豪華會員','100,000元寶／30天'],['貴族會員','2,000,000元寶／60天']];
- return html+`<div class="panel"><h3>🎫 九黎會員專區</h3><p class="tiny">${member}</p><div class="card-list">${members.map(([n,p])=>`<div class="list-card"><div class="details"><strong>${n}</strong><small>${p}</small></div>${btn('購買會員','buyMembership',n,'gold')}</div>`).join('')}</div>${btn('💎 會員每日簽到（與普通簽到分開）','memberSignin','','mint',expires<=Date.now())}${btn('♾️ 貴族購買永恆寶箱（5,000元寶）','buyChest','永恆寶箱','gold',expires<=Date.now()||s.membership!=='貴族會員')}<p class="footnote">目前會員的伺服器效益包括每日會員簽到及貴族購買永恆寶箱。未移植的會員自動施肥、託管功能暫不另行收費。</p></div>`;
+ const noble=jiuliMemberPlanExpiry(s,'貴族會員')>membershipNow();
+ return secureOriginalShop()+`<section class="panel"><h3>🎫 會員專區</h3><p class="tiny">開通、續期和每日會員簽到請到會員商店。</p><div class="row wrap">${btn('前往會員商店','go','membership','soft')}${btn('♾️ 貴族購買永恆寶箱（5,000元寶）','buyChest','永恆寶箱','gold',!hasCurrentAuthority()||!noble||Number(s.yuanbao||0)<5000)}</div></section>`;
 };
 const secureOriginalRestaurant=restaurant;
 restaurant=function(){return secureOriginalRestaurant()+`<div class="panel"><h3>🤖 NPC 批量銷售</h3><p class="tiny">一次結算目前已完成且未腐壞的料理，金額由伺服器按上架時間計算。</p>${btn('🍽️ 一鍵賣出已完成料理','npcSellAll','','gold',!(s.dishes||[]).length)}</div>`;};
@@ -1741,8 +1751,7 @@ function nobleFishState(){
  return a;
 }
 function nobleFishEligible(now=membershipNow()){
- const expiry=Number(s.vipUntil);
- return s.membership==='貴族會員'&&Number.isFinite(expiry)&&expiry>now;
+ return jiuliMemberPlanExpiry(s,'貴族會員')>now;
 }
 function nobleFishOwnsLoop(){
  const a=nobleFishState();
@@ -1980,7 +1989,7 @@ setInterval(()=>{if(entry.stage==='game'&&cloud.user&&secureBooted&&!document.hi
 
 
 // WEB 1.6 登入完成後的公告：每個裝置、每個登入帳號、每個公告版本只自動顯示一次。
-const jiuliReleaseVersion='web-1.7.8-20261121';
+const jiuliReleaseVersion='web-1.7.9-20261121';
 let jiuliReleaseReturnFocus=null;
 let jiuliReleaseOldOverflow='';
 function jiuliReleaseSeenKey(){
@@ -2041,6 +2050,123 @@ setInterval(()=>{if(!document.hidden&&ui.page==='marriage'&&cloud.user&&!cloud.b
 const levels=[0,5,15,35,70,120,200,320];
 const kitchenLevel=()=>Number(s.restaurantLevel||1);
 const pots=()=>4+kitchenLevel();
+const jiuliAdminLabels=Object.freeze({gold:'金幣',yuanbao:'元寶'});
+const jiuliAdminHandle=/^[a-z0-9_]{3,16}$/;
+const jiuliAdminUuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+let jiuliAdminSession=null;
+function jiuliAdminValid(p, requireTarget=true){
+ return p&&jiuliAdminHandle.test(p.handle)&&Object.prototype.hasOwnProperty.call(jiuliAdminLabels,p.currency)&&
+  Number.isSafeInteger(p.amount)&&p.amount>=1&&p.amount<=5e6&&
+  typeof p.reason==='string'&&[...p.reason].length>=3&&[...p.reason].length<=120&&!/[\x00-\x1f\x7f]/.test(p.reason)&&
+  jiuliAdminUuid.test(p.request_id)&&(!requireTarget||jiuliAdminUuid.test(p.target_ref));
+}
+function jiuliAdminKey(a){return 'jiuli-admin-pending-v1:'+a.owner}
+function jiuliAdminRecover(a){
+ try{const p=JSON.parse(sessionStorage.getItem(jiuliAdminKey(a))||'null');return jiuliAdminValid(p)?p:null;}catch(_){return null}
+}
+function jiuliAdminRemember(a,p){
+ a.pending=p;
+ try{if(p)sessionStorage.setItem(jiuliAdminKey(a),JSON.stringify(p));else sessionStorage.removeItem(jiuliAdminKey(a));}catch(_){}
+}
+function jiuliAdminCurrent(a){
+ return a===jiuliAdminSession&&hasCurrentAuthority()&&a.owner===cloud.user?.id&&a.epoch===authEpoch;
+}
+function jiuliAdminOnSync(){
+ if(!hasCurrentAuthority())return;
+ const owner=cloud.user.id;
+ if(jiuliAdminSession?.owner===owner&&jiuliAdminSession.epoch===authEpoch)return;
+ const a=jiuliAdminSession={owner,epoch:authEpoch,allowed:false,busy:false,grants:[],pending:null,message:''};
+ void jiuliAdminCheck(a);
+}
+async function jiuliAdminCheck(a){
+ try{
+  const {data,error}=await cloud.client.rpc('j179_admin_status');
+  if(!jiuliAdminCurrent(a)||error||data?.is_admin!==true)return;
+  a.grants=Array.isArray(data.grants)?data.grants.slice(0,8):[];
+  a.pending=jiuliAdminRecover(a);a.allowed=true;
+  if(ui.page==='profile')render();
+ }catch(_){ /* No UI or privileges when verification fails. */ }
+}
+function jiuliAdminReceiptTime(v){
+ const n=typeof v==='string'?Date.parse(v):0;
+ return Number.isFinite(n)&&n>0?new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(n):'';
+}
+function jiuliAdminPanel(){
+ const a=jiuliAdminSession;
+ if(!a?.allowed||!jiuliAdminCurrent(a))return '';
+ const p=a.pending;
+ const value=k=>esc(String(p?.[k]??''));
+ const status=a.message?`<p class="footnote" role="status">${esc(a.message)}</p>`:'';
+ const grants=a.grants.length?`<details><summary>最近補償紀錄</summary>${a.grants.map(g=>`<p><strong>@${esc(String(g?.handle??''))}</strong> · ${esc(jiuliAdminLabels[g?.currency]||'遊戲貨幣')} +${fmt(Number(g?.amount)||0)}<br><small>${esc(jiuliAdminReceiptTime(g?.created_at))}</small> ${esc(String(g?.reason??''))}</p>`).join('')}</details>`:'';
+ const pending=p?.verify_only?'<p class="inline-alert warn">單號明細有衝突，此筆已停止重試，請查帳後再處理。</p>':p?'<p class="inline-alert warn">有一筆補償尚未確認是否入帳。請使用「核對／重試上一筆」，系統會沿用同一筆單號，不會重複發放。</p>':'';
+ return `<section class="panel"><h3>🛡️ 管理員補償</h3><p class="tiny">依玩家的 @ID 發放遊戲內金幣或元寶，需核對玩家並填寫原因。不能補償自己。</p>
+ <div class="field"><label for="j179GrantHandle">玩家 @ID</label><input class="input" id="j179GrantHandle" maxlength="17" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@玩家ID" value="${value('handle')}" ${p?'disabled':''}></div>
+ <div class="field"><label for="j179GrantCurrency">貨幣</label><select class="input" id="j179GrantCurrency" ${p?'disabled':''}><option value="yuanbao">元寶</option><option value="gold" ${p?.currency==='gold'?'selected':''}>金幣</option></select></div>
+ <div class="field"><label for="j179GrantAmount">數量（1～5,000,000）</label><input class="input" id="j179GrantAmount" inputmode="numeric" maxlength="7" value="${value('amount')}" ${p?'disabled':''}></div>
+ <div class="field"><label for="j179GrantReason">原因（3～120 字）</label><input class="input" id="j179GrantReason" maxlength="120" value="${value('reason')}" ${p?'disabled':''}></div>
+ ${pending}${status}${btn(p?'核對／重試上一筆':'核對玩家並補償','j179AdminGrant','','gold',a.busy||p?.verify_only===true)}${grants}</section>`;
+}
+async function jiuliAdminSubmit(){
+ const a=jiuliAdminSession;
+ if(!a?.allowed||!jiuliAdminCurrent(a)||a.busy||a.pending?.verify_only===true)return;
+ a.busy=true;
+ try{
+  let p=a.pending;
+  if(!p){
+   const handle=String($('j179GrantHandle')?.value||'').trim().replace(/^@/,'').toLowerCase();
+   const currency=$('j179GrantCurrency')?.value;
+   const digits=String($('j179GrantAmount')?.value||'').trim();
+   const reason=String($('j179GrantReason')?.value||'').trim();
+   const request_id=globalThis.crypto?.randomUUID?.();
+   p={handle,currency,amount:/^[0-9]{1,7}$/.test(digits)?Number(digits):0,reason,request_id};
+   if(!jiuliAdminValid(p,false)){fail('請檢查玩家 @ID、貨幣、正整數數量及 3～120 字原因。');return;}
+   const {data,error}=await cloud.client.rpc('j179_admin_preview',{p_handle:handle});
+   if(!jiuliAdminCurrent(a))return;
+   if(error||data?.handle!==handle||!jiuliAdminUuid.test(data?.target_ref)){fail('無法核對這位玩家。請檢查 @ID，確認對方已有遊戲存檔。');return;}
+   p.target_ref=data.target_ref;
+   const name=String(data.display_name||'').replace(/[\x00-\x1f\x7f]/g,'').slice(0,60);
+   if(!confirm(`確定發放補償給 @${handle}${name?'（'+name+'）':''}？\n${jiuliAdminLabels[currency]} ${fmt(p.amount)}\n原因：${reason}`))return;
+   if(!jiuliAdminCurrent(a))return;
+   jiuliAdminRemember(a,p);
+  }
+  a.message='正在和伺服器核對這筆補償…';
+  if(ui.page==='profile')render();
+  const {data,error}=await cloud.client.rpc('j179_admin_grant',{p_handle:p.handle,p_currency:p.currency,p_amount:p.amount,p_reason:p.reason,p_request_id:p.request_id,p_target_ref:p.target_ref});
+  if(!jiuliAdminCurrent(a))return;
+  if(error){
+   const e=String(error.message||'');
+   if(e==='ADMIN_REQUIRED'){a.allowed=false;return;}
+   if(e==='ADMIN_REQUEST_MISMATCH'){
+    jiuliAdminRemember(a,{...p,verify_only:true});
+    a.message='這筆單號已存在但明細不同。請先核對補償紀錄；不要重試或另開新單。';
+    return;
+   }
+   const rejected={
+    ADMIN_BAD_HANDLE:'玩家 @ID 格式不正確。',ADMIN_RECIPIENT_NOT_FOUND:'找不到玩家或對方尚未建立遊戲存檔。',
+    ADMIN_NO_SELF_GRANT:'不能補償自己。',ADMIN_TARGET_CHANGED:'玩家 ID 資料已變更，請重新核對，未入帳。',ADMIN_BAD_CURRENCY:'未指定有效貨幣。',
+    ADMIN_BAD_AMOUNT:'補償只能發放 1～5,000,000。',ADMIN_BAD_REASON:'原因須為 3～120 字。',
+    ADMIN_MISSING_REQUEST:'無法建立補償單號，未入帳。',ECONOMY_LIMIT:'補償會超過錢包上限，未入帳。'
+   };
+   if(Object.prototype.hasOwnProperty.call(rejected,e)){
+    jiuliAdminRemember(a,null);a.message=rejected[e];return;
+   }
+   a.message='目前無法確認是否入帳。請勿重開一筆，可使用上方按鈕沿用原單號核對。';
+   return;
+  }
+  if(data?.request_id!==p.request_id||data.handle!==p.handle||data.currency!==p.currency||Number(data.amount)!==p.amount||data.reason!==p.reason){
+   a.message='伺服器回傳明細不一致，請沿用原單號核對，不要開新單。';return;
+  }
+  jiuliAdminRemember(a,null);
+  a.grants=[data,...a.grants.filter(x=>x.request_id!==data.request_id)].slice(0,8);
+  a.message=`已補償 @${p.handle}：${jiuliAdminLabels[p.currency]} +${fmt(p.amount)}。`;
+ }catch(_){
+  if(jiuliAdminCurrent(a))a.message=a.pending?'連線中斷，這筆可能已入帳。請沿用原單號核對。':'暫時無法核對玩家，請稍後再試。';
+ }finally{
+  a.busy=false;
+  if(jiuliAdminCurrent(a)&&ui.page==='profile')render();
+ }
+}
+
 const plans=[
  ['普通會員',5000,7,'每天領 888 元寶，適合想用少量元寶體驗會員簽到的玩家。'],
  ['農場普通會員',8000,7,'每日可施肥 6 次，會員簽到領 2,000 元寶，適合每天種田的玩家。'],
@@ -2054,7 +2180,7 @@ function membership(){
    `<div class="plans">${plans.map(([name,price,days,details])=>{
     const current=state.entries.find(e=>e.name===name);
     const label=current?.active?'續期 ':current?'重新開通 ':'購買 ';
-    return `<article class="panel"><h3>${esc(name)}</h3><p>${esc(details)}</p><strong>${fmt(price)} 元寶 · ${days} 天</strong>${btn(label+name,'confirmPlan',name,'gold',!ready||Number(s.yuanbao||0)<price)}</article>`;
+    return `<article class="panel"><h3>${esc(name)}</h3><p>${esc(details)}</p><strong>${fmt(price)} 元寶 · ${days} 天</strong>${btn(label+name,'confirmPlan',name,'gold',!ready||!state.plansReady||Number(s.yuanbao||0)<price)}</article>`;
    }).join('')}</div>`;
 }
 function membershipAction(type,value){
@@ -2066,16 +2192,15 @@ function membershipAction(type,value){
   if(snapshot.claimed)return fail('今天已領取會員簽到獎勵。');
   return secureAction('memberSignin',{});
  }
+ if(!snapshot.plansReady)return fail('會員商店尚未完成伺服器更新，請不要重複購買。');
  const p=plans.find(x=>x[0]===value);
  if(!p)return fail('找不到指定會員方案。');
  const [name,price,days]=p;
  if(Number(s.yuanbao||0)<price)return fail('元寶不足。');
- const cook=name==='自動烹飪會員', switching=!cook&&snapshot.classic?.active&&snapshot.classic.name!==name;
- const extra=switching?' 會立即切換一般會員方案，尚未用完的天數會保留。':'';
- if(!confirm(`花費 ${fmt(price)} 元寶購買 ${name} ${days} 天？${extra}`))return;
+ const cook=name==='自動烹飪會員';
+ if(!confirm(`花費 ${fmt(price)} 元寶開通或續期 ${name} ${days} 天？只會延長這個方案；其他會員效期不變。`))return;
  return secureAction(cook?'buyCookPass':'buyMembership',cook?{}:{name});
 }
-shop=secureOriginalShop;
 Object.entries(D.wholesale).forEach(([name,price])=>shopProducts.push({name,price,currency:'gold',category:'餐廳',type:'ingredient',icon:'🧺',desc:'料理用食材，購買後存入背包'}));
 function needList(r){return [...r[3].map(([n,q])=>[n,q,s.crops[n]||0]),...r[4].map(([n,q])=>[n,q,s.items[n]||0])]}
 web13FilteredRecipes=function(){let q=ui.recipeQuery.trim();return D.recipes.filter(r=>(ui.category==='全部'||ui.category===r[6])&&(!q||[r[0],...needList(r).map(x=>x[0])].some(n=>n.includes(q)))&&(!ui.recipeAvailableOnly||needList(r).every(([,need,have])=>have>=need)))};
@@ -2119,6 +2244,7 @@ const old17Action=action;
 action=function(type,value){
  if(type==='nobleFishToggle')return requestNobleFish(value);
  if(type==='confirmPlan'||type==='claimMembership')return membershipAction(type,value);
+ if(type==='j179AdminGrant')return jiuliAdminSubmit();
  if(['pickupAll','restaurantUp','claimFishBook'].includes(type))return secureAction(type);
  if(type==='pantryShop'){ui.shopTab='餐廳';return navigate('shop')}
  if(type==='bookTier'){bookTier=value;bookPage=0;return render()}

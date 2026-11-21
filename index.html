@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <meta name="jiuli-release" content="web-1.7.9-membership-admin"><title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.7.9a-membership-readiness"><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -280,7 +280,7 @@ window.JIULI_DATA={"fish":{"普通魚":[["小魚",40],["鯽魚",41],["吳郭魚"
   <div id="jiuliReleaseNotice" role="presentation" hidden>
     <section class="jiuli-release-card" role="dialog" aria-modal="true" aria-labelledby="jiuliReleaseHeading" aria-describedby="jiuliReleaseDescription" tabindex="-1">
       <button class="jiuli-release-close" type="button" data-release-action="close" aria-label="關閉更新公告">×</button>
-      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.9</div>
+      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.9a</div>
       <h2 id="jiuliReleaseHeading">🐈‍⬛ 九黎靈貓更新公告</h2>
       <p id="jiuliReleaseDescription">各會員方案可同時生效，並各自顯示到期日。</p>
       <div class="jiuli-release-chips">
@@ -536,6 +536,7 @@ function acceptAuthUser(user){
  if(entry.stage==='game'){jiuliReleaseHide();entrySetStage('auth');}
  cloud.user=user;cloud.enabled=false;cloud.remote=null;cloud.revision=0;cloud.lastSaved='';
  cloud.profile=null;cloud.marriage=null;cloud.partner=null;cloud.baby=null;cloud.proposals=[];cloud.proposerInfo={};cloud.error='';
+ jiuliMemberServerProof=null;
  secureBooted=false;authorityEpoch=-1;secureInFlight=false;secureMarketOffers=null;secureTeamInfo=null;secureServerNow=0;web13Bank=null;
  socialData={friends:[],incoming:[],outgoing:[],team_invites:[],gifts_received:[],team:null,search:null};
  socialOwnerId=null;socialSelection='';socialSearch='';board.data=null;board.owner='';board.error='';board.ticket++;
@@ -1058,7 +1059,10 @@ function jiuliMemberValidTime(x){
  const t=(typeof x==='string'||typeof x==='number')?Number(x):0;
  return Number.isSafeInteger(t)&&t>0&&t<=8.64e15?t:0;
 }
-function jiuliMemberPlansReady(state){return state?.membershipPlansVersion===1}
+function jiuliMemberMapPresent(state){
+ return Boolean(state?.membershipPlans&&typeof state.membershipPlans==='object'&&!Array.isArray(state.membershipPlans));
+}
+function jiuliMemberPlansReady(state){return state?.membershipPlansVersion===1&&jiuliMemberMapPresent(state)}
 function jiuliMemberPlanExpiry(state,name){
  if(jiuliMemberPlansReady(state))return jiuliMemberValidTime(state.membershipPlans?.[name]);
  return state.membership===name?jiuliMemberValidTime(state.vipUntil):0;
@@ -1094,7 +1098,8 @@ function membershipSummary(source,now=membershipNow()){
  const status=(shop?'<p class="footnote">一般會員可並存、各自到期；每日會員簽到只領一次，按生效方案中最高的獎勵發放。不與一般每日簽到共用。</p>':'')+
    (shop&&m.best&&!m.claimed?`<p class="footnote">目前可領：${esc(m.best.name)} · 元寶 +${fmt(m.best.reward)}</p>`:'')+
    (shop&&m.entries.some(x=>x.kind==='cook')?'<p class="footnote">自動烹飪會員另計效期，不發會員簽到獎勵。</p>':'')+
-   (shop&&ready&&!m.plansReady?'<p class="inline-alert warn">會員獨立續期功能尚未完成伺服器更新，暫停購買。已生效方案仍可查看。</p>':'');
+   (shop&&!ready?'<p class="inline-alert warn">請先登入並載入正式雲端存檔，再購買會員。</p>':'')+
+   (shop&&ready&&!m.plansReady?'<p class="inline-alert warn">尚未確認伺服器支援會員獨立續期，暫停購買。已生效方案仍可查看。</p>':'');
  const todayReceipt=s.lastMemberSignin;
  const receipt=shop&&m.claimed&&todayReceipt?.date===s.memberSignIn&&Number(todayReceipt.yuanbao)>0
    ?`<p class="footnote">今日會員簽到已入帳：${esc(todayReceipt.plan||'一般會員')} · 元寶 +${fmt(Number(todayReceipt.yuanbao))}</p>`:'';
@@ -1540,10 +1545,25 @@ cloudAction=async function(type,value){
  }
  return secureOriginalCloudAction(type,value);
 };
+let jiuliMemberServerProof=null;
+function jiuliMemberReadResponse(state,type,owner,epoch){
+ const confirmed=jiuliMemberPlansReady(state);
+ if(type==='status')jiuliMemberServerProof=confirmed?{owner,epoch}:null;
+ if(confirmed)return {state,refresh:false};
+ const verified=jiuliMemberServerProof?.owner===owner&&jiuliMemberServerProof.epoch===epoch;
+ if(type==='signin'&&verified&&jiuliMemberMapPresent(state)){
+  // The ordinary streak RPC returns persisted state, not secure_game's capability marker.
+  return {state:{...state,membershipPlansVersion:1},refresh:false};
+ }
+ if(type!=='signin')jiuliMemberServerProof=null;
+ const unsupported={...state};delete unsupported.membershipPlansVersion;
+ return {state:unsupported,refresh:type==='signin'&&verified};
+}
 async function secureAction(type,args={},quiet=false){
  if(secureInFlight)return fail('⏳ 上一個伺服器操作還沒完成，請不要連按');
  if(!cloud.user||!cloud.client)return fail('請先登入 Supabase 帳號，才能進入正式伺服器模式');
- const epoch=authEpoch;
+ const epoch=authEpoch,owner=cloud.user.id;
+ let refreshMemberStatus=false;
  if(type!=='status'&&!hasCurrentAuthority())return fail('請先取得此帳號的雲端進度');
  secureInFlight=true;
  try{
@@ -1553,11 +1573,16 @@ async function secureAction(type,args={},quiet=false){
     isStreakSignin?'jiuli_secure_streak_signin':'jiuli_secure_game',
     isStreakSignin?{p_request_id:req}:{p_action:type,p_args:args,p_request_id:req}
    );
-  if(epoch!==authEpoch)return null;
+  if(epoch!==authEpoch||owner!==cloud.user?.id)return null;
   if(error)throw error;
   if(!data||!data.state||typeof data.state.gold!=='number'||typeof data.state.yuanbao!=='number')throw new Error('伺服器回應格式錯誤，請停止操作並聯繫站長');
   const previousNickname=type==='saveName'?cleanJiuliNickname(s.name,12):'';
-  s=normalizeCloudSave(data.state);
+  const nextState=normalizeCloudSave(data.state);
+  const checked=jiuliMemberReadResponse(data.state,type,owner,epoch);
+  refreshMemberStatus=checked.refresh;
+  if(checked.state.membershipPlansVersion===1)nextState.membershipPlansVersion=1;
+  else delete nextState.membershipPlansVersion;
+  s=nextState;
   if(type==='saveName'){
    const mirroredName=cleanJiuliNickname(cloud.profile?.display_name,24);
    if(cloud.profile&&(!mirroredName||mirroredName==='靈貓旅人'||mirroredName===previousNickname)){
@@ -1569,7 +1594,7 @@ async function secureAction(type,args={},quiet=false){
   jiuliAdminOnSync();
   cloud.revision=Number(data.revision||0);cloud.lastSaved=new Date().toISOString();
   cloud.status='✅ 正式伺服器帳本已更新';cloud.error='';
-  cloud.remote={game_state:data.state,revision:cloud.revision,updated_at:cloud.lastSaved};
+  cloud.remote={game_state:checked.state,revision:cloud.revision,updated_at:cloud.lastSaved};
   web13Bank=data.bank||null;secureMarketOffers=data.market_offers||null;secureTeamInfo=data.team||null;secureServerNow=Number(data.server_time||0);jiuliMemberClockAt=globalThis.performance?.now?.()||0;
   cloud.enabled=true;
   save();render();
@@ -1607,7 +1632,12 @@ async function secureAction(type,args={},quiet=false){
   toast('⚠️ '+msg.slice(0,145));
   if(type==='status'){cloud.status='安全伺服器初始化失敗：'+msg;cloud.error=cloud.status;entry.notice=cloud.status;}
   return null;
- }finally{if(epoch===authEpoch){secureInFlight=false;entryRefresh();}}
+ }finally{if(epoch===authEpoch&&owner===cloud.user?.id){
+  secureInFlight=false;entryRefresh();
+  if(refreshMemberStatus)setTimeout(()=>{
+   if(epoch===authEpoch&&owner===cloud.user?.id&&hasCurrentAuthority()&&!secureInFlight)void secureAction('status',{},true);
+  },0);
+ }}
 }
 // 註冊登入不變；只把登入後的存檔讀取換成 SQL 權威資料。
 cloudFetchState=async function(){
@@ -1989,7 +2019,7 @@ setInterval(()=>{if(entry.stage==='game'&&cloud.user&&secureBooted&&!document.hi
 
 
 // WEB 1.6 登入完成後的公告：每個裝置、每個登入帳號、每個公告版本只自動顯示一次。
-const jiuliReleaseVersion='web-1.7.9-20261121';
+const jiuliReleaseVersion='web-1.7.9a-20261121';
 let jiuliReleaseReturnFocus=null;
 let jiuliReleaseOldOverflow='';
 function jiuliReleaseSeenKey(){
@@ -2180,7 +2210,9 @@ function membership(){
    `<div class="plans">${plans.map(([name,price,days,details])=>{
     const current=state.entries.find(e=>e.name===name);
     const label=current?.active?'續期 ':current?'重新開通 ':'購買 ';
-    return `<article class="panel"><h3>${esc(name)}</h3><p>${esc(details)}</p><strong>${fmt(price)} 元寶 · ${days} 天</strong>${btn(label+name,'confirmPlan',name,'gold',!ready||!state.plansReady||Number(s.yuanbao||0)<price)}</article>`;
+    const short=Math.max(0,price-(Number(s.yuanbao)||0));
+    const reason=!ready?'請先登入並讀取正式進度':!state.plansReady?'尚未確認會員伺服器版本':short>0?'元寶不足，還差 '+fmt(short)+' 元寶':'';
+    return `<article class="panel"><h3>${esc(name)}</h3><p>${esc(details)}</p><strong>${fmt(price)} 元寶 · ${days} 天</strong>${btn(label+name,'confirmPlan',name,'gold',Boolean(reason))}${reason?`<p class="footnote">${esc(reason)}</p>`:''}</article>`;
    }).join('')}</div>`;
 }
 function membershipAction(type,value){

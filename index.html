@@ -7,7 +7,7 @@
   <meta name="description" content="九黎靈貓｜釣魚、農場、500道料理、房產、寵物、副本與荒謬法庭的手機網頁遊戲。">
   <meta property="og:title" content="九黎靈貓｜奇幻遊戲世界">
   <meta property="og:description" content="一起走進靈貓奇幻世界：釣魚、種田、經營餐廳和挑戰法庭！">
-  <meta name="jiuli-release" content="web-1.7.9a-membership-readiness"><title>九黎靈貓｜奇幻遊戲世界</title>
+  <meta name="jiuli-release" content="web-1.7.10-shop-bulk"><title>九黎靈貓｜奇幻遊戲世界</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjODQ2YWZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZWM4YmRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMCIgZmlsbD0iIzE1MTYyOSIvPjxwYXRoIGQ9Ik0yOSA0OSAyNCAxOCA1MiAzNFE2NCAyNiA3NiAzNEwxMDQgMTggOTkgNDlBNDIgNDIgMCAxIDEgMjkgNDkiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI0NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMTYxNjI5Ii8+PGNpcmNsZSBjeD0iODEiIGN5PSI3MCIgcj0iNiIgZmlsbD0iIzE2MTYyOSIvPjxwYXRoIGQ9Im01OCA4MyA2IDUgNi01IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNjE2MjkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1IDkyIDQwIDg4bTQ4IDAgMjUgNCIgc3Ryb2tlPSIjZjZkY2U5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPgo=" type="image/svg+xml">
   <style>
 :root{--bg:#0d1020;--panel:#191c30;--panel2:#21253c;--border:#303650;--text:#f7f5ff;--muted:#9ca2bd;--purple:#a693ff;--violet:#7c68ee;--pink:#ffa3c6;--mint:#72ddc7;--gold:#ffd073;--blue:#7bc4ff;--red:#ff8e9c;--radius:19px;color-scheme:dark}
@@ -280,9 +280,9 @@ window.JIULI_DATA={"fish":{"普通魚":[["小魚",40],["鯽魚",41],["吳郭魚"
   <div id="jiuliReleaseNotice" role="presentation" hidden>
     <section class="jiuli-release-card" role="dialog" aria-modal="true" aria-labelledby="jiuliReleaseHeading" aria-describedby="jiuliReleaseDescription" tabindex="-1">
       <button class="jiuli-release-close" type="button" data-release-action="close" aria-label="關閉更新公告">×</button>
-      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.9a</div>
+      <div class="jiuli-release-kicker">✦ NOV 21, 2026 · WEB 1.7.10</div>
       <h2 id="jiuliReleaseHeading">🐈‍⬛ 九黎靈貓更新公告</h2>
-      <p id="jiuliReleaseDescription">各會員方案可同時生效，並各自顯示到期日。</p>
+      <p id="jiuliReleaseDescription">寶箱與餐廳商城現在可以一次購買 50 個或 100 個。</p>
       <div class="jiuli-release-chips">
         <div class="jiuli-release-chip"><strong>🎁 每日簽到</strong><span>到首頁的每日福利領取獎勵，並查看連續打卡進度。</span></div>
         <div class="jiuli-release-chip"><strong>📜 角色名稱</strong><span>婚姻名片和排行榜會顯示角色名稱，原有的 @玩家 ID 不變。</span></div>
@@ -376,7 +376,7 @@ function settlePassive(){let changed=false;
  if(s.court&&N()>=s.court.deadline){log('⚖️ 法庭逾時流局，沒有收取罰金');s.court=null;changed=true}
  if(changed){save();queueCloudSave()}return changed;
 }
-let ui={page:(location.hash||'#home').slice(1),seedQuery:'',recipeQuery:'',category:'全部',fishFilter:'全部',activityLimit:8,shopTab:'釣魚',shopQty:1,plantSeed:''};
+let ui={page:(location.hash||'#home').slice(1),seedQuery:'',recipeQuery:'',category:'全部',fishFilter:'全部',activityLimit:8,shopTab:'釣魚',shopQty:1,chestShopQty:1,plantSeed:''};
 if(!navInfo[ui.page])ui.page='home';
 s=load();if(!s.plots||s.plots.length!==10)s.plots=Array(10).fill(null);
 const E=(tag,cls,body)=>`<${tag} class="${cls}">${body}</${tag}>`;
@@ -536,7 +536,7 @@ function acceptAuthUser(user){
  if(entry.stage==='game'){jiuliReleaseHide();entrySetStage('auth');}
  cloud.user=user;cloud.enabled=false;cloud.remote=null;cloud.revision=0;cloud.lastSaved='';
  cloud.profile=null;cloud.marriage=null;cloud.partner=null;cloud.baby=null;cloud.proposals=[];cloud.proposerInfo={};cloud.error='';
- jiuliMemberServerProof=null;
+ jiuliMemberServerProof=null;jiuliShopServerProof=null;ui.shopQty=1;ui.chestShopQty=1;
  secureBooted=false;authorityEpoch=-1;secureInFlight=false;secureMarketOffers=null;secureTeamInfo=null;secureServerNow=0;web13Bank=null;
  socialData={friends:[],incoming:[],outgoing:[],team_invites:[],gifts_received:[],team:null,search:null};
  socialOwnerId=null;socialSelection='';socialSearch='';board.data=null;board.owner='';board.error='';board.ticket++;
@@ -950,16 +950,53 @@ const shopProducts=[
  {name:'究極寶箱',icon:'🌈',category:'寶箱',currency:'yuanbao',price:99000,desc:'高級獎勵寶箱，可到寶箱頁開啟',type:'chest'}
 ];
 function ownedShopItem(p){return p.type==='fruit'?s.fruit:p.type==='fragments'?s.fragments:p.type==='chest'?(s.chests[p.name]||0):(s.items[p.name]||0)}
-const jiuliShopQtyOptions=category=>category==='餐廳'?[1,5,10,50]:[1,5,10];
-const jiuliShopQtyFor=(product,selected=ui.shopQty)=>[1,5,10].includes(selected)?selected:selected===50&&product?.category==='餐廳'&&product?.type==='ingredient'?50:1;
+const jiuliShopSmallQty=Object.freeze([1,5,10]);
+const jiuliShopBulkQty=Object.freeze([50,100]);
+const jiuliShopChestNames=new Set(['普通寶箱','精良寶箱','稀有寶箱','神秘寶箱','永恆寶箱','究極寶箱','木製寶箱','星光寶箱']);
+const jiuliShopBulkCategory=category=>category==='寶箱'||category==='餐廳';
+const jiuliShopQtyOptions=category=>jiuliShopBulkCategory(category)?[...jiuliShopSmallQty,...jiuliShopBulkQty]:jiuliShopSmallQty;
+const jiuliShopIsBulk=n=>jiuliShopBulkQty.includes(n);
+const jiuliShopBulkReady=()=>hasCurrentAuthority()&&s.shopBulkVersion===1;
+const jiuliShopCurrency=p=>p?.currency==='gold'?'金幣':'元寶';
+function jiuliShopIsBulkProduct(p){
+ if(p?.category==='寶箱')return p.type==='chest'&&jiuliShopChestNames.has(p.name);
+ if(p?.category!=='餐廳')return false;
+ return p.name==='料理加速券'&&p.type==='item'&&p.currency==='yuanbao'||
+  p.type==='ingredient'&&p.currency==='gold'&&Object.prototype.hasOwnProperty.call(D.wholesale,p.name);
+}
+function jiuliShopBuyReason(p,qty){
+ if(!p||!['gold','yuanbao'].includes(p.currency)||!Number.isSafeInteger(p.price)||p.price<1)return '目前無法購買這項商品';
+ if(!jiuliShopQtyOptions(p.category).includes(qty))return '請選擇這個分類支援的數量';
+ if(!hasCurrentAuthority())return '請先登入並讀取正式進度';
+ if(p.name==='永恆寶箱'&&jiuliMemberPlanExpiry(s,'貴族會員')<=membershipNow())return '需要生效中的貴族會員';
+ if(jiuliShopIsBulk(qty)&&!jiuliShopBulkReady())return '伺服器批量購買尚未啟用';
+ if(jiuliShopIsBulk(qty)&&!jiuliShopIsBulkProduct(p))return '此品項不支援批量購買，請改選 1、5 或 10';
+ const price=p.price*qty, wallet=Number(s[p.currency]);
+ if(!Number.isFinite(wallet)||wallet<price)return '還差 '+fmt(price-Math.max(0,wallet||0))+' '+jiuliShopCurrency(p);
+ return '';
+}
+function jiuliShopQtyChips(category,qty,action='shopQty'){
+ return `<div class="row wrap mb"><span class="tiny muted">每次購買數量：</span>${jiuliShopQtyOptions(category).map(n=>`<button type="button" data-action="${action}" data-value="${n}" class="chip ${qty===n?'active':''}" aria-pressed="${qty===n}" ${jiuliShopIsBulk(n)&&!jiuliShopBulkReady()?'disabled':''}>${n} 個</button>`).join('')}</div>${jiuliShopBulkCategory(category)&&!jiuliShopBulkReady()?'<p class="footnote">50／100 個需安裝最新伺服器更新；仍可使用原有數量購買。</p>':''}`;
+}
+function jiuliShopBuy(name,qty,fromChestPage=false){
+ const p=shopProducts.find(x=>x.name===name&&(!fromChestPage||x.category==='寶箱'&&x.type==='chest'));
+ const problem=jiuliShopBuyReason(p,qty);
+ if(problem)return fail(problem);
+ if(secureInFlight)return fail('⏳ 上一個伺服器操作還沒完成，請不要連按');
+ if(jiuliShopIsBulk(qty)&&!confirm(`購買 ${name} × ${qty}？\n總價：${fmt(p.price*qty)} ${jiuliShopCurrency(p)}\n確認後伺服器才會扣款並放入背包。`))return;
+ return secureAction(fromChestPage&&qty===1?'buyChest':'buyShop',{name,quantity:qty});
+}
 function shop(){
  let category=ui.shopTab,qty=jiuliShopQtyOptions(category).includes(ui.shopQty)?ui.shopQty:1;
  let categories=['釣魚','農場','餐廳','寵物','寶箱'];
  return `${pageTitle('🛒','靈貓百貨','五大分類商店：釣魚、農場、餐廳、寵物和寶箱補給')}
  <div class="stacks"><div class="stat"><span class="icon">🪙</span><b>${fmt(s.gold)}</b><small>可用金幣</small></div><div class="stat"><span class="icon">💎</span><b>${fmt(s.yuanbao)}</b><small>可用元寶</small></div><div class="stat"><span class="icon">🎒</span><b>${Object.values(s.items).reduce((a,b)=>a+b,0)}</b><small>背包道具數</small></div></div>
  <div class="panel"><h3>🛍️ 分類選購</h3><div class="chip-row">${categories.map(cat=>`<button data-action="shopTab" data-value="${cat}" class="chip ${category===cat?'active':''}">${cat}</button>`).join('')}</div>
- <div class="sep"></div><div class="row wrap mb"><span class="tiny muted">每次購買數量：</span>${jiuliShopQtyOptions(category).map(n=>`<button data-action="shopQty" data-value="${n}" class="chip ${qty===n?'active':''}">${n===50?'50 個（限食材）':n+' 個'}</button>`).join('')}</div>
- <div class="card-list">${shopProducts.filter(p=>p.category===category).map(p=>{const quantity=jiuliShopQtyFor(p,qty);let price=p.price*quantity;let currency=p.currency==='gold'?'金幣':'元寶';return `<div class="list-card"><div class="avatar">${p.icon}</div><div class="details"><strong>${esc(p.name)}</strong><small>${esc(p.desc)}</small><small>持有 ${fmt(ownedShopItem(p))} · 單價 ${fmt(p.price)} ${currency}</small></div><div class="shop-buy"><div class="tiny">${fmt(price)} ${currency}</div>${btn(`購買 ×${quantity}`,'buyShop',p.name,'gold',s[p.currency]<price)}</div></div>`}).join('')}</div>
+ <div class="sep"></div>${jiuliShopQtyChips(category,qty)}
+ <div class="card-list">${shopProducts.filter(p=>p.category===category).map(p=>{
+  const price=p.price*qty,currency=jiuliShopCurrency(p),why=jiuliShopBuyReason(p,qty);
+  return `<div class="list-card"><div class="avatar">${p.icon}</div><div class="details"><strong>${esc(p.name)}</strong><small>${esc(p.desc)}</small><small>持有 ${fmt(ownedShopItem(p))} · 單價 ${fmt(p.price)} ${currency}</small>${why?`<small>${esc(why)}</small>`:''}</div><div class="shop-buy"><div class="tiny">總價 ${fmt(price)} ${currency}</div>${btn(`購買 ×${qty}`,'buyShop',p.name,'gold',Boolean(why))}</div></div>`;
+ }).join('')}</div>
  <p class="footnote">所有價格均為遊戲內金幣或元寶，不涉及真實付款。購買成功才會扣款，背包數量與遊戲進度由伺服器保存。</p></div>
  <div class="panel"><h3>🎒 道具背包・直接使用</h3><div class="card-list">${shopProducts.filter(p=>p.type==='item').map(p=>{let owned=ownedShopItem(p);return `<div class="list-card"><div class="avatar">${p.icon}</div><div class="details"><strong>${esc(p.name)}</strong><small>現有 ${fmt(owned)} 個 · ${esc(p.desc)}</small></div>${btn('使用×1','useShopItem',p.name,'soft',owned<1)}</div>`}).join('')}</div><div class="row wrap mt">${btn('🌱 去農場','go','farm','soft')}${btn('🍳 去餐廳','go','restaurant','soft')}${btn('🎁 寶箱背包','go','chests','soft')}</div></div>`;
 }
@@ -1164,7 +1201,7 @@ function action(type,value){if(type.startsWith('cloud')||type.startsWith('baby')
  case 'newbie':{if(s.newbieBonus)return fail('已領取過試玩補助');s.newbieBonus=true;s.yuanbao+=3000000;log('🎉 領取房產試玩補助300萬元寶');return commit('💎 領取成功！去房產買第一間房吧！')}
  case 'fishCast':return fishCast();case 'fishCollect':return fishCollect();case 'sellFish':return sellFish(value);case 'useFishItem':return useFishItem(value);
  case 'fishFilter':ui.fishFilter=value;return render();
- case 'marketSell':return marketSell(value);case 'plantAll':return plantAll();case 'harvestAll':return harvestAll();case 'shopTab':ui.shopTab=value;if(!jiuliShopQtyOptions(value).includes(ui.shopQty))ui.shopQty=1;return render();case 'shopQty':if(jiuliShopQtyOptions(ui.shopTab).includes(Number(value)))ui.shopQty=Number(value);return render();case 'buyShop':return buyShop(value);case 'useShopItem':return useShopItem(value);
+ case 'marketSell':return marketSell(value);case 'plantAll':return plantAll();case 'harvestAll':return harvestAll();case 'shopTab':ui.shopTab=value;if(!jiuliShopQtyOptions(value).includes(ui.shopQty))ui.shopQty=1;return render();case 'shopQty':if(jiuliShopQtyOptions(ui.shopTab).includes(Number(value))&&(!jiuliShopIsBulk(Number(value))||jiuliShopBulkReady()))ui.shopQty=Number(value);return render();case 'buyShop':return buyShop(value);case 'useShopItem':return useShopItem(value);
  case 'buySeed':return buySeed(value);case 'plant':return plant(value);case 'harvest':return harvest(value);case 'water':return water(value);case 'fertilizeAll':return fertilizeAll();case 'sellCrop':return sellCrop(value);
  case 'clearSeed':ui.seedQuery='';return render();case 'recipeCategory':ui.category=value;return render();case 'cook':return cook(value);case 'pickupCook':return pickupCook(value);case 'sellDish':return sellDish(value);
  case 'buyHouse':return buyHouse();case 'upgradeHouse':return upgradeHouse(value);case 'renameHouse':return renameHouse(value);case 'collectRent':{let n=settleRent();return commit(n?`🏘️ 本次新增租金${fmt(n)}元寶`:'🏘️ 目前尚未滿1小時，待入帳0元寶；已入帳租金不會重複發放')}
@@ -1271,16 +1308,21 @@ function web13RollChest(name){
  return result.join('、');
 }
 chests=function(){
+ const qty=ui.chestShopQty||1;
  const owned=WEB13_CHEST_ORDER.filter(n=>(s.chests[n]||0)>0);
  const listed=WEB13_CHEST_ORDER.map(name=>{
   const [icon,desc,currency,price]=WEB13_CHEST_INFO[name];
   const stock=s.chests[name]||0;
-  return `<div class="list-card"><div class="avatar">${icon}</div><div class="details"><strong>${name}</strong><small>${esc(desc)}</small><small>持有 ${fmt(stock)}箱 · ${currency?`售價 ${fmt(price)}${currency==='gold'?'金幣':'元寶'}`:'活動／副本／會員限定'}</small></div><div class="web13-box-actions">${btn('開啟1箱','openChest',name,'soft',stock<1)}${currency?btn('購買','buyChest',name,'gold',s[currency]<price):''}</div></div>`;
+  const product=currency?shopProducts.find(p=>p.name===name&&p.type==='chest'):null;
+  const why=product?jiuliShopBuyReason(product,qty):'';
+  const purchase=product?`<div class="tiny">總價 ${fmt(product.price*qty)} ${jiuliShopCurrency(product)}</div>${btn(`購買 ×${qty}`,'j1710ChestBuy',name,'gold',Boolean(why))}`:'';
+
+  return `<div class="list-card"><div class="avatar">${icon}</div><div class="details"><strong>${name}</strong><small>${esc(desc)}</small><small>持有 ${fmt(stock)}箱 · ${currency?`售價 ${fmt(price)}${currency==='gold'?'金幣':'元寶'}`:'活動／副本／會員限定'}</small>${why?`<small>${esc(why)}</small>`:''}</div><div class="web13-box-actions">${btn('開啟1箱','openChest',name,'soft',stock<1)}${purchase}</div></div>`;
  }).join('');
  return `${pageTitle('🎁','寶箱樂園','對照 LINE 原版完整寶箱種類；不同寶箱有各自獎池')}
  <div class="stacks"><div class="stat"><span class="icon">🎁</span><b>${fmt(owned.reduce((v,n)=>v+(s.chests[n]||0),0))}</b><small>持有寶箱</small></div><div class="stat"><span class="icon">🧩</span><b>${fmt(s.fragments)}</b><small>寵物碎片</small></div><div class="stat"><span class="icon">🍎</span><b>${fmt(s.fruit)}</b><small>戰力果實</small></div></div>
- <div class="panel"><h3>🎒 寶箱快捷操作</h3><div class="row wrap mt">${btn('🎁 全部開箱（每次最多100箱）','openAllChests','','gold',owned.length===0)}${btn('🛒 前往商城','go','shop','soft')}</div><p class="footnote">全開依現有持有量結算，不會把本次開出的新寶箱連續打開。永恆寶箱限有效貴族會員購買；天域與鴻蒙可從高層副本獲得。</p></div>
- <div class="columns"><div class="panel"><h3>📦 寶箱清單（含歷史舊款）</h3><div class="card-list">${listed}</div></div><div class="panel"><h3>🎒 背包道具</h3>${Object.entries(s.items).filter(([,q])=>q>0).map(([n,q])=>info(n,fmt(q))+(['高級魚餌','幸運符'].includes(n)?btn('使用'+esc(n),'useShopItem',n,'soft'):'')).join('')||empty('🧺','沒有道具','前往商城購買或開箱獲得')}${info('寵物碎片',fmt(s.fragments))}${info('戰力果實',fmt(s.fruit))}</div></div>`;
+ <div class="panel"><h3>🎒 寶箱快捷操作</h3><div class="row wrap mt">${btn('🎁 全部開箱（每次最多100箱）','openAllChests','','gold',owned.length===0)}${btn('🛒 前往寶箱商城','j1710OpenChestShop','','soft')}</div><p class="footnote">全開依現有持有量結算，不會把本次開出的新寶箱連續打開。永恆寶箱限有效貴族會員購買；天域與鴻蒙可從高層副本獲得。</p></div>
+ <div class="columns"><div class="panel"><h3>📦 寶箱清單／購買</h3>${jiuliShopQtyChips('寶箱',qty,'j1710ChestQty')}<div class="card-list">${listed}</div></div><div class="panel"><h3>🎒 背包道具</h3>${Object.entries(s.items).filter(([,q])=>q>0).map(([n,q])=>info(n,fmt(q))+(['高級魚餌','幸運符'].includes(n)?btn('使用'+esc(n),'useShopItem',n,'soft'):'')).join('')||empty('🧺','沒有道具','前往商城購買或開箱獲得')}${info('寵物碎片',fmt(s.fragments))}${info('戰力果實',fmt(s.fruit))}</div></div>`;
 };
 openChest=function(name){
  if(!WEB13_CHEST_INFO[name])return fail('未知寶箱種類');
@@ -1546,6 +1588,16 @@ cloudAction=async function(type,value){
  return secureOriginalCloudAction(type,value);
 };
 let jiuliMemberServerProof=null;
+let jiuliShopServerProof=null;
+function jiuliShopReadResponse(state,type,owner,epoch){
+ const supported=state.shopBulkVersion===1;
+ if(type==='status')jiuliShopServerProof=supported?{owner,epoch}:null;
+ if(supported)return state;
+ if(type==='signin'&&jiuliShopServerProof?.owner===owner&&jiuliShopServerProof.epoch===epoch)
+  return {...state,shopBulkVersion:1};
+ if(type!=='signin')jiuliShopServerProof=null;
+ const stale={...state};delete stale.shopBulkVersion;return stale;
+}
 function jiuliMemberReadResponse(state,type,owner,epoch){
  const confirmed=jiuliMemberPlansReady(state);
  if(type==='status')jiuliMemberServerProof=confirmed?{owner,epoch}:null;
@@ -1582,6 +1634,9 @@ async function secureAction(type,args={},quiet=false){
   refreshMemberStatus=checked.refresh;
   if(checked.state.membershipPlansVersion===1)nextState.membershipPlansVersion=1;
   else delete nextState.membershipPlansVersion;
+  checked.state=jiuliShopReadResponse(checked.state,type,owner,epoch);
+  if(checked.state.shopBulkVersion===1)nextState.shopBulkVersion=1;
+  else delete nextState.shopBulkVersion;
   s=nextState;
   if(type==='saveName'){
    const mirroredName=cleanJiuliNickname(cloud.profile?.display_name,24);
@@ -1708,10 +1763,17 @@ action=function(type,value){
   if([1,5,10].includes(Number(value))){j175FruitQty=Number(value);render();}
   return;
  }
+ if(type==='j1710OpenChestShop'){ui.shopTab='寶箱';return navigate('shop');}
+ if(type==='j1710ChestQty'){
+  const qty=Number(value);
+  if(jiuliShopQtyOptions('寶箱').includes(qty)&&(!jiuliShopIsBulk(qty)||jiuliShopBulkReady())){ui.chestShopQty=qty;render();}
+  return;
+ }
+ if(type==='j1710ChestBuy')return jiuliShopBuy(value,ui.chestShopQty||1,true);
+ if(type==='buyShop')return jiuliShopBuy(value,ui.shopQty);
  if(SECURE_MONEY_ACTIONS.has(type)){
   if(!secureBooted)return fail('請先完成伺服器登入並載入正式進度。');
   const args={name:value||'',value:value||'',quantity:[1,5,10].includes(ui.shopQty)?ui.shopQty:1};
-  if(type==='buyShop')args.quantity=jiuliShopQtyFor(shopProducts.find(p=>p.name===value));
   if(type==='buyChest')args.quantity=1;
   if(['plant','plantAll'].includes(type))args.seed=($('plantSeed')?.value||ui.plantSeed||'');
   if(['plant','harvest','water','upgradeHouse','renameHouse','pickupCook','sellDish'].includes(type))args.index=Number(value);
@@ -2019,7 +2081,7 @@ setInterval(()=>{if(entry.stage==='game'&&cloud.user&&secureBooted&&!document.hi
 
 
 // WEB 1.6 登入完成後的公告：每個裝置、每個登入帳號、每個公告版本只自動顯示一次。
-const jiuliReleaseVersion='web-1.7.9a-20261121';
+const jiuliReleaseVersion='web-1.7.10-20261121';
 let jiuliReleaseReturnFocus=null;
 let jiuliReleaseOldOverflow='';
 function jiuliReleaseSeenKey(){
